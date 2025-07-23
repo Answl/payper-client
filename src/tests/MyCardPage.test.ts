@@ -89,7 +89,6 @@ describe("MyCardPage", () => {
 
   it("카드 아이템을 클릭하면 카드 상세 페이지(/cards/:id)로 이동합니다", async () => {
     // given
-    // given
     const mockCompany: CardCompany = {
       id: 1,
       name: "Test Bank",
@@ -139,15 +138,15 @@ describe("MyCardPage", () => {
 
     server.use(http.get("https://api.example.com/api/me/cards", () => HttpResponse.json(response)));
 
+    // when then
     render(MyCardPage);
 
-    const button = await screen.findAllByTestId("cardItem"); // getAllByTestId
-    console.log("button: ", button);
+    const button = await screen.findAllByTestId("cardItem");
 
-    // when then
     await waitFor(() => {
       response.cards.forEach((card, idx) => {
         user.click(button[idx]);
+
         expect(mockPush).toHaveBeenCalledWith({
           name: "cardsDetails",
           params: { id: card.id },
