@@ -3,6 +3,7 @@ import HomeView from "../views/HomeView.vue";
 import CardsPage from "@/views/CardsPage.vue";
 import LandingPage from "@/pages/LandingPage.vue";
 import { useAuthStore } from "@/stores/authStore";
+import MyCardPage from "@/views/MyCardPage.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -16,6 +17,12 @@ const router = createRouter({
       path: "/landing",
       name: "landing",
       component: LandingPage,
+      meta: { requiresAuth: false },
+    },
+    {
+      path: "/my/cards",
+      name: "myCards",
+      component: MyCardPage,
       meta: { requiresAuth: false },
     },
     {
