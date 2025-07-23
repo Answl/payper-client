@@ -89,37 +89,50 @@ describe("MyCardPage", () => {
 
   it("카드 아이템을 클릭하면 카드 상세 페이지(/cards/:id)로 이동합니다", async () => {
     // given
-    const benefit: Benefit[] = [
-      {
-        id: 1,
-        target: "PARTNER",
-        range: {
-          start: 10,
-          end: 20,
-        },
-        discount: {
-          type: "RATE",
-          amount: 5,
-        },
-        partner: {
-          id: 1,
-          categoryId: 1,
-          name: "GS25",
-        },
+    // given
+    const mockCompany: CardCompany = {
+      id: 1,
+      name: "Test Bank",
+      code: 1001,
+    };
+
+    const mockBenefit: Benefit = {
+      id: 1,
+      target: "PARTNER",
+      range: {
+        start: 10,
+        end: 20,
       },
-    ];
+      discount: {
+        type: "RATE",
+        amount: 5,
+        limitCount: null,
+        limitAmount: null,
+      },
+      partner: {
+        id: 1,
+        categoryId: 1,
+        name: "GS25",
+      },
+      category: {
+        id: 1,
+        name: "편의점",
+      },
+    };
 
     const response: Cards = {
       cards: [
         {
           id: 1,
           name: "Nori2 Check Card",
-          benefits: benefit,
+          benefits: [mockBenefit],
+          company: mockCompany,
         },
         {
           id: 2,
           name: "TeenUp Check Card",
-          benefits: benefit,
+          benefits: [mockBenefit],
+          company: mockCompany,
         },
       ],
     };

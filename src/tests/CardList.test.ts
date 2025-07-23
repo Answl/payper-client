@@ -12,7 +12,7 @@ describe("CardList.vue", () => {
     const mockCards: Card[] = [
       {
         id: 1,
-        name: "KB누리2",
+        name: "KB노리2",
         company: {
           id: 1,
           name: "KB국민카드",
@@ -57,14 +57,14 @@ describe("CardList.vue", () => {
     ];
 
     // when - mock 서버 응답 설정
-    server.use(http.get("/api/cards", () => HttpResponse.json(mockCards)));
+    server.use(http.get("/api/cards", () => HttpResponse.json({ cards: mockCards })));
 
     // render
     render(CardList);
 
     // then
     await waitFor(() => {
-      expect(screen.getByText("KB누리2")).toBeInTheDocument();
+      expect(screen.getByText("KB노리2")).toBeInTheDocument();
       expect(screen.getByText("토스뱅크 체크카드")).toBeInTheDocument();
       expect(screen.getByText("KB국민카드")).toBeInTheDocument();
       expect(screen.getByText("토스뱅크")).toBeInTheDocument();
