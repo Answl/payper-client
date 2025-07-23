@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import LandingPage from "@/pages/LandingPage.vue";
+import { useAuthStore } from "@/stores/authStore";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -9,7 +11,23 @@ const router = createRouter({
       name: "home",
       component: HomeView,
     },
+    {
+      path: "/landing",
+      name: "landing",
+      component: LandingPage,
+      meta: { requiresAuth: false },
+    },
   ],
+});
+
+router.beforeEach((to) => {
+  const { isAuthenticated } = useAuthStore();
+  if (to.meta.requiresAuth && !isAuthenticated) {
+    return {
+      path: "/landing",
+      query: { redirect: to.fullPath },
+    };
+  }
 });
 
 export default router;
