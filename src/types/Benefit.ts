@@ -8,8 +8,8 @@ export type Target = "PARTNER" | "CATEGORY";
 export interface Benefit {
   id: number;
   target: Target;
-  range: Range[];
-  discount: Discount[];
-  category: Category[];
-  partner: Partner[];
+  range: Range;
+  discount: Discount;
+  category?: Category;
+  partner?: Partner;
 }
