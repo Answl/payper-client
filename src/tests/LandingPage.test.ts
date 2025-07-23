@@ -7,6 +7,7 @@ import { server } from "@/mocks/node";
 import { http, HttpResponse } from "msw";
 import { createPinia, setActivePinia } from "pinia";
 import { useAuthStore } from "@/stores/authStore";
+import { VueQueryPlugin } from "@tanstack/vue-query";
 
 // 목함수
 const { getAccessTokenMock } = vi.hoisted(() => ({
@@ -54,7 +55,11 @@ describe("LandingPage", () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (window as any).location = { assign: assignMock };
 
-    render(LandingPage);
+    render(LandingPage, {
+      global: {
+        plugins: [VueQueryPlugin],
+      },
+    });
 
     const kakaoLoginButton = screen.getByTestId("kakao-login-button");
 
@@ -75,7 +80,11 @@ describe("LandingPage", () => {
       authStore.logOut();
 
       // when
-      render(LandingPage);
+      render(LandingPage, {
+        global: {
+          plugins: [VueQueryPlugin],
+        },
+      });
 
       // then
       await waitFor(() => {
@@ -92,7 +101,11 @@ describe("LandingPage", () => {
       server.use(http.get("https://api.example.com/api/users/me", () => HttpResponse.json({})));
 
       // when
-      render(LandingPage);
+      render(LandingPage, {
+        global: {
+          plugins: [VueQueryPlugin],
+        },
+      });
 
       // then
       await waitFor(() => {

@@ -1,20 +1,24 @@
 <script setup lang="ts">
-import { getMe } from "@/api/user.api";
+import { useMeQuery } from "@/composables/useMeQuery";
 import { useAuthStore } from "@/stores/authStore";
 import { getAccessToken } from "@/utils/storage";
-import { onMounted } from "vue";
+import { watchEffect } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 const KAKAO_AUTH_URL = "";
 const router = useRouter();
 const route = useRoute();
 const { isAuthenticated, authenticate } = useAuthStore();
+const accessToken = getAccessToken();
+const redirect = route.query.redirect;
 
-onMounted(async () => {
-  const accessToken = getAccessToken();
-  const redirect = route.query.redirect;
-  if (!isAuthenticated && accessToken !== null) {
-    await attemptAuthentication();
+const { isSuccess } = useMeQuery({
+  enabled: !isAuthenticated && accessToken !== null,
+});
+
+watchEffect(() => {
+  if (accessToken && isSuccess && !isAuthenticated) {
+    authenticate();
     if (typeof redirect === "string") {
       router.push(redirect);
     } else {
@@ -22,11 +26,6 @@ onMounted(async () => {
     }
   }
 });
-
-const attemptAuthentication = async () => {
-  await getMe();
-  authenticate();
-};
 
 const onKakaoLoginClick = () => {
   window.location.assign(KAKAO_AUTH_URL);
