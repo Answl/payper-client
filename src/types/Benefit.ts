@@ -11,6 +11,6 @@ export interface Benefit {
     limitCount: number | null;
     limitAmount: number | null;
   };
-  category: Category;
+  category?: Category;
   partner?: Partner | null;
 }

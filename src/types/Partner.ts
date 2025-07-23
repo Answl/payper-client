@@ -2,6 +2,6 @@ import type { Category } from "./Category";
 
 export interface Partner {
   id: number;
-  categoryId: Category["id"];
+  category: Category["id"];
   name: string;
 }

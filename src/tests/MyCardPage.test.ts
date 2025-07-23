@@ -40,7 +40,7 @@ describe("MyCardPage", () => {
       },
       partner: {
         id: 1,
-        categoryId: 1,
+        category: 1,
         name: "GS25",
       },
       category: {
@@ -110,7 +110,7 @@ describe("MyCardPage", () => {
       },
       partner: {
         id: 1,
-        categoryId: 1,
+        category: 1,
         name: "GS25",
       },
       category: {
