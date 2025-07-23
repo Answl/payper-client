@@ -1,15 +1,16 @@
-import type { Range } from "./Range";
-import type { Discount } from "./Discount";
 import type { Category } from "./Category";
 import type { Partner } from "./Partner";
 
-export type Target = "PARTNER" | "CATEGORY";
-
 export interface Benefit {
   id: number;
-  target: Target;
-  range: Range;
-  discount: Discount;
-  category?: Category;
-  partner?: Partner;
+  target: "CATEGORY" | "PARTNER";
+  range: { start: number; end: number };
+  discount: {
+    type: "RATE" | "FIXED_AMOUNT";
+    amount: number | null;
+    limitCount: number | null;
+    limitAmount: number | null;
+  };
+  category: Category;
+  partner?: Partner | null;
 }

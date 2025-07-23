@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import CardsPage from "@/views/CardsPage.vue";
 import LandingPage from "@/pages/LandingPage.vue";
 import { useAuthStore } from "@/stores/authStore";
 
@@ -16,6 +17,10 @@ const router = createRouter({
       name: "landing",
       component: LandingPage,
       meta: { requiresAuth: false },
+    },
+    {
+      path: "/cards",
+      component: CardsPage,
     },
   ],
 });

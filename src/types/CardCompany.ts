@@ -1,5 +1,5 @@
 export interface CardCompany {
-    id : number,
-    name : string,
-    code : number
+  id: number;
+  name: string;
+  code: number;
 }
