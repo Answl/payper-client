@@ -52,4 +52,5 @@ export const handlers = [
       ],
     });
   }),
+  http.get("https://api.example.com/api/users/me", () => {}),
 ];
