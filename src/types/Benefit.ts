@@ -1,16 +1,17 @@
 import type { Category } from "./Category";
 import type { Partner } from "./Partner";
+import type { BenefitGrade } from "./BenefitGrade";
+import type { Limit } from "./Limit";
 
 export interface Benefit {
   id: number;
-  target: "CATEGORY" | "PARTNER";
-  range: { start: number; end: number };
-  discount: {
-    type: "RATE" | "FIXED_AMOUNT";
-    amount: number | null;
-    limitCount: number | null;
-    limitAmount: number | null;
-  };
-  category?: Category;
-  partner?: Partner | null;
+  title: string;
+  summary: string;
+  description: string;
+  iconUrl: string;
+  limit: Limit;
+  benefitGrades: BenefitGrade[];
+  categories: Category[];
+  partners: Partner[];
+  minPayment: number;
 }

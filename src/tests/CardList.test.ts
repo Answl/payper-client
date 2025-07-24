@@ -3,67 +3,45 @@ import { render, screen, waitFor } from "@testing-library/vue";
 import "@testing-library/jest-dom";
 import { server } from "@/mocks/node";
 import { http, HttpResponse } from "msw";
-import CardList from "@/views/CardsPage.vue";
-import type { Card } from "@/types/Card";
-import type { Category } from "@/types/Category";
+import CardList from "@/views/CardListPage.vue";
+import type { Cards } from "@/types/Cards";
 
 describe("CardList.vue", () => {
   it("마운트 시 카드 목록을 정상적으로 렌더링한다", async () => {
     // given
-    const mockCategory: Category =
-          {
-          id: 1,
-          name: "편의점"
-        }
-    const mockCards: Card[] = [
+     const mockCards: Cards = {
+      cards : [
       {
         id: 1,
         name: "KB노리2",
+        type: "CREDIT",
+        imageUrl: "https://example.com/kbcard.png",
         company: {
           id: 1,
           name: "KB국민카드",
-          code: 101,
         },
-        benefits: [
-          {
-            id: 1,
-            target: "PARTNER",
-            range: {
-              start: 0,
-              end: 300000,
-            },
-            discount: {
-              type: "RATE",
-              amount: 10,
-              limitCount: 2,
-              limitAmount: 1000,
-            },
-            category: {
-              id: 1,
-              name: "편의점",
-            },
-            partner: {
-              id: 1,
-              category: mockCategory,
-              name: "GS25",
-            },
-          },
-        ],
+        benefits: [],
+        annualCosts: [],
+        grades: [],
       },
       {
         id: 2,
         name: "토스뱅크 체크카드",
+        type: "CHECK",
+        imageUrl: "https://example.com/toss.png",
         company: {
           id: 2,
           name: "토스뱅크",
-          code: 102,
         },
         benefits: [],
+        annualCosts: [],
+        grades: [],
       },
-    ];
+    ]
+  };
 
     // when - mock 서버 응답 설정
-    server.use(http.get("/api/cards", () => HttpResponse.json({ cards: mockCards })));
+    server.use(http.get("/api/cards", () => HttpResponse.json( mockCards )));
 
     // render
     render(CardList);

@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import CardsPage from "@/views/CardsPage.vue";
+import CardsPage from "@/views/CardListPage.vue";
 import LandingPage from "@/pages/LandingPage.vue";
 import { useAuthStore } from "@/stores/authStore";
 import MyCardPage from "@/views/MyCardPage.vue";

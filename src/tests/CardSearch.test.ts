@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { render, screen, fireEvent, waitFor } from "@testing-library/vue";
-import CardSearch from "@/views/CardsPage.vue";
+import CardSearch from "@/views/CardListPage.vue";
 
 describe("CardSearch", () => {
   it("검색어를 입력하여 검색하면 결과가 필터링되어 표시됩니다", async () => {

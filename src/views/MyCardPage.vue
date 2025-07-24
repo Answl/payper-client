@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { getMyCards } from "@/api/mycard.api";
-import type { Card } from "@/types/Card";
+import type { Cards } from "@/types/Cards";
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 
-const cards = ref<Card[]>([]);
+const cards = ref<Cards>();
 const router = useRouter();
 
 onMounted(async () => {
   const data = await getMyCards();
-  cards.value = data.cards;
+  cards.value = data;
 });
 
 const onClick = (id: number) => {
@@ -19,16 +19,20 @@ const onClick = (id: number) => {
 
 <template>
   <div>
-    <div v-for="card in cards" :key="card.id" @click="onClick(card.id)">
+    <div v-for="card in cards?.cards" :key="card.id" @click="onClick(card.id)">
       <div data-testid="cardItem">
         <p>{{ card.name }}</p>
-        <p>{{ card.benefits[0].range.start }}</p>
-        <p>{{ card.benefits[0].range.end }}</p>
-        <p>{{ card.benefits[0].target }}</p>
-        <p>{{ card.benefits[0].discount.amount }}</p>
-        <p>{{ card.benefits[0].discount.type }}</p>
-        <p>{{ card.benefits[0].partner?.name ?? "" }}</p>
+        <p>{{ card.company.name }}</p>
+        <ul>
+          <li v-for="benefit in card.benefits" :key="benefit.id">
+            <p> {{ benefit.title }} </p>
+            <p> {{ benefit.categories[0]?.name }} </p>
+            <p> {{ benefit.partners[0]?.name }} </p>
+            <p> {{ benefit.benefitGrades[0]?.discount.amount }}</p>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
 </template>
+

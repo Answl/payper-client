@@ -26,10 +26,19 @@ onMounted(async () => {
     <p>{{ card.company.name }}</p>
     <ul>
       <li v-for="benefit in card.benefits" :key="benefit.id">
-        {{ benefit.category?.name }} / {{ benefit.partner?.name }} /
-        {{ benefit.discount.amount }}
-        {{ benefit.discount.type === "RATE" ? "%" : "원" }}
+        <span v-for="category in benefit.categories" :key="category.id">
+          {{ category.name }}
+        </span>
+        /
+        <span v-for="partner in benefit.partners" :key="partner.id">
+          {{ partner.name }}
+        </span>
+        /
+        {{
+          benefit.benefitGrades[0]?.discount.amount
+        }}{{ benefit.benefitGrades[0]?.discount.type === "RATE" ? "%" : "원" }}
       </li>
     </ul>
   </div>
 </template>
+
