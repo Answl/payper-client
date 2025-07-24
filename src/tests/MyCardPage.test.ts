@@ -7,6 +7,7 @@ import { userEvent } from "@testing-library/user-event";
 import type { Cards } from "@/types/Cards";
 import type { Benefit } from "@/types/Benefit";
 import type { CardCompany } from "@/types/CardCompany";
+import type { Category } from "@/types/Category";
 
 import { server } from "@/mocks/node";
 import MyCardPage from "@/views/MyCardPage.vue";
@@ -23,7 +24,13 @@ describe("MyCardPage", () => {
       id: 1,
       name: "Test Bank",
       code: 1001,
-    };
+    }
+
+    const mockCategory: Category =
+      {
+      id: 1,
+      name: "편의점"
+    }
 
     const mockBenefit: Benefit = {
       id: 1,
@@ -40,7 +47,7 @@ describe("MyCardPage", () => {
       },
       partner: {
         id: 1,
-        category: 1,
+        category: mockCategory,
         name: "GS25",
       },
       category: {

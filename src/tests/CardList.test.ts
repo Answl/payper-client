@@ -5,10 +5,16 @@ import { server } from "@/mocks/node";
 import { http, HttpResponse } from "msw";
 import CardList from "@/views/CardsPage.vue";
 import type { Card } from "@/types/Card";
+import type { Category } from "@/types/Category";
 
 describe("CardList.vue", () => {
   it("마운트 시 카드 목록을 정상적으로 렌더링한다", async () => {
     // given
+    const mockCategory: Category =
+          {
+          id: 1,
+          name: "편의점"
+        }
     const mockCards: Card[] = [
       {
         id: 1,
@@ -38,7 +44,7 @@ describe("CardList.vue", () => {
             },
             partner: {
               id: 1,
-              category: 1,
+              category: mockCategory,
               name: "GS25",
             },
           },
