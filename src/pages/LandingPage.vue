@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useMeQuery } from "@/composables/useMeQuery";
+import { useMeQuery } from "@/composables/user.query";
 import { useAuthStore } from "@/stores/authStore";
 import { getAccessToken } from "@/utils/storage";
 import { watchEffect } from "vue";

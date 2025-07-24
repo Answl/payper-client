@@ -9,6 +9,7 @@ import type { Cards } from "@/types/Cards";
 import { server } from "@/mocks/node";
 import { mockPush } from "@/../__mocks__/vue-router";
 import MyCardPage from "@/pages/MyCardPage.vue";
+import { baseURL } from "@/api/axios";
 
 vi.mock("vue-router");
 
@@ -78,9 +79,7 @@ describe("MyCardPage", () => {
   };
 
   it("마운트 시 내 카드 목록을 표시합니다", async () => {
-    server.use(
-      http.get("https://api.example.com/api/me/cards", () => HttpResponse.json(mockCards))
-    );
+    server.use(http.get(baseURL + "/me/cards", () => HttpResponse.json(mockCards)));
 
     render(MyCardPage);
 
@@ -94,9 +93,7 @@ describe("MyCardPage", () => {
   });
 
   it("카드 아이템을 클릭하면 카드 상세 페이지로 이동합니다", async () => {
-    server.use(
-      http.get("https://api.example.com/api/me/cards", () => HttpResponse.json(mockCards))
-    );
+    server.use(http.get(baseURL + "/me/cards", () => HttpResponse.json(mockCards)));
 
     render(MyCardPage);
     const button = await screen.findByTestId("cardItem");

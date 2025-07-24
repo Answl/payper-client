@@ -1,7 +1,8 @@
+import { baseURL } from "@/api/axios";
 import { server } from "@/mocks/node";
 import KakaoCallbackPage from "@/pages/KakaoCallbackPage.vue";
 import { useAuthStore } from "@/stores/authStore";
-import type { LoginResponse } from "@/types/LoginResponse";
+import type { LoginResponse } from "@/types/auth/LoginResponse";
 import { getAccessToken } from "@/utils/storage";
 import { render, waitFor } from "@testing-library/vue";
 import { http, HttpResponse } from "msw";
@@ -58,12 +59,10 @@ describe("KakaoCallbackPage", () => {
     });
 
     server.use(
-      http.post<never, never, LoginResponse>(
-        "https://api.example.com/api/auth/login/kakao",
-        async () =>
-          HttpResponse.json({
-            accessToken: "accessToken",
-          })
+      http.post<never, never, LoginResponse>(baseURL + "/auth/login/kakao", async () =>
+        HttpResponse.json({
+          accessToken: "accessToken",
+        })
       )
     );
 
@@ -83,9 +82,7 @@ describe("KakaoCallbackPage", () => {
   it("로그인 실패 시, Landing으로 이동", async () => {
     // given
     server.use(
-      http.post("https://api.example.com/api/auth/login/kakao", async () =>
-        HttpResponse.json({}, { status: 403 })
-      )
+      http.post(baseURL + "/login/kakao", async () => HttpResponse.json({}, { status: 403 }))
     );
 
     const authStore = useAuthStore();
