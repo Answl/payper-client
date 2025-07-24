@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from "vitest";
 import { render, screen, waitFor } from "@testing-library/vue";
 import "@testing-library/jest-dom";
 import { userEvent } from "@testing-library/user-event";
-import SettingsPage from "@/views/SettingsPage.vue";
+import SettingsPage from "@/pages/SettingsPage.vue";
 
 const mockPush = vi.fn();
 

@@ -3,10 +3,10 @@ import { render, screen, waitFor } from "@testing-library/vue";
 import "@testing-library/jest-dom";
 import { server } from "@/mocks/node";
 import { http, HttpResponse } from "msw";
-import CardDetailsPage from "@/views/CardDetailsPage.vue";
 import type { Category } from "@/types/Category";
 import type { Card } from "@/types/Card";
 import { createRouter, createWebHistory } from "vue-router";
+import CardDetailsPage from "@/pages/CardDetailsPage.vue";
 
 const category: Category = {
   id: 1,

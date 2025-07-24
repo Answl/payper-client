@@ -30,10 +30,7 @@ describe("PartnerDetailsPage", () => {
   const partnerMock: Partner = {
     id: 1,
     name: "테스트 파트너",
-    category: {
-      id: 2,
-      name: "카테고리명",
-    },
+    myCards: [],
   };
 
   beforeEach(() => {

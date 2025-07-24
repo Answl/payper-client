@@ -1,10 +1,10 @@
-import LogoutPage from "@/views/LogoutPage.vue";
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { mount } from "@vue/test-utils";
 import axios from "axios";
 import { getAccessToken, setAccessToken } from "@/utils/storage";
 import { useAuthStore } from "@/stores/authStore";
 import { createPinia, setActivePinia } from "pinia";
+import LogoutPage from "@/pages/LogoutPage.vue";
 
 vi.mock("axios");
 

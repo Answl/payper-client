@@ -1,18 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
-import CardsPage from "@/views/CardListPage.vue";
 import LandingPage from "@/pages/LandingPage.vue";
 import { useAuthStore } from "@/stores/authStore";
-import MyCardPage from "@/views/MyCardPage.vue";
+import MyCardPage from "@/pages/MyCardPage.vue";
+import CardListPage from "@/pages/CardListPage.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    {
-      path: "/",
-      name: "home",
-      component: HomeView,
-    },
     {
       path: "/landing",
       name: "landing",
@@ -27,7 +21,7 @@ const router = createRouter({
     },
     {
       path: "/cards",
-      component: CardsPage,
+      component: CardListPage,
     },
   ],
 });
