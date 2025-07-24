@@ -1,6 +1,4 @@
-# payper_client
-💳 내가 가진 카드로, 지금 내 주변 매장에서 받을 수 있는 혜택을 확인하는 앱 서비스 (FE)
-# 💳 payper-server
+# 💳 payper-client
 
 **내가 가진 카드로, 지금 내 주변 매장에서 받을 수 있는 혜택을 확인하는 앱 서비스 (Frontend)**
 
@@ -43,8 +41,8 @@ payper-client/
    │   └── index.ts
    ├── stores/
    │   └── counter.ts
-   ├── views/
-   │   └── HomeView.vue
+   ├── pages/
+   │   └── HomePage.vue
    ├── App.vue
    └── main.ts
 
