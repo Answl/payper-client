@@ -28,7 +28,34 @@ describe("PartnerDetailsPage", () => {
   const partnerMock: Partner = {
     id: 1,
     name: "테스트 파트너",
-    myCards: [],
+    myCards: [
+       {
+          id: 1,
+          name: "KB노리2",
+          type: "CREDIT",
+          imageUrl: "https://example.com/kbcard.png",
+          company: {
+            id: 1,
+            name: "KB국민카드",
+          },
+          benefits: [],
+          annualCosts: [],
+          grades: [],
+        },
+        {
+          id: 2,
+          name: "토스뱅크 체크카드",
+          type: "CHECK",
+          imageUrl: "https://example.com/toss.png",
+          company: {
+            id: 2,
+            name: "토스뱅크",
+          },
+          benefits: [],
+          annualCosts: [],
+          grades: [],
+        },
+    ],
   };
 
   beforeEach(() => {
@@ -83,4 +110,18 @@ describe("PartnerDetailsPage", () => {
       expect(screen.getByTestId("partnerNameTest")).toHaveTextContent("테스트 파트너");
     });
   });
+
+  it("partnerdml Cards가 화면에 출력되는지 확인", async () => {
+    //given
+    getPartnerMock.mockResolvedValue(partnerMock);
+
+    //when
+    render(PartnerDetailsPage);
+
+    //then
+    await waitFor(() => {
+      expect(screen.getByText("KB노리2")).toBeInTheDocument();
+      expect(screen.getByText("토스뱅크 체크카드")).toBeInTheDocument();
+    });
+  })
 });
