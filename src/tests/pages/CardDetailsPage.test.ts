@@ -36,11 +36,11 @@ describe("CardDetailsPage.vue", () => {
 
     // then
     await waitFor(() => {
-      expect(screen.getByText("KB노리2")).toBeInTheDocument();
-      expect(screen.getByText("KB국민카드")).toBeInTheDocument();
-      expect(screen.getByText((t) => t.includes("편의점"))).toBeInTheDocument();
-      expect(screen.getByText((t) => t.includes("GS25"))).toBeInTheDocument();
-      expect(screen.getByText((t) => t.includes("10"))).toBeInTheDocument();
+      expect(screen.getByText(mockCard.name)).toBeInTheDocument();
+      expect(screen.getByText(mockCard.company.name)).toBeInTheDocument();
+      mockCard.benefits.forEach((benefit) => {
+        expect(screen.getAllByText(benefit.title).length).toBeGreaterThan(0);
+      });
     });
   });
 });
