@@ -55,10 +55,30 @@ export const handlers = [
       ],
     });
   }),
+
   http.get("https://api.example.com/api/users/me", () => {}),
   http.post<KakaoLoginRequest, never, LoginResponse>(baseURL + "/auth/login/kakao", () =>
     HttpResponse.json({
       accessToken: "mock-accessToken",
     })
   ),
+  http.get(baseURL + "/cards/1/benefits/1", () => {
+    return HttpResponse.json({
+      id: 1,
+      title: "GS25 할인",
+      summary: "편의점에서 5% 할인",
+      description: "매일 최대 2회, 1만원 한도 내 5% 할인 제공",
+      iconUrl: "https://example.com/icon.png",
+      limit: {
+        limitCountPerDay: 2,
+        limitCountPerMonth: 30,
+        limitCountPerYear: null,
+        limitAmountPerPay: null,
+      },
+      benefitGrades: [],
+      categories: [],
+      partners: [],
+      minPayment: 10000,
+    });
+  }),
 ];
