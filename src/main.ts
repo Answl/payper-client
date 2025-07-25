@@ -7,10 +7,22 @@ import App from "./App.vue";
 import router from "./router";
 import { VueQueryPlugin } from "@tanstack/vue-query";
 
-const app = createApp(App);
+// Browser에서 MSW 활성화
+async function enableMocking() {
+  // 개발 환경에서만 동작
+  if (!import.meta.env.DEV) {
+    return;
+  }
+  const { worker } = await import("./mocks/browser");
+  return worker.start();
+}
 
-app.use(createPinia());
-app.use(router);
-app.use(VueQueryPlugin);
+enableMocking().then(() => {
+  const app = createApp(App);
 
-app.mount("#app");
+  app.use(createPinia());
+  app.use(router);
+  app.use(VueQueryPlugin);
+
+  app.mount("#app");
+});

@@ -3,6 +3,7 @@ import LandingPage from "@/pages/LandingPage.vue";
 import { useAuthStore } from "@/stores/authStore";
 import MyCardPage from "@/pages/MyCardPage.vue";
 import CardListPage from "@/pages/CardListPage.vue";
+import KakaoCallbackPage from "@/pages/KakaoCallbackPage.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,6 +23,11 @@ const router = createRouter({
     {
       path: "/cards",
       component: CardListPage,
+    },
+    {
+      path: "/auth/callback/kakao",
+      name: "kakaoCallback",
+      component: KakaoCallbackPage,
     },
   ],
 });

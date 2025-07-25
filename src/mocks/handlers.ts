@@ -1,3 +1,6 @@
+import { baseURL } from "@/api/axios";
+import type { KakaoLoginRequest } from "@/types/auth/KakaoLoginRequest";
+import type { LoginResponse } from "@/types/auth/LoginResponse";
 import { HttpResponse, http } from "msw";
 
 export const handlers = [
@@ -53,4 +56,9 @@ export const handlers = [
     });
   }),
   http.get("https://api.example.com/api/users/me", () => {}),
+  http.post<KakaoLoginRequest, never, LoginResponse>(baseURL + "/auth/login/kakao", () =>
+    HttpResponse.json({
+      accessToken: "mock-accessToken",
+    })
+  ),
 ];

@@ -7,10 +7,10 @@ import { useAuthStore } from "@/stores/authStore";
 
 const route = useRoute();
 const router = useRouter();
-const { authenticate } = useAuthStore();
+const authStore = useAuthStore();
 
 onMounted(async () => {
-  const code = route.params.code;
+  const code = route.query.code;
   if (typeof code !== "string") {
     router.push("/landing");
     return;
@@ -28,7 +28,7 @@ onMounted(async () => {
 const attemptLogin = async (code: string) => {
   const data = await loginWithKakao({ code });
   setAccessToken(data.accessToken);
-  authenticate();
+  authStore.authenticate();
 };
 </script>
 

@@ -2,7 +2,6 @@ import { baseURL } from "@/api/axios";
 import { server } from "@/mocks/node";
 import KakaoCallbackPage from "@/pages/KakaoCallbackPage.vue";
 import { useAuthStore } from "@/stores/authStore";
-import type { LoginResponse } from "@/types/auth/LoginResponse";
 import { getAccessToken } from "@/utils/storage";
 import { render, waitFor } from "@testing-library/vue";
 import { http, HttpResponse } from "msw";
@@ -38,7 +37,7 @@ describe("KakaoCallbackPage", () => {
   it("code가 없으면 Landing으로 강제 이동", async () => {
     // given
     mockRoute.mockReturnValue({
-      params: {},
+      query: {},
     });
 
     // when
@@ -53,19 +52,11 @@ describe("KakaoCallbackPage", () => {
   it("code로 서버에 로그인 요청 후, 인증 처리 및 Home으로 이동", async () => {
     // given
     mockRoute.mockReturnValue({
-      params: {
+      query: {
         code: code,
       },
     });
-
-    server.use(
-      http.post<never, never, LoginResponse>(baseURL + "/auth/login/kakao", async () =>
-        HttpResponse.json({
-          accessToken: "accessToken",
-        })
-      )
-    );
-
+    
     const authStore = useAuthStore();
 
     // when
@@ -81,6 +72,12 @@ describe("KakaoCallbackPage", () => {
 
   it("로그인 실패 시, Landing으로 이동", async () => {
     // given
+    mockRoute.mockReturnValue({
+      query: {
+        code: code,
+      },
+    });
+
     server.use(
       http.post(baseURL + "/login/kakao", async () => HttpResponse.json({}, { status: 403 }))
     );
