@@ -4,6 +4,7 @@ import { useAuthStore } from "@/stores/authStore";
 import MyCardPage from "@/pages/MyCardPage.vue";
 import CardListPage from "@/pages/CardListPage.vue";
 import KakaoCallbackPage from "@/pages/KakaoCallbackPage.vue";
+import CardDetailsPage from "@/pages/CardDetailsPage.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,6 +29,12 @@ const router = createRouter({
       path: "/auth/callback/kakao",
       name: "kakaoCallback",
       component: KakaoCallbackPage,
+    },
+    {
+      path: "/cards/:id",
+      name: "cardsDetails",
+      component: CardDetailsPage,
+      meta: { requiresAuth: false },
     },
   ],
 });

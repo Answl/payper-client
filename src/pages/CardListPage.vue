@@ -3,7 +3,9 @@ import { ref, onMounted } from "vue";
 import type { Cards } from "@/types/Cards";
 import type { Card } from "@/types/Card";
 import axios from "axios";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
 const cards = ref<Cards>();
 const filteredCards = ref<Cards>({ cards: [] });
 const searchKeyword = ref("");
@@ -23,6 +25,10 @@ const filterCards = () => {
   filteredCards.value = { cards: filtered };
 };
 
+const goToDetail = (id: number) => {
+  router.push({ name: "cardsDetails", params: { id } });
+};
+
 onMounted(fetchCards);
 </script>
 
@@ -32,7 +38,13 @@ onMounted(fetchCards);
     <button @click="filterCards">검색</button>
 
     <ul v-if="filteredCards?.cards.length > 0">
-      <li v-for="card in filteredCards.cards" :key="card.id">
+      <li
+        v-for="card in filteredCards.cards"
+        :key="card.id"
+        @click="goToDetail(card.id)"
+        data-testid="cardItem"
+        style="cursor: pointer"
+      >
         <div>{{ card.name }}</div>
         <div>{{ card.company.name }}</div>
       </li>
