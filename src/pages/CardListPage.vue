@@ -26,7 +26,7 @@ const filterCards = () => {
 };
 
 const goToDetail = (id: number) => {
-  router.push({ name: "cardsDetails", params: { id } });
+  router.push({ name: "cardDetails", params: { id } });
 };
 
 onMounted(fetchCards);

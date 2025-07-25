@@ -76,13 +76,13 @@ describe("CardListPage.vue", () => {
 
     await fireEvent.click(items[0]);
     expect(mockPush).toHaveBeenCalledWith({
-      name: "cardsDetails",
+      name: "cardDetails",
       params: { id: mockCards.cards[0].id },
     });
 
     await fireEvent.click(items[1]);
     expect(mockPush).toHaveBeenCalledWith({
-      name: "cardsDetails",
+      name: "cardDetails",
       params: { id: mockCards.cards[1].id },
     });
   });
