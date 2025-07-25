@@ -6,6 +6,7 @@ import { createPinia } from "pinia";
 import App from "./App.vue";
 import router from "./router";
 import { VueQueryPlugin } from "@tanstack/vue-query";
+import { useKakao } from "vue3-kakao-maps";
 
 // Browser에서 MSW 활성화
 async function enableMocking() {
@@ -16,6 +17,8 @@ async function enableMocking() {
   const { worker } = await import("./mocks/browser");
   return worker.start();
 }
+
+useKakao(import.meta.env.VITE_KAKAO_JAVASCRIPT_KEY);
 
 enableMocking().then(() => {
   const app = createApp(App);
