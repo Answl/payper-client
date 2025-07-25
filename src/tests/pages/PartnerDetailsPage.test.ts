@@ -1,12 +1,12 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { flushPromises } from "@vue/test-utils";
 import PartnerDetailsPage from "@/pages/PartnerDetailsPage.vue"; // 가정된 경로
-import { useRoute } from "vue-router";
 import type { Partner } from "@/types/Partner";
 import { screen, render, waitFor } from "@testing-library/vue";
 
-const { getPartnerMock } = vi.hoisted(() => ({
+const { getPartnerMock, useRouteMock } = vi.hoisted(() => ({
   getPartnerMock: vi.fn(),
+  useRouteMock: vi.fn(),
 }));
 
 // getPartner 함수와 vue-router 모킹
@@ -20,11 +20,9 @@ vi.mock("vue-router", async () => {
 
   return {
     ...actual,
-    useRoute: vi.fn(),
+    useRoute: useRouteMock,
   };
 });
-
-const userRouteMock = useRoute as unknown as ReturnType<typeof vi.fn>;
 
 describe("PartnerDetailsPage", () => {
   const partnerMock: Partner = {
@@ -34,17 +32,16 @@ describe("PartnerDetailsPage", () => {
   };
 
   beforeEach(() => {
-    userRouteMock.mockClear();
+    useRouteMock.mockClear();
     // useRoute를 통해 partnerId = 1로 고정
-    userRouteMock.mockReturnValue({
+    useRouteMock.mockReturnValue({
       params: { id: 1 },
     });
     //getPartnerMock.mockClear();
     vi.clearAllMocks();
   });
 
-  // 테스트 1: 기본 렌더링 요소가 존재하는지 확인
-  it("should render base structure", async () => {
+  it("기본 렌더링 요소가 존재하는지 확인", async () => {
     //given
 
     //when
@@ -56,8 +53,7 @@ describe("PartnerDetailsPage", () => {
     });
   });
 
-  // 테스트 2: getPartner 호출 시 에러 발생 → error 메시지 노출
-  it("should show error message when getPartner throws error", async () => {
+  it("getPartner 호출 시 에러 발생 → error 메시지 노출", async () => {
     //given
     getPartnerMock.mockRejectedValue(new Error("API error"));
 
@@ -72,8 +68,7 @@ describe("PartnerDetailsPage", () => {
     });
   });
 
-  // 테스트 3: getPartner 함수가 호출되고 올바른 Partner 객체를 반환했는지 확인
-  it("should call getPartner and set correct data", async () => {
+  it("getPartner 함수가 호출되고 올바른 Partner 객체를 반환했는지 확인", async () => {
     //given
     getPartnerMock.mockResolvedValue(partnerMock);
 
