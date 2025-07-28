@@ -10,6 +10,7 @@ import SettingsPage from "@/pages/SettingsPage.vue";
 import LogoutPage from "@/pages/LogoutPage.vue";
 import BenefitDetailsPage from "@/pages/BenefitDetailsPage.vue";
 import PartnerDetailsPage from "@/pages/PartnerDetailsPage.vue";
+import ProfilePage from "@/pages/ProfilePage.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -72,6 +73,12 @@ const router = createRouter({
       path: "/cards/:cardId/benefits/:benefitId",
       name: "benefitDetails",
       component: BenefitDetailsPage,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: "/profile",
+      name: "profiles",
+      component: ProfilePage,
       meta: { requiresAuth: true },
     },
   ],
