@@ -1,12 +1,13 @@
 import type { Card } from "@/types/Card";
 import { mockCardCompany } from "./mockCardCompany";
 import { mockBenefits } from "./mockBenefits";
+import { mockGrades } from "./mockGrades";
 
 export const mockCard: Card = {
   id: 1,
-  name: "KB노리2",
+  name: "신한카드 B.Big(삑)",
   type: "CREDIT",
-  imageUrl: "https://cdn.banksalad.com/resources/images/cards/kb_nori2_basic_check.png",
+  imageUrl: "https://financialshopping-cdn.banksalad.com/shihan_b_big_5acbb579eb.png",
   company: mockCardCompany,
   benefits: mockBenefits,
   annualCosts: [
@@ -15,9 +16,13 @@ export const mockCard: Card = {
       amount: 10000,
     },
     {
+      brandName: "UPI",
+      amount: 10000,
+    },
+    {
       brandName: "VISA",
-      amount: 5000,
+      amount: 13000,
     },
   ],
-  grades: [],
+  grades: mockGrades,
 };

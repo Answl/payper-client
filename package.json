@@ -33,6 +33,7 @@
     "vue3-kakao-maps": "^2.3.10"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.16",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/user-event": "^14.6.1",
     "@testing-library/vue": "^8.1.0",

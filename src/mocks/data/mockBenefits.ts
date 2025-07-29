@@ -1,5 +1,6 @@
 import type { Benefit } from "@/types/Benefit";
 import { mockCategories } from "./mockCategories";
+import { mockGrades } from "./mockGrades";
 
 export const mockBenefits: Benefit[] = [
   {
@@ -14,7 +15,40 @@ export const mockBenefits: Benefit[] = [
       limitCountPerMonth: 3,
       limitAmountPerPay: 5000,
     },
-    benefitGrades: [],
+    benefitGrades: [
+      {
+        id: 0,
+        grade: mockGrades[0],
+        discount: {
+          type: "FIXED_AMOUNT",
+          amount: 5000,
+        },
+      },
+      {
+        id: 1,
+        grade: mockGrades[1],
+        discount: {
+          type: "FIXED_AMOUNT",
+          amount: 12000,
+        },
+      },
+      {
+        id: 1,
+        grade: mockGrades[2],
+        discount: {
+          type: "FIXED_AMOUNT",
+          amount: 15000,
+        },
+      },
+      {
+        id: 1,
+        grade: mockGrades[3],
+        discount: {
+          type: "FIXED_AMOUNT",
+          amount: 20000,
+        },
+      },
+    ],
     categories: mockCategories,
     partners: [
       {
@@ -52,7 +86,40 @@ export const mockBenefits: Benefit[] = [
       limitCountPerMonth: 8,
       limitAmountPerPay: 10000,
     },
-    benefitGrades: [],
+    benefitGrades: [
+      {
+        id: 0,
+        grade: mockGrades[0],
+        discount: {
+          type: "FIXED_AMOUNT",
+          amount: 5000,
+        },
+      },
+      {
+        id: 1,
+        grade: mockGrades[1],
+        discount: {
+          type: "FIXED_AMOUNT",
+          amount: 12000,
+        },
+      },
+      {
+        id: 1,
+        grade: mockGrades[2],
+        discount: {
+          type: "FIXED_AMOUNT",
+          amount: 15000,
+        },
+      },
+      {
+        id: 1,
+        grade: mockGrades[3],
+        discount: {
+          type: "FIXED_AMOUNT",
+          amount: 20000,
+        },
+      },
+    ],
     categories: mockCategories,
     partners: [
       {
@@ -91,7 +158,40 @@ export const mockBenefits: Benefit[] = [
       limitCountPerYear: 12,
       limitAmountPerPay: 12000,
     },
-    benefitGrades: [],
+    benefitGrades: [
+      {
+        id: 0,
+        grade: mockGrades[0],
+        discount: {
+          type: "FIXED_AMOUNT",
+          amount: 12000,
+        },
+      },
+      {
+        id: 1,
+        grade: mockGrades[1],
+        discount: {
+          type: "FIXED_AMOUNT",
+          amount: 12000,
+        },
+      },
+      {
+        id: 1,
+        grade: mockGrades[2],
+        discount: {
+          type: "FIXED_AMOUNT",
+          amount: 12000,
+        },
+      },
+      {
+        id: 1,
+        grade: mockGrades[3],
+        discount: {
+          type: "FIXED_AMOUNT",
+          amount: 12000,
+        },
+      },
+    ],
     categories: mockCategories,
     partners: [
       {

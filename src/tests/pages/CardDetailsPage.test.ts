@@ -7,6 +7,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import CardDetailsPage from "@/pages/CardDetailsPage.vue";
 import { mockCard } from "@/mocks/data/mockCard";
 import { baseURL } from "@/api/axios";
+import { VueQueryPlugin, QueryClient } from "@tanstack/vue-query";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -19,6 +20,8 @@ const router = createRouter({
   ],
 });
 
+const queryClient = new QueryClient();
+
 describe("CardDetailsPage.vue", () => {
   it("카드 상세 정보를 정상적으로 렌더링한다", async () => {
     //  given
@@ -30,7 +33,7 @@ describe("CardDetailsPage.vue", () => {
 
     render(CardDetailsPage, {
       global: {
-        plugins: [router],
+        plugins: [router, [VueQueryPlugin, { queryClient }]],
       },
     });
 
