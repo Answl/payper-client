@@ -2,11 +2,11 @@
 import { ChevronRight } from "lucide-vue-next";
 import CommonButton from "./ui/button/CommonButton.vue";
 
-import { defineProps, type FunctionalComponent } from "vue";
+import { defineProps, type Component } from "vue";
 
 const props = defineProps<{
   label: string;
-  icon: FunctionalComponent;
+  icon: Component;
   onClick: () => void;
 }>();
 </script>

@@ -6,7 +6,7 @@ import CardListPage from "@/pages/CardListPage.vue";
 import KakaoCallbackPage from "@/pages/KakaoCallbackPage.vue";
 import CardDetailsPage from "@/pages/CardDetailsPage.vue";
 import HomePage from "@/pages/HomePage.vue";
-import SettingsPage from "@/pages/SettingsPage.vue";
+import SettingsPage from "@/pages/MorePage.vue";
 import LogoutPage from "@/pages/LogoutPage.vue";
 import BenefitDetailsPage from "@/pages/BenefitDetailsPage.vue";
 import PartnerDetailsPage from "@/pages/PartnerDetailsPage.vue";
@@ -59,8 +59,8 @@ const router = createRouter({
       meta: { requiresAuth: false },
     },
     {
-      path: "/settings",
-      name: "settings",
+      path: "/more",
+      name: "more",
       component: SettingsPage,
       meta: { requiresAuth: true },
     },

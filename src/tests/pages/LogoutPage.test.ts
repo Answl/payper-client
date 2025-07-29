@@ -1,18 +1,14 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
-import { mount } from "@vue/test-utils";
-import axios from "axios";
-import { getAccessToken, setAccessToken } from "@/utils/storage";
-import { useAuthStore } from "@/stores/authStore";
-import { createPinia, setActivePinia } from "pinia";
+import { render, waitFor } from "@testing-library/vue";
 import LogoutPage from "@/pages/LogoutPage.vue";
-
-vi.mock("axios");
+import { createPinia, setActivePinia } from "pinia";
+import { useAuthStore } from "@/stores/authStore";
+import { setAccessToken, getAccessToken } from "@/utils/storage";
+import { VueQueryPlugin, QueryClient } from "@tanstack/vue-query";
 
 const replaceMock = vi.fn();
-
 vi.mock("vue-router", async () => {
   const actual = await vi.importActual<typeof import("vue-router")>("vue-router");
-
   return {
     ...actual,
     useRouter: () => ({
@@ -21,64 +17,33 @@ vi.mock("vue-router", async () => {
   };
 });
 
+beforeEach(() => {
+  setActivePinia(createPinia());
+  useAuthStore().logOut();
+  localStorage.clear();
+});
+
 describe("LogoutPage", () => {
-  const postMock = axios.post as unknown as ReturnType<typeof vi.fn>;
-  postMock.mockResolvedValue({});
+  it("로그아웃 시 store, localStorage, 라우팅 정상 작동", async () => {
+    // given
+    const queryClient = new QueryClient();
 
-  beforeEach(() => {
-    vi.clearAllMocks();
-    setActivePinia(createPinia());
-  });
-
-  it("로그아웃 페이지 마운트시 isAuthenticated->false", async () => {
-    //pre
     const authStore = useAuthStore();
-
-    //given
-    authStore.authenticate();
-
-    //when
-    await mount(LogoutPage);
-
-    //then
-    expect(authStore.isAuthenticated).toBeFalsy();
-  });
-
-  it("로그아웃 페이지 마운트시 localStorage에 accessToken제거", async () => {
-    //pre
-    const originToken = getAccessToken();
-
-    //given
+    authStore.authenticate(); // isAuthenticated = true
     setAccessToken("dummy-token");
 
-    //when
-    await mount(LogoutPage);
+    // when
+    render(LogoutPage, {
+      global: {
+        plugins: [[VueQueryPlugin, { queryClient }]],
+      },
+    });
 
-    //then
-    expect(getAccessToken()).toBeNull();
-
-    //after
-    setAccessToken(originToken ? originToken : "");
-  });
-
-  it("로그아웃 페이지 마운트시 쿠키 지우는 api 서버에 요청", async () => {
-    //given
-    //없음
-
-    //when
-    await mount(LogoutPage);
-
-    //then
-    expect(postMock).toHaveBeenCalledExactlyOnceWith("/logout");
-  });
-
-  it("로그아웃 완료 후 홈 페이지로 이동", async () => {
-    //given
-
-    //when
-    await mount(LogoutPage);
-
-    //then
-    expect(replaceMock).toHaveBeenCalledWith("/");
+    // 비동기 로직 처리 기다림
+    await waitFor(() => {
+      expect(authStore.isAuthenticated).toBeFalsy();
+      expect(getAccessToken()).toBeNull();
+      expect(replaceMock).toHaveBeenCalledWith("/landing");
+    });
   });
 });

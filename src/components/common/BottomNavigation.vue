@@ -36,8 +36,8 @@ const items = [
   },
   {
     id: 4,
-    title: "메뉴",
-    name: "menu",
+    title: "더보기",
+    name: "more",
     icon: Menu,
   },
 ];

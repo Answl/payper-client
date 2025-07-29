@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from "vitest";
 import { render, screen, waitFor } from "@testing-library/vue";
 import "@testing-library/jest-dom";
 import { userEvent } from "@testing-library/user-event";
-import SettingsPage from "@/pages/SettingsPage.vue";
+import MorePage from "@/pages/MorePage.vue";
 
 const mockPush = vi.fn();
 
@@ -25,18 +25,18 @@ describe("SettingsPage", () => {
     //아직 없음
 
     //when
-    render(SettingsPage);
+    render(MorePage);
 
     //then
     await waitFor(() => {
-      expect(screen.getByTestId("LogoutButtonTest")).toBeInTheDocument();
+      expect(screen.getByTestId("logout-button")).toBeInTheDocument();
     });
   });
 
   it("로그아웃 버튼을 누르면 /logout으로 이동한다", async () => {
     //given
-    render(SettingsPage);
-    const logoutButton = screen.getByTestId("LogoutButtonTest");
+    render(MorePage);
+    const logoutButton = screen.getByTestId("logout-button");
 
     //when
     await user.click(logoutButton);

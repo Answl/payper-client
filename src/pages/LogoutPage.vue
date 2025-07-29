@@ -3,24 +3,27 @@ import { onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/authStore";
 import { removeAccessToken } from "@/utils/storage";
-import axios from "axios";
+import { useLogoutMutation } from "@/composables/auth.query";
 
 const router = useRouter();
 const authStore = useAuthStore();
 
+const { mutate } = useLogoutMutation({
+  onSuccess: () => {
+    authStore.logOut();
+    removeAccessToken();
+    router.replace("/landing");
+  },
+  onError: (error) => {
+    console.error("Logout failed:", error);
+  },
+});
+
 onMounted(async () => {
-  //로그아웃 진행
-  authStore.logOut();
-
-  removeAccessToken();
-
-  await axios.post("/logout"); //임시 URL
-
-  //리다이렉트
-  router.replace("/");
+  mutate();
 });
 </script>
 
 <template>
-  <div>로그아웃 중~</div>
+  <div></div>
 </template>

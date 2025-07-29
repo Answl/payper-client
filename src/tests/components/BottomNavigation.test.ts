@@ -19,7 +19,7 @@ describe("BottomNavigation", () => {
 
     const user = userEvent.setup();
 
-    const expectedRoutes = ["myCards", "cards", "home", "profile", "menu"];
+    const expectedRoutes = ["myCards", "cards", "home", "profile", "more"];
 
     for (const routeName of expectedRoutes) {
       const item = await screen.findByTestId(`nav-item-${routeName}`);
