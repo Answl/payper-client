@@ -1,12 +1,14 @@
 import type { Card } from "@/types/Card";
 import { mockCategory } from "./mockCategory";
+import cardImg1 from "@/assets/cardimg/cardImg1.png";
 
-export const mockCards: Card[] = [
+
+const cardList: Card[] = [
   {
     id: 1,
     name: "KB노리2",
     type: "CREDIT",
-    imageUrl: "https://example.com/card.png",
+    imageUrl: cardImg1,
     company: {
       id: 1,
       name: "KB국민카드",
@@ -60,3 +62,5 @@ export const mockCards: Card[] = [
     grades: [],
   },
 ];
+
+export const mockCards = { cards: cardList };

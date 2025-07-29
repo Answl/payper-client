@@ -5,5 +5,5 @@ export interface Partner {
   id: number;
   name: string;
   myCards : Card[];
-  position : Position,
+  position ?: Position,
 }

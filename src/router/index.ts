@@ -29,7 +29,7 @@ const router = createRouter({
       meta: { requiresAuth: false },
     },
     {
-      path: "/my/cards",
+      path: "/cards/me",
       name: "myCards",
       component: MyCardPage,
       meta: { requiresAuth: true },
