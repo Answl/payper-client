@@ -1,7 +1,7 @@
-<script setup lang="ts">
-import { Home } from "lucide-vue-next"; // 그냥 넣어놓은거, 없애도 됨
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <Home />
+  <h1 className="text-primary">Primary</h1>
+  <h1 className="text-primary-light">Primary Light</h1>
+  <h1 className="text-primary-lighter">Primary Lighter</h1>
 </template>
