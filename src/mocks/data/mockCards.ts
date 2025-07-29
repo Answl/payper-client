@@ -46,6 +46,11 @@ export const mockCards: Card[] = [
             id: 1,
             name: "GS25",
             myCards: [],
+            position: {
+              x: 0,
+              y: 0,
+              distance: 0,
+            },
           },
         ],
         minPayment: 1000,

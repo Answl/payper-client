@@ -53,20 +53,21 @@ describe("CardListPage.vue", () => {
     });
   });
 
-  it("검색어를 입력하여 검색하면 결과가 필터링되어 표시된다", async () => {
-    //npm install 후 재 커밋을 위한 주석
-    render(CardListPage);
+  // 내부 필터링이 아닌 API 호출로 검색 구현 예정 -> 해당 테스트는 주석 처리
+  // it("검색어를 입력하여 검색하면 결과가 필터링되어 표시된다", async () => {
+  //   //npm install 후 재 커밋을 위한 주석
+  //   render(CardListPage);
 
-    const input = screen.getByPlaceholderText("카드 이름을 입력하세요");
-    const button = screen.getByText("검색");
+  //   const input = screen.getByPlaceholderText("카드 이름을 입력하세요");
+  //   const button = screen.getByText("검색");
 
-    await fireEvent.update(input, "토스");
-    await fireEvent.click(button);
+  //   await fireEvent.update(input, "토스");
+  //   await fireEvent.click(button);
 
-    await waitFor(() => {
-      expect(screen.getByText("토스뱅크 체크카드")).toBeInTheDocument();
-    });
-  });
+  //   await waitFor(() => {
+  //     expect(screen.getByText("토스뱅크 체크카드")).toBeInTheDocument();
+  //   });
+  // });
 
   it("카드 아이템을 클릭하면 카드 상세 페이지로 이동한다", async () => {
     server.use(http.get("/api/cards", () => HttpResponse.json(mockCards)));
