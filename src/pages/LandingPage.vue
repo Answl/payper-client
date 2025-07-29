@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import BrandLogo from "@/assets/BrandLogo.vue";
 import KakaoLoginButton from "@/components/KakaoLoginButton.vue";
 import { useMeQuery } from "@/composables/user.query";
 import { useAuthStore } from "@/stores/authStore";
@@ -29,7 +30,16 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div>
-    <KakaoLoginButton />
+  <div class="flex flex-col py-20 h-full items-center justify-center">
+    <div class="flex flex-col size-full items-center justify-center">
+      <BrandLogo />
+      <div class="flex mt-[-20px]">
+        <span class="text-2xl font-bold mt-4 text-primary">pay</span>
+        <span class="text-2xl font-bold mt-4">per</span>
+      </div>
+    </div>
+    <div class="flex flex-col">
+      <KakaoLoginButton />
+    </div>
   </div>
 </template>
