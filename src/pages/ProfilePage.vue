@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
-import { Button } from "@/components/ui/button";
+import { CommonButton } from "@/components/ui/button";
 import { ChevronRight, Pencil, LogOut, UserX, ArrowLeft } from "lucide-vue-next";
 
 const router = useRouter();
@@ -25,7 +25,7 @@ const deleteAccount = () => router.push("/delete-account");
         <p class="text-sm text-gray-500">000-0000-0000</p>
       </div>
 
-      <Button
+      <CommonButton
         as="button"
         variant="ghost"
         class="w-full flex justify-between items-center border px-4 py-4 rounded-md shadow-sm mb-6"
@@ -36,9 +36,9 @@ const deleteAccount = () => router.push("/delete-account");
           <span>내 정보 수정하기</span>
         </div>
         <ChevronRight class="w-4 h-4 text-gray-400" />
-      </Button>
+      </CommonButton>
 
-      <Button
+      <CommonButton
         as="button"
         variant="ghost"
         class="w-full flex justify-between items-center border px-4 py-4 rounded-md shadow-sm mb-6"
@@ -49,9 +49,9 @@ const deleteAccount = () => router.push("/delete-account");
           <span>로그아웃</span>
         </div>
         <ChevronRight class="w-4 h-4 text-gray-400" />
-      </Button>
+      </CommonButton>
 
-      <Button
+      <CommonButton
         as="button"
         variant="ghost"
         class="w-full flex justify-between items-center border px-4 py-4 rounded-md shadow-sm"
@@ -62,7 +62,7 @@ const deleteAccount = () => router.push("/delete-account");
           <span>회원탈퇴</span>
         </div>
         <ChevronRight class="w-4 h-4 text-gray-400" />
-      </Button>
+      </CommonButton>
     </div>
   </div>
 </template>

@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
-import { Button } from "@/components/ui/button";
+
 import { ChevronRight, User, LogOut, X } from "lucide-vue-next";
+import { CommonButton } from "@/components/ui/button";
 
 const router = useRouter();
 
@@ -30,7 +31,7 @@ const goToHome = () => {
       </div>
 
       <div class="space-y-4">
-        <Button
+        <CommonButton
           variant="ghost"
           class="w-full flex items-center justify-between border border-gray-200 rounded-md px-4 py-3 shadow-sm"
           @click="goToProfile"
@@ -40,9 +41,9 @@ const goToHome = () => {
             <span>내 정보</span>
           </div>
           <ChevronRight class="w-4 h-4 text-gray-400" />
-        </Button>
+        </CommonButton>
 
-        <Button
+        <CommonButton
           variant="ghost"
           class="w-full flex items-center justify-between border border-gray-200 rounded-md px-4 py-3 shadow-sm"
           @click="logout"
@@ -53,7 +54,7 @@ const goToHome = () => {
             <span>로그아웃</span>
           </div>
           <ChevronRight class="w-4 h-4 text-gray-400" />
-        </Button>
+        </CommonButton>
       </div>
     </div>
   </div>
