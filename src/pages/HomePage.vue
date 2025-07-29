@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import CommonHeader from "@/components/ui/CommonHeader.vue";
+import CommonHeader from "@/components/CommonHeader.vue";
 </script>
 
 <template>
