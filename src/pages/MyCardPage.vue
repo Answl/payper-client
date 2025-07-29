@@ -6,20 +6,37 @@ import {
   Plus,
   Coffee,
   Film,
+  FlaskConical,
   ChevronDown,
   ChevronUp,
+  BookOpen,
+  ShoppingBag,
+  Candy,
 } from "lucide-vue-next";
+import { Accordion, AccordionItem } from "@/components/ui/accordion";
 import { getMyCards } from "@/api/mycard.api";
 import type { Card } from "@/types/Card";
 
 const router = useRouter();
-const expandedCardId = ref<number | null>(null);
 const cards = ref<Card[]>([]);
 const loading = ref(false);
+const expandedBenefits = ref<Record<number, boolean>>({});
 
 const iconMap: Record<string, Component> = {
-  "편의점": Coffee,
-  "영화": Film,
+  "편의점": ShoppingBag,
+  "카페": Coffee,
+  "헬스/뷰티": FlaskConical,
+  "문화": Film,
+  "도서": BookOpen,
+  "생활": ShoppingBag,
+  "식비": Candy,
+};
+
+const resolveIcon = (benefit: Card["benefits"][number]): Component => {
+  const normalize = (str?: string) => str?.trim().toLowerCase() || "";
+  const category = normalize(benefit.categories?.[0]?.name);
+  const partner = normalize(benefit.partners?.[0]?.name);
+  return iconMap[category] || iconMap[partner] || ShoppingBag;
 };
 
 onMounted(async () => {
@@ -35,22 +52,23 @@ onMounted(async () => {
   }
 });
 
-
-const goBack = () => router.back();
-const goToAdd = () => router.push("/cards/add");
-
-const goToCardDetail = (id: number) => {
-  router.push({
-    name: "cardsDetails",
-    params: { id },
-  });
+const goBack = () => {
+  router.push("/");
 };
 
+const goToAdd = () => router.push("/cards/add");
+
+const goToDetail = (id: number) => {
+  router.push({ name: "cardsDetails", params: { id } });
+};
+
+const toggleBenefit = (cardId: number) => {
+  expandedBenefits.value[cardId] = !expandedBenefits.value[cardId];
+};
 </script>
 
 <template>
-  <div class="min-h-screen bg-[#F7F7F7] pb-36 max-w-md mx-auto">
-
+  <div class="min-h-screen pb-36 max-w-md mx-auto">
     <div class="flex items-center justify-between h-12 mt-6 mb-6 px-4">
       <button @click="goBack" class="w-6 h-6 flex items-center justify-center">
         <ArrowLeft class="w-6 h-6 text-black" />
@@ -63,76 +81,55 @@ const goToCardDetail = (id: number) => {
       등록된 카드가 없습니다.
     </div>
 
-
-    <div v-else class="space-y-4 pb-36 max-w-md mx-auto">
-      <div
+    <Accordion type="single" collapsible class="space-y-4 px-4">
+      <AccordionItem
         v-for="card in cards"
         :key="card.id"
-        class="bg-white rounded-2xl shadow-sm px-4 py-4 cursor-pointer mx-4"
-        @click="goToCardDetail(card.id)"
-        data-testid="cardItem"
+        :value="String(card.id)"
+        class="overflow-hidden"
       >
-
-        <div class="flex">
-          <img
-            :src="card.imageUrl"
-            alt="카드 이미지"
-            class="w-20 h-32 object-cover rounded-md"
-          />
-          <div class="ml-4 flex-1">
+        <div
+          class="px-4 py-4 flex cursor-pointer"
+          data-testid="cardItem"
+          @click="goToDetail(card.id)"
+        >
+          <img :src="card.imageUrl" alt="카드 이미지" class="w-20 h-32 object-cover rounded-md" />
+          <div class="ml-4 flex-1 mt-2">
             <p class="text-xs text-gray-500">{{ card.company?.name }}</p>
-            <p class="text-sm text-gray-900 font-medium leading-snug line-clamp-2">
+            <p class="text-sm text-gray-900 font-medium leading-snug line-clamp-2 mt-2">
               {{ card.name }}
             </p>
 
             <div
-              v-for="(benefit, i) in card.benefits.slice(0, 3)"
+              v-for="(benefit, i) in expandedBenefits[card.id] ? card.benefits : card.benefits.slice(0, 3)"
               :key="i"
               class="flex gap-1 items-start mt-1"
             >
               <component
-                :is="iconMap[benefit.categories?.[0]?.name] || Coffee"
+                :is="resolveIcon(benefit)"
                 class="w-4 h-4 text-gray-500 mt-0.5 shrink-0"
               />
               <span class="text-xs text-gray-600 leading-snug">
-                {{ benefit.partners?.[0]?.name || '제휴처' }}에서
-                {{ benefit.benefitGrades?.[0]?.discount?.amount ?? '?' }}
-                {{ benefit.benefitGrades?.[0]?.discount?.type === 'RATE' ? '%' : '원' }}
-                {{ benefit.title }}
+                {{ benefit.summary }}
               </span>
             </div>
-          </div>
-          <component
-            :is="expandedCardId === card.id ? ChevronUp : ChevronDown"
-            class="w-5 h-5 text-gray-400 self-start mt-1"
-          />
-        </div>
 
-        <div
-          v-if="expandedCardId === card.id"
-          class="mt-4 ml-24 bg-gray-50 border border-gray-200 rounded-lg p-4 space-y-3 text-sm text-gray-700"
-        >
-          <div
-            v-for="(benefit, i) in card.benefits"
-            :key="i"
-            class="flex items-start gap-2"
-          >
-            <component
-              :is="iconMap[benefit.categories?.[0]?.name] || Coffee"
-              class="w-4 h-4 text-gray-500 mt-1 shrink-0"
-            />
-            <div class="flex-1">
-              <p class="font-medium text-gray-800">
-                {{ benefit.partners?.[0]?.name || '제휴처' }}:
-                {{ benefit.benefitGrades?.[0]?.discount?.amount ?? '?' }}
-                {{ benefit.benefitGrades?.[0]?.discount?.type === 'RATE' ? '%' : '원' }}
-              </p>
-              <p class="text-xs text-gray-500 mt-1" v-if="benefit.description" v-html="benefit.description" />
+            <div v-if="card.benefits.length > 3" class="mt-2">
+              <button
+                @click.stop="toggleBenefit(card.id)"
+                class="text-xs text-gray-600 flex items-center gap-1"
+              >
+                {{ expandedBenefits[card.id] ? '접기' : '더보기' }}
+                <component
+                  :is="expandedBenefits[card.id] ? ChevronUp : ChevronDown"
+                  class="w-4 h-4 text-gray-400"
+                />
+              </button>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </AccordionItem>
+    </Accordion>
 
     <div class="fixed bottom-0 left-1/2 -translate-x-1/2 w-[calc(100%-32px)] max-w-md">
       <button
@@ -145,3 +142,4 @@ const goToCardDetail = (id: number) => {
     </div>
   </div>
 </template>
+
