@@ -1,17 +1,29 @@
 <script setup lang="ts">
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useCardQuery } from "@/composables/card.query";
 import BenefitItem from "@/components/card/BenefitItem.vue";
 import PageHolder from "@/components/common/PageHolder.vue";
 import CommonButton from "@/components/ui/button/CommonButton.vue";
 import { Plus } from "lucide-vue-next";
 import { ref } from "vue";
+import { useAddToMyCardsMutation } from "@/composables/mycard.query";
 
 const route = useRoute();
+const router = useRouter();
 const cardId = Number(route.params.id);
 
 const { data: card } = useCardQuery(cardId);
 const selectedGradeIndex = ref<number>(0);
+
+const { mutate } = useAddToMyCardsMutation({
+  onSuccess: () => {
+    router.push({ name: "myCards" });
+  },
+});
+
+const onAddCardClick = () => {
+  mutate(cardId);
+};
 </script>
 
 <template>
@@ -22,7 +34,7 @@ const selectedGradeIndex = ref<number>(0);
         <p class="text-sm text-stone-500">{{ card.company.name }}</p>
         <h1 class="text-2xl font-bold">{{ card.name }}</h1>
       </div>
-      <CommonButton variant="outline" class="w-full"
+      <CommonButton variant="outline" class="w-full" @click="onAddCardClick"
         ><Plus /><span>내 카드에 추가하기</span>
       </CommonButton>
     </div>

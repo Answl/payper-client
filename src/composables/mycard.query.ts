@@ -10,10 +10,13 @@ export const useMyCardsQuery = () => {
 
 // 내 카드에 추가
 // 내 카드 목록 쿼리를 invalidate 합니다.
-export const useAddToMyCardsMutation = (
-  onSuccess?: () => void,
-  onError?: (error: unknown) => void
-) => {
+export const useAddToMyCardsMutation = ({
+  onSuccess,
+  onError,
+}: {
+  onSuccess?: () => void;
+  onError?: (error: unknown) => void;
+}) => {
   const queryClient = useQueryClient();
 
   return useMutation({

@@ -1,13 +1,12 @@
 import type { Cards } from "@/types/Cards";
 import { api } from "./axios";
 
-
 export const addToMyCards = async (cardId: number | string) => {
-  await api.post("/me/cards", { cardId });
+  await api.post("/cards/me", { cardId });
 };
 
 export const removeFromMyCards = async (cardId: number | string) => {
-  await api.delete(`me/cards/${cardId}`);
+  await api.delete(`/cards/me/${cardId}`);
 };
 
 export const getMyCards = async (): Promise<Cards> => {
