@@ -2,14 +2,15 @@
 import { CreditCard, MapPinned, Menu, Search, UserRound } from "lucide-vue-next";
 import { useRouter } from "vue-router";
 import { cn } from "@/lib/utils";
+import type { NavigationItem } from "@/types/navigation/NavigationItem";
 
 const { selected } = defineProps<{
-  selected: string;
+  selected?: string;
 }>();
 
 const router = useRouter();
 
-const items = [
+const items: NavigationItem[] = [
   {
     id: 0,
     title: "내 카드",
@@ -18,8 +19,8 @@ const items = [
   },
   {
     id: 1,
-    title: "카드 찾기",
-    name: "cards",
+    title: "검색",
+    name: "search",
     icon: Search,
   },
   {

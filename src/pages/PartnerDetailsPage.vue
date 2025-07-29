@@ -1,39 +1,22 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import PageHolder from "@/components/common/PageHolder.vue";
+import PartnerCard from "@/components/partner/PartnerCard.vue";
+import PartnerInfo from "@/components/partner/PartnerInfo.vue";
+import { usePartnerQuery } from "@/composables/partner.query";
 import { useRoute } from "vue-router";
-import { getPartner } from "@/api/partner.api";
-import type { Partner } from "@/types/Partner";
-import type { Card } from "@/types/Card";
 
-const currentRoute = useRoute();
-const partnerObj = ref<Partner>();
-const error = ref(false);
-const partnerCard = ref<Card[]>();
-
-onMounted(async () => {
-  const partnerId = Number(currentRoute.params.id);
-
-  try {
-    const data = await getPartner(partnerId);
-    partnerObj.value = data;
-    partnerCard.value = data.myCards;
-  } catch {
-    error.value = true;
-  }
-});
+const route = useRoute();
+const partnerId = route.params.id as string;
+const { data } = usePartnerQuery(partnerId);
 </script>
 
 <template>
-  <div v-if="error">
-    <h1>not enrolled partner</h1>
-  </div>
-  <div v-else>
-    <h1 data-testid="partnerNameTest">{{ partnerObj?.name }}</h1>
-    <p>this is my part ner details</p>
-    <ul>
-     <li v-for="Card in partnerCard" :key="Card.id">
-       {{ Card.name }}
-     </li>
-    </ul>
-  </div>
+  <PageHolder v-if="data" title="가맹점 정보">
+    <PartnerInfo :partner="data" />
+    <div class="flex flex-col bg-stone-100 p-5 rounded-xl">
+      <p class="text-stone-900">혜택 적용 카드</p>
+      <p class="text-stone-500">아래 카드를 사용하면 혜택을 받을 수 있어요.</p>
+    </div>
+    <PartnerCard v-for="card in data.myCards" :key="card.id" :card="card" />
+  </PageHolder>
 </template>

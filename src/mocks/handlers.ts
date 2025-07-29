@@ -6,6 +6,7 @@ import { mockCard } from "./data/mockCard";
 import { mockUser } from "./data/mockUser";
 import { mockPartners } from "./data/mockPartners";
 import { mockTokens } from "./data/mockTokens";
+import { mockPartner } from "./data/mockPartner";
 
 export const handlers = [
   // API-6 카드 혜택 조회
@@ -26,6 +27,8 @@ export const handlers = [
   http.delete(baseURL + "/users/me", () => HttpResponse.json({})),
   // API-28 파트너 리스트 조회
   http.get(baseURL + "/partners", () => HttpResponse.json(mockPartners)),
+  // 파트너 상세 조회
+  http.get(baseURL + "/partners/:id", () => HttpResponse.json(mockPartner)),
   // API-18 카카오 회원가입
   http.post(baseURL + "/auth/login/kakao", () => HttpResponse.json({})),
   // API-23 로그아웃
