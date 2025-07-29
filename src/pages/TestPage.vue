@@ -1,16 +1,21 @@
 <script setup lang="ts">
 import SearchBar from "@/components/common/SearchBar.vue";
 import CommonHeader from "@/components/CommonHeader.vue";
+import MenuButton from "@/components/MenuButton.vue";
+import { LogOut } from "lucide-vue-next";
 </script>
 
 <template>
-  <CommonHeader title="Test" />
-  <SearchBar
-    :onClick="
-      () => {
-        console.log('click!');
-      }
-    "
-    placeholder="검색어를 입력하세요"
-  />
+  <div class="flex flex-col gap-10 p-5">
+    <CommonHeader title="Test" />
+    <SearchBar
+      :onClick="
+        () => {
+          console.log('click!');
+        }
+      "
+      placeholder="검색어를 입력하세요"
+    />
+    <MenuButton :onClick="() => console.log('Clicked!')" :icon="LogOut" label="로그아웃" />
+  </div>
 </template>
