@@ -56,7 +56,7 @@ const goBack = () => {
   router.push("/");
 };
 
-const goToAdd = () => router.push("/cards/add");
+const goToAdd = () => router.push("/search");
 
 const goToDetail = (id: number) => {
   router.push({ name: "cardsDetails", params: { id } });
@@ -68,7 +68,7 @@ const toggleBenefit = (cardId: number) => {
 </script>
 
 <template>
-  <div class="min-h-screen pb-36 max-w-md mx-auto">
+    <div class="flex flex-col size-full">
     <div class="flex items-center justify-between h-12 mt-6 mb-6 px-4">
       <button @click="goBack" class="w-6 h-6 flex items-center justify-center">
         <ArrowLeft class="w-6 h-6 text-black" />
@@ -81,7 +81,7 @@ const toggleBenefit = (cardId: number) => {
       등록된 카드가 없습니다.
     </div>
 
-    <Accordion type="single" collapsible class="space-y-4 px-4">
+    <Accordion type="single" collapsible class="space-y-4 px-6">
       <AccordionItem
         v-for="card in cards"
         :key="card.id"
@@ -131,7 +131,8 @@ const toggleBenefit = (cardId: number) => {
       </AccordionItem>
     </Accordion>
 
-    <div class="fixed bottom-0 left-1/2 -translate-x-1/2 w-[calc(100%-32px)] max-w-md">
+    <div class="border-b border-gray-200 mx-10 mb-4 py-4"></div>
+      <div class="flex flex-col px-4 py-4 size-full">
       <button
         @click="goToAdd"
         class="w-full mt-4 bg-[#F67154] text-white py-4 rounded-md text-base font-semibold flex items-center justify-center gap-2 shadow-md"
