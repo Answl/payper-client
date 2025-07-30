@@ -26,7 +26,7 @@ export const handlers = [
   // API-3 회원 탈퇴
   http.delete(baseURL + "/users/me", () => HttpResponse.json({})),
   // API-28 파트너 리스트 조회
-  http.get(baseURL + "/partners", () => HttpResponse.json(mockPartners)),
+  http.get(baseURL + "/partners", () => HttpResponse.json({partners: mockPartners})),
   // 파트너 상세 조회
   http.get(baseURL + "/partners/:id", () => HttpResponse.json(mockPartner)),
   // API-18 카카오 회원가입

@@ -1,10 +1,9 @@
-import type { Partner } from "@/types/Partner";
+import type { Partners } from "@/types/Partners";
 import { api } from "./axios";
 
-export const getMAPartner = async (category: string, name: string, latitude: number, longitude: number): Promise<Partner> => {
-  const response = await api.get<Partner>("https://api.example.com/api/partners", {
+export const getMAPartner = async ( name: string, latitude: number, longitude: number): Promise<Partners> => {
+  const response = await api.get<Partners>("/partners", {
     params: {
-      category,
       name,
       latitude,
       longitude,
