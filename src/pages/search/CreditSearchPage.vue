@@ -140,42 +140,34 @@ onMounted(async () => {
       </div>
     </div>
 
-   <div class="grid grid-cols-3 gap-x-2 gap-y-2 mb-3 px-10 max-w-[400px] ">
+    <div class="flex flex-wrap gap-2 items-center mb-2 px-10">
+      <FilterDrawer
+        label="혜택"
+        :options="benefitOptions"
+        v-model:selected="selectedTags"
+      />
+      <FilterDrawer
+        label="카드사"
+        :options="['KB국민카드', '신한카드', '우리카드']"
+        v-model:selected="selectedTags"
+      />
+      <FilterDrawer
+        label="전월실적"
+        :options="['없음', '30만원 이상', '50만원 이상']"
+        v-model:selected="selectedTags"
+      />
 
-  <FilterDrawer
-    label="유형"
-    :options="['신용카드', '체크카드']"
-    v-model:selected="selectedTags"
-  />
-  <FilterDrawer
-    label="혜택"
-    :options="benefitOptions"
-    v-model:selected="selectedTags"
-  />
-  <FilterDrawer
-    label="카드사"
-    :options="['KB국민카드', '신한카드', '우리카드']"
-    v-model:selected="selectedTags"
-  />
-  <FilterDrawer
-    label="전월실적"
-    :options="['없음', '30만원 이상', '50만원 이상']"
-    v-model:selected="selectedTags"
-  />
-  <FilterDrawer
-    label="연회비"
-    :options="['없음', '1만원 이하', '1~3만원']"
-    v-model:selected="selectedTags"
-  />
-  <FilterDrawer
-    label="브랜드"
-    :options="['VISA', 'MASTER', 'JCB', 'LOCAL']"
-    v-model:selected="selectedTags"
-  />
-</div>
+      <button
+        v-if="!selectedTags.length"
+        class="text-sm text-gray-500 underline ml-auto"
+        @click="clearFilters"
+      >
+        초기화
+      </button>
+    </div>
 
 
-    <div class="flex items-center flex-wrap gap-2 mb-4 px-10">
+<div v-if="selectedTags.length" class="flex flex-wrap gap-2 mb-4 px-10 items-center">
       <span
         v-for="tag in selectedTags"
         :key="tag"
@@ -186,11 +178,18 @@ onMounted(async () => {
           &times;
         </button>
       </span>
-      <button class="ml-auto text-sm text-gray-500 underline" @click="clearFilters">
+
+
+      <button
+        class="text-sm text-gray-500 underline ml-auto"
+        @click="clearFilters"
+      >
         초기화
       </button>
     </div>
-<div class="border-b border-gray-200 mx-10 mb-4"></div>
+
+
+    <div class="border-b border-gray-200 mx-10 mb-4 mt-2"></div>
 
     <div class="flex justify-end mb-4 px-10">
       <select v-model="sortOption" class="border rounded px-2 py-1 text-sm">
@@ -207,7 +206,9 @@ onMounted(async () => {
         :value="String(card.id)"
         class="overflow-hidden"
       >
-        <div class="px-4 py-4 flex cursor-pointer border-none">
+                <div class="w-[95%] mx-auto">
+
+        <div class="px-4 py-4 flex cursor-pointer">
 <img :src="card.imageUrl" alt="카드 이미지" class="w-20 h-28 object-cover rounded-md" />
 
           <div class="ml-4 flex-1 mt-2">
@@ -241,6 +242,7 @@ onMounted(async () => {
                   class="w-4 h-4 text-gray-400"
                 />
               </button>
+              </div>
             </div>
           </div>
         </div>
