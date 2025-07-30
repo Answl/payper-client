@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, defineProps } from "vue";
+import { defineProps } from "vue";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-vue-next";
 
@@ -8,7 +8,7 @@ const props = defineProps<{
   onClick: () => void;
 }>();
 
-const keyword = ref("");
+const keyword = defineModel<string>();
 </script>
 
 <template>

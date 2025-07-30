@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import PageHolder from "@/components/common/PageHolder.vue";
 import SearchBar from "@/components/common/SearchBar.vue";
+import HomeSearchBar from "@/components/home/HomeSearchBar.vue";
 import MenuButton from "@/components/MenuButton.vue";
 import SelectDrawerButton from "@/components/search/SelectDrawerButton.vue";
 import { LogOut } from "lucide-vue-next";
@@ -31,6 +32,7 @@ const selected = ref<string[]>([]);
           <SelectDrawerButton label="Label 3" :options="options3" v-model:selected="selected" />
         </div>
       </div>
+      <HomeSearchBar :onSubmit="(data) => console.log('검색: ' + data)" />
     </div>
   </PageHolder>
 </template>
