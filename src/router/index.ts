@@ -12,6 +12,9 @@ import BenefitDetailsPage from "@/pages/BenefitDetailsPage.vue";
 import PartnerDetailsPage from "@/pages/PartnerDetailsPage.vue";
 import ProfilePage from "@/pages/ProfilePage.vue";
 import TestPage from "@/pages/TestPage.vue";
+import CreditSearchPage from "@/pages/search/CreditSearchPage.vue";
+import CheckSearchPage from "@/pages/search/CheckSearchPage.vue";
+import PartnerSearchPage from "@/pages/search/PartnerSearchPage.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -88,6 +91,29 @@ const router = createRouter({
       component: TestPage,
       meta: { requiresAuth: false },
     },
+    {
+  path: "/search",
+  redirect: "/search/credit",
+},
+{
+  path: "/search/credit",
+  name: "searchCredit",
+  component: CreditSearchPage,
+  meta: { requiresAuth: true },
+},
+{
+  path: "/search/check",
+  name: "searchCheck",
+  component: CheckSearchPage,
+  meta: { requiresAuth: true },
+},
+{
+  path: "/search/partners",
+  name: "searchPartners",
+  component: PartnerSearchPage,
+  meta: { requiresAuth: true },
+},
+
   ],
 });
 
