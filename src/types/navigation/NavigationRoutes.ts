@@ -1,1 +1,1 @@
-export type NavigationRoutes = "myCards" | "search" | "home" | "profile" | "more";
+export type NavigationRoutes = "myCards" | "search" | "home" | "profiles" | "more";

@@ -32,7 +32,7 @@ const items: NavigationItem[] = [
   {
     id: 3,
     title: "프로필",
-    name: "profile",
+    name: "profiles",
     icon: UserRound,
   },
   {

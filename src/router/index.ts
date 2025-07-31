@@ -84,6 +84,7 @@ const router = createRouter({
     },
     {
       path: "/search",
+      name: "search",
       redirect: "/search/credit",
     },
     {
