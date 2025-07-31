@@ -30,8 +30,11 @@ const handleSearch = () => {
   onSubmit(keyword.value);
 };
 
+const selectedCategory = ref<string | null>(null);
+
 const onCategoryClick = (pill: CategoryPill) => {
   keyword.value = pill.label;
+  selectedCategory.value = pill.label;
   onSubmit(keyword.value);
 };
 </script>
@@ -45,7 +48,12 @@ const onCategoryClick = (pill: CategoryPill) => {
         :key="index"
         variant="outline"
         @click="() => onCategoryClick(pill)"
-        class="rounded-full gap-1"
+        :class="[
+          'rounded-full gap-1 shadow-xl',
+          selectedCategory === pill.label
+            ? 'bg-red-500 text-white'
+            : 'bg-gray-100 hover:bg-gray-200',
+        ]"
       >
         <component :is="pill.icon" class="w-4 h-4" />
         {{ pill.label }}
