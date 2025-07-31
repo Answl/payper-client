@@ -2,13 +2,11 @@ import { createRouter, createWebHistory } from "vue-router";
 import LandingPage from "@/pages/LandingPage.vue";
 import { useAuthStore } from "@/stores/authStore";
 import MyCardPage from "@/pages/MyCardPage.vue";
-import CardListPage from "@/pages/CardListPage.vue";
 import KakaoCallbackPage from "@/pages/KakaoCallbackPage.vue";
 import CardDetailsPage from "@/pages/CardDetailsPage.vue";
 import HomePage from "@/pages/HomePage.vue";
 import SettingsPage from "@/pages/MorePage.vue";
 import LogoutPage from "@/pages/LogoutPage.vue";
-import BenefitDetailsPage from "@/pages/BenefitDetailsPage.vue";
 import PartnerDetailsPage from "@/pages/PartnerDetailsPage.vue";
 import ProfilePage from "@/pages/ProfilePage.vue";
 import TestPage from "@/pages/TestPage.vue";
@@ -16,7 +14,6 @@ import CreditSearchPage from "@/pages/search/CreditSearchPage.vue";
 import CheckSearchPage from "@/pages/search/CheckSearchPage.vue";
 import PartnerSearchPage from "@/pages/search/PartnerSearchPage.vue";
 import AgreePage from "@/pages/AgreePage.vue";
-
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -34,15 +31,13 @@ const router = createRouter({
       meta: { requiresAuth: false },
     },
     {
+      path: "/cards",
+      redirect: "/cards/me",
+    },
+    {
       path: "/cards/me",
       name: "myCards",
       component: MyCardPage,
-      meta: { requiresAuth: true },
-    },
-    {
-      path: "/cards",
-      name: "cardList",
-      component: CardListPage,
       meta: { requiresAuth: true },
     },
     {
@@ -76,12 +71,6 @@ const router = createRouter({
       meta: { requiresAuth: false },
     },
     {
-      path: "/cards/:cardId/benefits/:benefitId",
-      name: "benefitDetails",
-      component: BenefitDetailsPage,
-      meta: { requiresAuth: true },
-    },
-    {
       path: "/profile",
       name: "profiles",
       component: ProfilePage,
@@ -94,34 +83,33 @@ const router = createRouter({
       meta: { requiresAuth: false },
     },
     {
-  path: "/search",
-  redirect: "/search/credit",
-},
-{
-  path: "/search/credit",
-  name: "searchCredit",
-  component: CreditSearchPage,
-  meta: { requiresAuth: true },
-},
-{
-  path: "/search/check",
-  name: "searchCheck",
-  component: CheckSearchPage,
-  meta: { requiresAuth: true },
-},
-{
-  path: "/search/partners",
-  name: "searchPartners",
-  component: PartnerSearchPage,
-  meta: { requiresAuth: true },
-},
-{
-  path: "/agree",
-  name: "doYouAgree",
-  component: AgreePage,
-  meta: { requiresAuth: false },
-},
-
+      path: "/search",
+      redirect: "/search/credit",
+    },
+    {
+      path: "/search/credit",
+      name: "searchCredit",
+      component: CreditSearchPage,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: "/search/check",
+      name: "searchCheck",
+      component: CheckSearchPage,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: "/search/partners",
+      name: "searchPartners",
+      component: PartnerSearchPage,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: "/agree",
+      name: "doYouAgree",
+      component: AgreePage,
+      meta: { requiresAuth: false },
+    },
   ],
 });
 
