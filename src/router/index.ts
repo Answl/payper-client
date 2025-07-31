@@ -15,6 +15,8 @@ import TestPage from "@/pages/TestPage.vue";
 import CreditSearchPage from "@/pages/search/CreditSearchPage.vue";
 import CheckSearchPage from "@/pages/search/CheckSearchPage.vue";
 import PartnerSearchPage from "@/pages/search/PartnerSearchPage.vue";
+import AgreePage from "@/pages/AgreePage.vue";
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -112,6 +114,12 @@ const router = createRouter({
   name: "searchPartners",
   component: PartnerSearchPage,
   meta: { requiresAuth: true },
+},
+{
+  path: "/agree",
+  name: "doYouAgree",
+  component: AgreePage,
+  meta: { requiresAuth: false },
 },
 
   ],
