@@ -17,5 +17,4 @@ export const mockBenefit: Benefit = {
   benefitGrades: [],
   categories: mockCategories,
   partners: mockPartners,
-  minPayment: 5000,
 };

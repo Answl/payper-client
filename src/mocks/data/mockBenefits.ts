@@ -23,6 +23,7 @@ export const mockBenefits: Benefit[] = [
           type: "FIXED_AMOUNT",
           amount: 5000,
         },
+          minPayment: 5000,
       },
       {
         id: 1,
@@ -31,6 +32,7 @@ export const mockBenefits: Benefit[] = [
           type: "FIXED_AMOUNT",
           amount: 12000,
         },
+          minPayment: 5000,
       },
       {
         id: 1,
@@ -39,6 +41,7 @@ export const mockBenefits: Benefit[] = [
           type: "FIXED_AMOUNT",
           amount: 15000,
         },
+          minPayment: 5000,
       },
       {
         id: 1,
@@ -47,6 +50,7 @@ export const mockBenefits: Benefit[] = [
           type: "FIXED_AMOUNT",
           amount: 20000,
         },
+          minPayment: 5000,
       },
     ],
     categories: mockCategories,
@@ -72,7 +76,6 @@ export const mockBenefits: Benefit[] = [
         myCards: [],
       },
     ],
-    minPayment: 5000,
   },
   {
     id: 24873,
@@ -94,6 +97,7 @@ export const mockBenefits: Benefit[] = [
           type: "FIXED_AMOUNT",
           amount: 5000,
         },
+          minPayment: 5000,
       },
       {
         id: 1,
@@ -102,6 +106,7 @@ export const mockBenefits: Benefit[] = [
           type: "FIXED_AMOUNT",
           amount: 12000,
         },
+          minPayment: 5000,
       },
       {
         id: 1,
@@ -110,6 +115,7 @@ export const mockBenefits: Benefit[] = [
           type: "FIXED_AMOUNT",
           amount: 15000,
         },
+          minPayment: 5000,
       },
       {
         id: 1,
@@ -118,6 +124,7 @@ export const mockBenefits: Benefit[] = [
           type: "FIXED_AMOUNT",
           amount: 20000,
         },
+          minPayment: 5000,
       },
     ],
     categories: mockCategories,
@@ -143,7 +150,6 @@ export const mockBenefits: Benefit[] = [
         myCards: [],
       },
     ],
-    minPayment: 5000,
   },
   {
     id: 24874,
@@ -166,6 +172,7 @@ export const mockBenefits: Benefit[] = [
           type: "FIXED_AMOUNT",
           amount: 12000,
         },
+          minPayment: 5000,
       },
       {
         id: 1,
@@ -174,6 +181,7 @@ export const mockBenefits: Benefit[] = [
           type: "FIXED_AMOUNT",
           amount: 12000,
         },
+          minPayment: 5000,
       },
       {
         id: 1,
@@ -182,6 +190,7 @@ export const mockBenefits: Benefit[] = [
           type: "FIXED_AMOUNT",
           amount: 12000,
         },
+          minPayment: 5000,
       },
       {
         id: 1,
@@ -190,6 +199,7 @@ export const mockBenefits: Benefit[] = [
           type: "FIXED_AMOUNT",
           amount: 12000,
         },
+          minPayment: 5000,
       },
     ],
     categories: mockCategories,
@@ -205,6 +215,5 @@ export const mockBenefits: Benefit[] = [
         myCards: [],
       },
     ],
-    minPayment: 10000,
   },
 ];

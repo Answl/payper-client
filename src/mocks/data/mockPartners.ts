@@ -27,7 +27,6 @@ export const mockPartners: Partner[] = [
         },
         categories: [{ id: 7, name: "생활" }],
         partners: [],
-        minPayment: 10000,
         benefitGrades: [],
       },
       {
@@ -43,7 +42,6 @@ export const mockPartners: Partner[] = [
         },
         categories: [{ id: 8, name: "식비" }],
         partners: [],
-        minPayment: 10000,
         benefitGrades: [],
       },
     ],

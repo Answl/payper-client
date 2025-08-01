@@ -13,5 +13,4 @@ export interface Benefit {
   benefitGrades: BenefitGrade[];
   categories: Category[];
   partners: Partner[];
-  minPayment: number;
 }

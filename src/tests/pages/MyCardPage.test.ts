@@ -42,7 +42,6 @@ describe("MyCardPage", () => {
             benefitGrades: [],
             categories: [{ id: 1, name: "편의점" }],
             partners: [{ id: 1, name: "GS25", myCards: [] }],
-            minPayment: 1000,
           },
         ],
         annualCosts: [],

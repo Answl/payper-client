@@ -5,4 +5,5 @@ export interface BenefitGrade {
   id: number;
   grade: Grade;
   discount: Discount;
+  minPayment: number;
 }

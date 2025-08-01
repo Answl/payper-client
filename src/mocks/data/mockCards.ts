@@ -42,6 +42,7 @@ const cardList: Card[] = [
               limitCount: null,
               limitAmount: null,
             },
+            minPayment: 1000,
           },
         ],
         categories: [{ id: 1, name: "편의점" }],
@@ -53,7 +54,6 @@ const cardList: Card[] = [
             position: { x: 0, y: 0, distance: 0 },
           },
         ],
-        minPayment: 1000,
       },
     ],
     annualCosts: [],
@@ -84,7 +84,6 @@ const cardList: Card[] = [
         partners: [
           { id: 2, name: "스타벅스", myCards: [], position: { x: 0, y: 0, distance: 0 } },
         ],
-        minPayment: 1000,
         benefitGrades: [],
       },
       {
@@ -102,7 +101,6 @@ const cardList: Card[] = [
         partners: [
           { id: 3, name: "올리브영", myCards: [], position: { x: 0, y: 0, distance: 0 } },
         ],
-        minPayment: 1000,
         benefitGrades: [],
       },
       {
@@ -120,7 +118,6 @@ const cardList: Card[] = [
         partners: [
           { id: 4, name: "CGV", myCards: [], position: { x: 0, y: 0, distance: 0 } },
         ],
-        minPayment: 1000,
         benefitGrades: [],
       },
       {
@@ -138,7 +135,6 @@ const cardList: Card[] = [
         partners: [
           { id: 5, name: "네이버페이", myCards: [], position: { x: 0, y: 0, distance: 0 } },
         ],
-        minPayment: 1000,
         benefitGrades: [],
       },
       {
@@ -156,7 +152,6 @@ const cardList: Card[] = [
         partners: [
           { id: 6, name: "YES24", myCards: [], position: { x: 0, y: 0, distance: 0 } },
         ],
-        minPayment: 1000,
         benefitGrades: [],
       },
     ],
@@ -186,7 +181,6 @@ const cardList: Card[] = [
         },
         categories: [{ id: 7, name: "생활" }],
         partners: [],
-        minPayment: 10000,
         benefitGrades: [],
       },
       {
@@ -202,7 +196,6 @@ const cardList: Card[] = [
         },
         categories: [{ id: 8, name: "식비" }],
         partners: [],
-        minPayment: 10000,
         benefitGrades: [],
       },
     ],
