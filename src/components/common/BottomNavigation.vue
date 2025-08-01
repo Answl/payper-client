@@ -49,7 +49,16 @@ const onClick = (name: string) => {
 </script>
 
 <template>
-  <ul class="flex justify-between items-center bg-white px-4 py-2 rounded-t-xl">
+  <ul
+  class="fixed bottom-0 left-0 right-0 z-30 w-full max-w-2xl mx-auto flex justify-between items-center border-t"
+  style="
+    height: 4.5rem;
+    background-color: white;
+    color: var(--color-foreground);
+    border-top-color: var(--color-border);
+  "
+>
+
     <li
       v-for="item in items"
       :key="item.id"

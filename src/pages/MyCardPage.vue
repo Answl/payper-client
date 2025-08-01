@@ -16,6 +16,7 @@ import {
 import { Accordion, AccordionItem } from "@/components/ui/accordion";
 import { getMyCards } from "@/api/mycard.api";
 import type { Card } from "@/types/Card";
+import BottomNavigation from "@/components/common/BottomNavigation.vue";
 
 const router = useRouter();
 const cards = ref<Card[]>([]);
@@ -141,6 +142,7 @@ const toggleBenefit = (cardId: number) => {
         내 카드 추가하기
       </button>
     </div>
+    <BottomNavigation selected="myCards" />
   </div>
 </template>
 

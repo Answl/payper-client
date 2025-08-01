@@ -3,7 +3,9 @@ import { ref, onMounted, watch } from "vue";
 import { useGeolocation } from "@vueuse/core";
 import { getMAPartner } from "@/api/mapartner.api";
 import PartnerSearchBar from "@/components/home/HomeSearchBar.vue";
+import BottomNavigation from "@/components/common/BottomNavigation.vue";
 import type { Partners } from "@/types/Partners";
+
 
 const KAKAO_APP_KEY = import.meta.env.VITE_KAKAO_JAVASCRIPT_KEY;
 const { coords } = useGeolocation();
@@ -97,28 +99,28 @@ onMounted(() => {
 
 <template>
   <div class="relative w-full h-screen overflow-hidden">
-    <!-- 지도 -->
+
+
     <div id="map" class="w-full h-full z-0" />
 
-    <!-- 상단 검색 -->
     <div class="absolute top-0 left-0 w-full z-10 p-4">
       <PartnerSearchBar :onSubmit="handleSearch" />
     </div>
 
-    <!-- 드로어 -->
     <div
       class="absolute bottom-0 left-0 w-full bg-white rounded-t-2xl shadow-lg z-20 transition-all duration-300"
       :style="{ height: `${drawerHeight}vh` }"
     >
-      <!-- 핸들 -->
       <div
         class="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mt-2 mb-3 cursor-pointer"
         @mousedown="startDrag"
         @touchstart="startDrag"
       />
 
-      <!-- 카드 리스트 -->
-      <div class="px-4 pb-6 space-y-4 overflow-y-auto h-[calc(100%-2rem)]">
+      <div
+        class="px-4 space-y-4 overflow-y-auto h-[calc(100%-2rem)] pb-24"
+      >
+
         <h2 class="text-base font-semibold">혜택 가맹점</h2>
         <div
           v-for="partner in PropsPartners?.partners"
@@ -126,7 +128,10 @@ onMounted(() => {
           class="border rounded-xl p-4 flex flex-col space-y-1 shadow"
         >
           <div class="text-sm text-gray-400">{{ partner.name }}</div>
-          <div class="text-base font-semibold text-black">{{ partner.myCards[0]?.name ?? '카드 없음' }}</div>
+
+          <div class="text-base font-semibold text-black">
+            {{ partner.myCards[0]?.name ?? '카드 없음' }}
+          </div>
           <div class="text-xs text-gray-500">
             {{ partner.position?.distance ?? 0 }}m
           </div>
@@ -136,6 +141,8 @@ onMounted(() => {
         </div>
       </div>
     </div>
+    <BottomNavigation selected="home"/>
+
   </div>
 </template>
 

@@ -42,6 +42,6 @@ if (!isSuccess) {
         />
       </div>
     </div>
-    <BottomNavigation selected="profile" />
+    <BottomNavigation selected="profiles" />
   </div>
 </template>
