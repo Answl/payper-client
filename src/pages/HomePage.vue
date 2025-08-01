@@ -6,14 +6,13 @@ import PartnerSearchBar from "@/components/home/HomeSearchBar.vue";
 import BottomNavigation from "@/components/common/BottomNavigation.vue";
 import type { Partners } from "@/types/Partners";
 
-
 const KAKAO_APP_KEY = import.meta.env.VITE_KAKAO_JAVASCRIPT_KEY;
 const { coords } = useGeolocation();
 
 const map = ref<kakao.maps.Map | null>(null);
 const markers = ref<kakao.maps.Marker[]>([]);
 const PropsPartners = ref<Partners>();
-const drawerHeight = ref(0); // 드로어 초기 숨김
+const drawerHeight = ref(0);
 const isDragging = ref(false);
 
 const onDrag = (e: MouseEvent | TouchEvent) => {
@@ -57,7 +56,28 @@ const handleSearch = async (keyword: string) => {
   const res = await getMAPartner(keyword, coords.value.latitude, coords.value.longitude);
   PropsPartners.value = res;
 
-  drawerHeight.value = 30; // 드로어 열기
+  drawerHeight.value = 30;
+
+  markers.value.forEach((m) => m.setMap(null));
+  markers.value = [];
+
+  for (const partner of res.partners) {
+    if (partner?.position) {
+      const latLng = new kakao.maps.LatLng(partner.position.x, partner.position.y);
+      const marker = new kakao.maps.Marker({ position: latLng });
+      marker.setMap(map.value);
+      markers.value.push(marker);
+    }
+  }
+};
+
+const refreshLocation = async () => {
+  if (!coords.value.latitude || !coords.value.longitude) return;
+  const res = await getMAPartner("", coords.value.latitude, coords.value.longitude);
+  PropsPartners.value = res;
+
+  const newCenter = new kakao.maps.LatLng(coords.value.latitude, coords.value.longitude);
+  map.value?.setCenter(newCenter);
 
   markers.value.forEach((m) => m.setMap(null));
   markers.value = [];
@@ -99,14 +119,29 @@ onMounted(() => {
 
 <template>
   <div class="relative w-full h-screen overflow-hidden">
-
-
+    <!-- 지도 -->
     <div id="map" class="w-full h-full z-0" />
 
-    <div class="absolute top-0 left-0 w-full z-10 p-4">
-      <PartnerSearchBar :onSubmit="handleSearch" />
-    </div>
+   <!-- 검색창 + 새로고침 버튼 -->
+<!-- 검색창 + 새로고침 아이콘 버튼 -->
+<div class="absolute top-0 left-0 w-full z-10 p-4">
+  <PartnerSearchBar :onSubmit="handleSearch" />
 
+  <div class="mt-2 flex justify-end">
+    <button
+      class="w-9 h-9 flex items-center justify-center rounded-full bg-white text-gray-700 shadow hover:bg-gray-100"
+      @click="refreshLocation"
+      aria-label="위치 새로고침"
+    >
+      <RefreshCw class="w-5 h-5" />
+    </button>
+  </div>
+</div>
+
+
+
+
+    <!-- 하단 드로어 -->
     <div
       class="absolute bottom-0 left-0 w-full bg-white rounded-t-2xl shadow-lg z-20 transition-all duration-300"
       :style="{ height: `${drawerHeight}vh` }"
@@ -117,10 +152,7 @@ onMounted(() => {
         @touchstart="startDrag"
       />
 
-      <div
-        class="px-4 space-y-4 overflow-y-auto h-[calc(100%-2rem)] pb-24"
-      >
-
+      <div class="px-4 space-y-4 overflow-y-auto h-[calc(100%-2rem)] pb-24">
         <h2 class="text-base font-semibold">혜택 가맹점</h2>
         <div
           v-for="partner in PropsPartners?.partners"
@@ -128,7 +160,6 @@ onMounted(() => {
           class="border rounded-xl p-4 flex flex-col space-y-1 shadow"
         >
           <div class="text-sm text-gray-400">{{ partner.name }}</div>
-
           <div class="text-base font-semibold text-black">
             {{ partner.myCards[0]?.name ?? '카드 없음' }}
           </div>
@@ -141,9 +172,11 @@ onMounted(() => {
         </div>
       </div>
     </div>
-    <BottomNavigation selected="home"/>
 
+    <!-- 하단 네비게이션 -->
+    <BottomNavigation selected="home" />
   </div>
 </template>
+
 
 
