@@ -8,6 +8,6 @@ const { user } = defineProps<{
 
 <template>
   <div>
-    <h1 class="text-2xl font-bold">{{ user.name }}</h1>
+    <h1 class="text-2xl font-bold">{{ user.nickname }}</h1>
   </div>
 </template>
