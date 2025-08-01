@@ -2,8 +2,7 @@ import type { Card } from "@/types/Card";
 //import { mockCategory } from "./mockCategory";
 import cardImg1 from "@/assets/cardimg/cardImg1.png";
 import cardImg2 from "@/assets/cardimg/cardImg2.png";
-import cardImg3 from "@/assets/cardimg/cardImg3.png"
-
+import cardImg3 from "@/assets/cardimg/cardImg3.png";
 
 const cardList: Card[] = [
   {
@@ -22,11 +21,7 @@ const cardList: Card[] = [
         summary: "GS25 10% 할인",
         description: "<p>월 2회, 최대 1천원</p>",
         iconUrl: "https://example.com/benefit.png",
-        limit: {
-          limitCountPerDay: null,
-          limitCountPerMonth: 2,
-          limitAmountPerPay: 1000,
-        },
+
         benefitGrades: [
           {
             id: 1,
@@ -75,15 +70,9 @@ const cardList: Card[] = [
         summary: "스타벅스 등 1천원 청구할인",
         description: "<p>스타벅스, 스타벅스 APP 사이렌오더에서 1천원 청구할인</p>",
         iconUrl: "https://example.com/starbucks.png",
-        limit: {
-          limitCountPerDay: 1,
-          limitCountPerMonth: 10,
-          limitAmountPerPay: 1000,
-        },
+
         categories: [{ id: 2, name: "카페" }],
-        partners: [
-          { id: 2, name: "스타벅스", myCards: [], position: { x: 0, y: 0, distance: 0 } },
-        ],
+        partners: [{ id: 2, name: "스타벅스", myCards: [], position: { x: 0, y: 0, distance: 0 } }],
         benefitGrades: [],
       },
       {
@@ -92,15 +81,9 @@ const cardList: Card[] = [
         summary: "올리브영, 안경점 1천원 청구할인",
         description: "<p>올리브영, 안경점에서 1천원 청구할인</p>",
         iconUrl: "https://example.com/oliveyoung.png",
-        limit: {
-          limitCountPerDay: 1,
-          limitCountPerMonth: 5,
-          limitAmountPerPay: 1000,
-        },
+
         categories: [{ id: 3, name: "헬스/뷰티" }],
-        partners: [
-          { id: 3, name: "올리브영", myCards: [], position: { x: 0, y: 0, distance: 0 } },
-        ],
+        partners: [{ id: 3, name: "올리브영", myCards: [], position: { x: 0, y: 0, distance: 0 } }],
         benefitGrades: [],
       },
       {
@@ -109,15 +92,9 @@ const cardList: Card[] = [
         summary: "CGV 1천원 청구할인",
         description: "<p>CGV에서 1천원 청구할인</p>",
         iconUrl: "https://example.com/cgv.png",
-        limit: {
-          limitCountPerDay: 1,
-          limitCountPerMonth: 5,
-          limitAmountPerPay: 1000,
-        },
+
         categories: [{ id: 4, name: "문화" }],
-        partners: [
-          { id: 4, name: "CGV", myCards: [], position: { x: 0, y: 0, distance: 0 } },
-        ],
+        partners: [{ id: 4, name: "CGV", myCards: [], position: { x: 0, y: 0, distance: 0 } }],
         benefitGrades: [],
       },
       {
@@ -126,11 +103,7 @@ const cardList: Card[] = [
         summary: "네이버페이 외 1천원 청구할인",
         description: "<p>네이버페이, 카카오페이, SSGPAY(온라인)에서 1천원 청구할인</p>",
         iconUrl: "https://example.com/pay.png",
-        limit: {
-          limitCountPerDay: 1,
-          limitCountPerMonth: 5,
-          limitAmountPerPay: 1000,
-        },
+
         categories: [{ id: 5, name: "생활" }],
         partners: [
           { id: 5, name: "네이버페이", myCards: [], position: { x: 0, y: 0, distance: 0 } },
@@ -143,15 +116,9 @@ const cardList: Card[] = [
         summary: "YES24 외 1천원 청구할인",
         description: "<p>YES24, 교보문고(온라인)에서 1천원 청구할인</p>",
         iconUrl: "https://example.com/book.png",
-        limit: {
-          limitCountPerDay: 1,
-          limitCountPerMonth: 5,
-          limitAmountPerPay: 1000,
-        },
+
         categories: [{ id: 6, name: "도서" }],
-        partners: [
-          { id: 6, name: "YES24", myCards: [], position: { x: 0, y: 0, distance: 0 } },
-        ],
+        partners: [{ id: 6, name: "YES24", myCards: [], position: { x: 0, y: 0, distance: 0 } }],
         benefitGrades: [],
       },
     ],
@@ -174,11 +141,7 @@ const cardList: Card[] = [
         summary: "1만원 이상 결제 시 10%",
         description: "<p>세탁소 업종 가맹점</p>",
         iconUrl: "https://example.com/laundry.png",
-        limit: {
-          limitCountPerDay: null,
-          limitCountPerMonth: null,
-          limitAmountPerPay: null,
-        },
+
         categories: [{ id: 7, name: "생활" }],
         partners: [],
         benefitGrades: [],
@@ -189,11 +152,7 @@ const cardList: Card[] = [
         summary: "1만원 이상 결제 시 5%",
         description: "<p>제과·아이스크림 업종 가맹점</p>",
         iconUrl: "https://example.com/dessert.png",
-        limit: {
-          limitCountPerDay: null,
-          limitCountPerMonth: null,
-          limitAmountPerPay: null,
-        },
+
         categories: [{ id: 8, name: "식비" }],
         partners: [],
         benefitGrades: [],

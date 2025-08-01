@@ -34,11 +34,7 @@ describe("MyCardPage", () => {
             summary: "GS25 10% 할인",
             description: "<p>월 최대 1,000원 할인</p>",
             iconUrl: "https://example.com/gs25.png",
-            limit: {
-              limitCountPerDay: null,
-              limitCountPerMonth: 2,
-              limitAmountPerPay: 1000,
-            },
+
             benefitGrades: [],
             categories: [{ id: 1, name: "편의점" }],
             partners: [{ id: 1, name: "GS25", myCards: [] }],
