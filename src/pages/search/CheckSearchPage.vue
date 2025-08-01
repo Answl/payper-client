@@ -19,10 +19,8 @@ import type { Card } from "@/types/Card";
 import BottomNavigation from "@/components/common/BottomNavigation.vue";
 import CommonHeader from "@/components/CommonHeader.vue";
 
-
 const router = useRouter();
 const route = useRoute();
-
 
 const tabs = [
   { label: "신용카드", path: "/search/credit" },
@@ -39,18 +37,28 @@ const loading = ref(false);
 const expandedBenefits = ref<Record<number, boolean>>({});
 
 const benefitOptions = [
-  "편의점", "카페", "영화관", "미용/뷰티", "주유", "대중교통",
-  "쇼핑", "여행/항공", "배달", "간편결제", "마트", "디지털구독"
+  "편의점",
+  "카페",
+  "영화관",
+  "미용/뷰티",
+  "주유",
+  "대중교통",
+  "쇼핑",
+  "여행/항공",
+  "배달",
+  "간편결제",
+  "마트",
+  "디지털구독",
 ];
 
 const iconMap: Record<string, Component> = {
-  "편의점": ShoppingBag,
-  "카페": Coffee,
+  편의점: ShoppingBag,
+  카페: Coffee,
   "헬스/뷰티": FlaskConical,
-  "문화": Film,
-  "도서": BookOpen,
-  "생활": ShoppingBag,
-  "식비": Candy,
+  문화: Film,
+  도서: BookOpen,
+  생활: ShoppingBag,
+  식비: Candy,
 };
 
 const resolveIcon = (benefit: Card["benefits"][number]): Component => {
@@ -76,14 +84,20 @@ const toggleBenefit = (cardId: number) => {
   expandedBenefits.value[cardId] = !expandedBenefits.value[cardId];
 };
 
+const goToDetail = (id: number) => {
+  router.push({ name: "cardDetails", params: { id } });
+};
+
 const filteredCards = computed(() =>
-  cards.value.filter((card) =>
-    card.name.includes(searchQuery.value) &&
-    selectedTags.value.every((tag) =>
-      card.name.includes(tag) ||
-      card.company?.name?.includes(tag) ||
-      card.benefits?.some((b) => b.summary.includes(tag))
-    )
+  cards.value.filter(
+    (card) =>
+      card.name.includes(searchQuery.value) &&
+      selectedTags.value.every(
+        (tag) =>
+          card.name.includes(tag) ||
+          card.company?.name?.includes(tag) ||
+          card.benefits?.some((b) => b.summary.includes(tag))
+      )
   )
 );
 
@@ -106,7 +120,6 @@ onMounted(async () => {
     <CommonHeader title="검색" />
 
     <main class="flex-1 overflow-y-auto">
-
       <div class="flex gap-6 pl-10 mb-4">
         <button
           v-for="tab in tabs"
@@ -116,13 +129,12 @@ onMounted(async () => {
             'bg-transparent outline-none text-xl px-0 pb-1 font-normal transition-all duration-150 ease-in-out',
             isActive(tab.path)
               ? 'text-black font-bold border-b-2 border-black'
-              : 'text-gray-300 hover:text-black hover:border-b-2 hover:border-black'
+              : 'text-gray-300 hover:text-black hover:border-b-2 hover:border-black',
           ]"
         >
           {{ tab.label }}
         </button>
       </div>
-
 
       <div class="mb-4 px-10">
         <div class="flex items-center w-full border rounded overflow-hidden">
@@ -139,13 +151,8 @@ onMounted(async () => {
         </div>
       </div>
 
-
       <div class="flex flex-wrap gap-2 items-center mb-2 px-10">
-        <FilterDrawer
-          label="혜택"
-          :options="benefitOptions"
-          v-model:selected="selectedTags"
-        />
+        <FilterDrawer label="혜택" :options="benefitOptions" v-model:selected="selectedTags" />
         <FilterDrawer
           label="카드사"
           :options="['KB국민카드', '신한카드', '우리카드']"
@@ -173,15 +180,15 @@ onMounted(async () => {
           class="bg-red-400 text-white px-3 py-2 rounded-full text-xs flex items-center gap-1"
         >
           {{ tag }}
-          <button class="ml-1 text-white hover:text-red-700 text-base leading-none" @click="removeTag(tag)">
+          <button
+            class="ml-1 text-white hover:text-red-700 text-base leading-none"
+            @click="removeTag(tag)"
+          >
             &times;
           </button>
         </span>
 
-        <button
-          class="text-sm text-gray-500 underline ml-auto"
-          @click="clearFilters"
-        >
+        <button class="text-sm text-gray-500 underline ml-auto" @click="clearFilters">
           초기화
         </button>
       </div>
@@ -194,7 +201,6 @@ onMounted(async () => {
         </select>
       </div>
 
-
       <Accordion type="single" collapsible class="space-y-4 px-10 pb-6">
         <AccordionItem
           v-for="card in filteredCards"
@@ -203,8 +209,16 @@ onMounted(async () => {
           class="overflow-hidden"
         >
           <div class="w-[95%] mx-auto">
-            <div class="px-4 py-4 flex cursor-pointer">
-              <img :src="card.imageUrl" alt="카드 이미지" class="w-20 h-28 object-cover rounded-md" />
+            <div
+              class="px-4 py-4 flex cursor-pointer"
+              data-testid="cardItem"
+              @click="goToDetail(card.id)"
+            >
+              <img
+                :src="card.imageUrl"
+                alt="카드 이미지"
+                class="w-20 h-28 object-cover rounded-md"
+              />
               <div class="ml-4 flex-1 mt-2">
                 <p class="text-xs text-gray-500">{{ card.company?.name }}</p>
                 <p class="text-sm text-gray-900 font-medium leading-snug line-clamp-2 mt-2">
@@ -212,7 +226,9 @@ onMounted(async () => {
                 </p>
 
                 <div
-                  v-for="(benefit, i) in expandedBenefits[card.id] ? card.benefits : card.benefits.slice(0, 3)"
+                  v-for="(benefit, i) in expandedBenefits[card.id]
+                    ? card.benefits
+                    : card.benefits.slice(0, 3)"
                   :key="i"
                   class="flex gap-1 items-start mt-1"
                 >
@@ -230,7 +246,7 @@ onMounted(async () => {
                     @click.stop="toggleBenefit(card.id)"
                     class="text-xs text-gray-600 flex items-center gap-1"
                   >
-                    {{ expandedBenefits[card.id] ? '접기' : '더보기' }}
+                    {{ expandedBenefits[card.id] ? "접기" : "더보기" }}
                     <component
                       :is="expandedBenefits[card.id] ? ChevronUp : ChevronDown"
                       class="w-4 h-4 text-gray-400"

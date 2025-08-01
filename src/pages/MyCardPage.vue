@@ -24,13 +24,13 @@ const loading = ref(false);
 const expandedBenefits = ref<Record<number, boolean>>({});
 
 const iconMap: Record<string, Component> = {
-  "편의점": ShoppingBag,
-  "카페": Coffee,
+  편의점: ShoppingBag,
+  카페: Coffee,
   "헬스/뷰티": FlaskConical,
-  "문화": Film,
-  "도서": BookOpen,
-  "생활": ShoppingBag,
-  "식비": Candy,
+  문화: Film,
+  도서: BookOpen,
+  생활: ShoppingBag,
+  식비: Candy,
 };
 
 const resolveIcon = (benefit: Card["benefits"][number]): Component => {
@@ -53,11 +53,10 @@ onMounted(async () => {
   }
 });
 
-
 const goToAdd = () => router.push("/search");
 
 const goToDetail = (id: number) => {
-  router.push({ name: "cardsDetails", params: { id } });
+  router.push({ name: "cardDetails", params: { id } });
 };
 
 const toggleBenefit = (cardId: number) => {
@@ -66,8 +65,8 @@ const toggleBenefit = (cardId: number) => {
 </script>
 
 <template>
-    <div class="flex flex-col size-full">
-      <CommonHeader title="내 카드" />
+  <div class="flex flex-col size-full">
+    <CommonHeader title="내 카드" />
 
     <div v-if="cards.length === 0" class="text-center text-sm text-gray-500 mt-10">
       등록된 카드가 없습니다.
@@ -93,14 +92,13 @@ const toggleBenefit = (cardId: number) => {
             </p>
 
             <div
-              v-for="(benefit, i) in expandedBenefits[card.id] ? card.benefits : card.benefits.slice(0, 3)"
+              v-for="(benefit, i) in expandedBenefits[card.id]
+                ? card.benefits
+                : card.benefits.slice(0, 3)"
               :key="i"
               class="flex gap-1 items-start mt-1"
             >
-              <component
-                :is="resolveIcon(benefit)"
-                class="w-4 h-4 text-gray-500 mt-0.5 shrink-0"
-              />
+              <component :is="resolveIcon(benefit)" class="w-4 h-4 text-gray-500 mt-0.5 shrink-0" />
               <span class="text-xs text-gray-600 leading-snug">
                 {{ benefit.summary }}
               </span>
@@ -111,7 +109,7 @@ const toggleBenefit = (cardId: number) => {
                 @click.stop="toggleBenefit(card.id)"
                 class="text-xs text-gray-600 flex items-center gap-1"
               >
-                {{ expandedBenefits[card.id] ? '접기' : '더보기' }}
+                {{ expandedBenefits[card.id] ? "접기" : "더보기" }}
                 <component
                   :is="expandedBenefits[card.id] ? ChevronUp : ChevronDown"
                   class="w-4 h-4 text-gray-400"
@@ -124,7 +122,7 @@ const toggleBenefit = (cardId: number) => {
     </Accordion>
 
     <div class="border-b border-gray-200 mx-10 mb-4 py-4"></div>
-      <div class="flex flex-col px-4 py-4 size-full">
+    <div class="flex flex-col px-4 py-4 size-full">
       <button
         @click="goToAdd"
         class="w-full mt-4 bg-[#F67154] text-white py-4 rounded-md text-base font-semibold flex items-center justify-center gap-2 shadow-md"
@@ -136,4 +134,3 @@ const toggleBenefit = (cardId: number) => {
     <BottomNavigation selected="myCards" />
   </div>
 </template>
-

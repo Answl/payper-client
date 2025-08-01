@@ -71,7 +71,7 @@ describe("MyCardPage", () => {
     await user.click(button);
 
     expect(mockPush).toHaveBeenCalledWith({
-      name: "cardsDetails",
+      name: "cardDetails",
       params: { id: mockCards.cards[0].id },
     });
   });

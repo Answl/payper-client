@@ -20,7 +20,6 @@ import type { Component } from "vue";
 import BottomNavigation from "@/components/common/BottomNavigation.vue";
 import CommonHeader from "@/components/CommonHeader.vue";
 
-
 const router = useRouter();
 const route = useRoute();
 const tabs = [
@@ -37,23 +36,20 @@ const cards = ref<Card[]>([]);
 const loading = ref(false);
 const expandedBenefits = ref<Record<number, boolean>>({});
 
-const benefitOptions = [
-  "편의점", "카페", "영화", "도서", "생활", "식비", "쇼핑", "뷰티"
-];
+const benefitOptions = ["편의점", "카페", "영화", "도서", "생활", "식비", "쇼핑", "뷰티"];
 
-const iconMap : Record<string, Component> = {
-  "편의점": ShoppingBag,
-  "카페": Coffee,
-  "뷰티": FlaskConical,
-  "영화": Film,
-  "도서": BookOpen,
-  "생활": ShoppingBag,
-  "식비": Candy,
-  "쇼핑": ShoppingBag,
+const iconMap: Record<string, Component> = {
+  편의점: ShoppingBag,
+  카페: Coffee,
+  뷰티: FlaskConical,
+  영화: Film,
+  도서: BookOpen,
+  생활: ShoppingBag,
+  식비: Candy,
+  쇼핑: ShoppingBag,
 };
 
-const normalize = (str?: string) =>
-  str?.trim().toLowerCase().replace(/\/.*/, "") || "";
+const normalize = (str?: string) => str?.trim().toLowerCase().replace(/\/.*/, "") || "";
 
 const resolveIcon = (benefit: Card["benefits"][number]) => {
   const category = normalize(benefit.categories?.[0]?.name);
@@ -73,6 +69,10 @@ const toggleBenefit = (cardId: number) => {
   expandedBenefits.value[cardId] = !expandedBenefits.value[cardId];
 };
 
+const goToDetail = (id: number) => {
+  router.push({ name: "cardDetails", params: { id } });
+};
+
 const filteredCards = computed(() =>
   cards.value.filter((card) => {
     const query = searchQuery.value.trim().toLowerCase();
@@ -84,13 +84,9 @@ const filteredCards = computed(() =>
       ...card.benefits.flatMap((b) => b.partners?.map((p) => p.name) ?? []),
     ].filter(Boolean);
 
-    const matchQuery = !query || fields.some((text) =>
-      text.toLowerCase().includes(query)
-    );
+    const matchQuery = !query || fields.some((text) => text.toLowerCase().includes(query));
 
-    const matchTags = selectedTags.value.every((tag) =>
-      fields.some((text) => text.includes(tag))
-    );
+    const matchTags = selectedTags.value.every((tag) => fields.some((text) => text.includes(tag)));
 
     return matchQuery && matchTags;
   })
@@ -112,7 +108,7 @@ onMounted(async () => {
 
 <template>
   <div class="flex flex-col size-full">
-            <CommonHeader title="검색" />
+    <CommonHeader title="검색" />
 
     <main class="flex-1 overflow-y-auto">
       <div class="flex gap-6 pl-10 mb-4">
@@ -124,7 +120,7 @@ onMounted(async () => {
             'bg-transparent outline-none text-xl px-0 pb-1 font-normal transition-all duration-150 ease-in-out',
             isActive(tab.path)
               ? 'text-black font-bold border-b-2 border-black'
-              : 'text-gray-300 hover:text-black hover:border-b-2 hover:border-black'
+              : 'text-gray-300 hover:text-black hover:border-b-2 hover:border-black',
           ]"
         >
           {{ tab.label }}
@@ -145,45 +141,40 @@ onMounted(async () => {
         </div>
       </div>
 
-<div class="flex flex-wrap gap-2 items-center mb-2 px-10">
-  <FilterDrawer
-    label="카테고리"
-    :options="benefitOptions"
-    v-model:selected="selectedTags"
-  />
+      <div class="flex flex-wrap gap-2 items-center mb-2 px-10">
+        <FilterDrawer label="카테고리" :options="benefitOptions" v-model:selected="selectedTags" />
 
-  <button
-    v-if="!selectedTags.length"
-    class="text-sm text-gray-500 underline ml-auto hover:text-black"
-    @click="clearFilters"
-  >
-    초기화
-  </button>
-</div>
+        <button
+          v-if="!selectedTags.length"
+          class="text-sm text-gray-500 underline ml-auto hover:text-black"
+          @click="clearFilters"
+        >
+          초기화
+        </button>
+      </div>
 
-<div v-if="selectedTags.length" class="flex flex-wrap gap-2 mb-4 px-10 items-center">
-  <span
-    v-for="tag in selectedTags"
-    :key="tag"
-    class="bg-red-400 text-white px-3 py-2 rounded-full text-xs flex items-center gap-1"
-  >
-    {{ tag }}
-    <button
-      class="ml-1 text-white hover:text-red-700 text-base leading-none"
-      @click="removeTag(tag)"
-    >
-      &times;
-    </button>
-  </span>
+      <div v-if="selectedTags.length" class="flex flex-wrap gap-2 mb-4 px-10 items-center">
+        <span
+          v-for="tag in selectedTags"
+          :key="tag"
+          class="bg-red-400 text-white px-3 py-2 rounded-full text-xs flex items-center gap-1"
+        >
+          {{ tag }}
+          <button
+            class="ml-1 text-white hover:text-red-700 text-base leading-none"
+            @click="removeTag(tag)"
+          >
+            &times;
+          </button>
+        </span>
 
-  <button
-    class="text-sm text-gray-500 underline ml-auto hover:text-black"
-    @click="clearFilters"
-  >
-    초기화
-  </button>
-</div>
-
+        <button
+          class="text-sm text-gray-500 underline ml-auto hover:text-black"
+          @click="clearFilters"
+        >
+          초기화
+        </button>
+      </div>
 
       <div class="border-b border-gray-200 mx-10 mb-4 mt-2"></div>
       <div class="flex justify-end mb-4 px-10">
@@ -201,8 +192,16 @@ onMounted(async () => {
           class="overflow-hidden"
         >
           <div class="w-[95%] mx-auto">
-            <div class="px-4 py-4 flex cursor-pointer">
-              <img :src="card.imageUrl" alt="카드 이미지" class="w-20 h-28 object-cover rounded-md" />
+            <div
+              class="px-4 py-4 flex cursor-pointer"
+              data-testid="cardItem"
+              @click="goToDetail(card.id)"
+            >
+              <img
+                :src="card.imageUrl"
+                alt="카드 이미지"
+                class="w-20 h-28 object-cover rounded-md"
+              />
               <div class="ml-4 flex-1 mt-2">
                 <p class="text-xs text-gray-500">{{ card.company?.name }}</p>
                 <p class="text-sm text-gray-900 font-medium leading-snug line-clamp-2 mt-2">
@@ -210,7 +209,9 @@ onMounted(async () => {
                 </p>
 
                 <div
-                  v-for="(benefit, i) in expandedBenefits[card.id] ? card.benefits : card.benefits.slice(0, 3)"
+                  v-for="(benefit, i) in expandedBenefits[card.id]
+                    ? card.benefits
+                    : card.benefits.slice(0, 3)"
                   :key="i"
                   class="flex gap-1 items-start mt-1"
                 >
@@ -228,7 +229,7 @@ onMounted(async () => {
                     @click.stop="toggleBenefit(card.id)"
                     class="text-xs text-gray-600 flex items-center gap-1"
                   >
-                    {{ expandedBenefits[card.id] ? '접기' : '더보기' }}
+                    {{ expandedBenefits[card.id] ? "접기" : "더보기" }}
                     <component
                       :is="expandedBenefits[card.id] ? ChevronUp : ChevronDown"
                       class="w-4 h-4 text-gray-400"
