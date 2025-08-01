@@ -44,7 +44,7 @@ describe("MyCardPage", () => {
             partners: [{ id: 1, name: "GS25", myCards: [] }],
           },
         ],
-        annualCosts: [],
+        annualcosts: "10,000원",
         grades: [],
       },
     ],

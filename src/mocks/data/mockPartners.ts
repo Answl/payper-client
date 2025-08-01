@@ -45,7 +45,7 @@ export const mockPartners: Partner[] = [
         benefitGrades: [],
       },
     ],
-    annualCosts: [],
+    annualcosts: "5000원",
     grades: [],
   },],
     position: {

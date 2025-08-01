@@ -45,9 +45,10 @@ const onAddCardClick = () => {
       </div>
       <div class="flex flex-col w-full gap-2">
         <p class="font-bold">연회비</p>
-        <p v-for="(cost, index) in card.annualCosts" :key="index" class="text-stone-500">
-          {{ cost.brandName }} {{ cost.amount.toLocaleString() }}원
-        </p>
+        <p class="text-stone-500">
+  {{ card.annualcosts }}
+</p>
+
       </div>
     </div>
     <div class="flex flex-col gap-2">

@@ -56,7 +56,7 @@ const cardList: Card[] = [
         ],
       },
     ],
-    annualCosts: [],
+    annualcosts: "1000원",
     grades: [],
   },
   {
@@ -155,7 +155,7 @@ const cardList: Card[] = [
         benefitGrades: [],
       },
     ],
-    annualCosts: [],
+    annualcosts: "2000원",
     grades: [],
   },
   {
@@ -199,7 +199,7 @@ const cardList: Card[] = [
         benefitGrades: [],
       },
     ],
-    annualCosts: [],
+    annualcosts: "3000원",
     grades: [],
   },
 ];
