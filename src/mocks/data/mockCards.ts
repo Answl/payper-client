@@ -46,7 +46,14 @@ const cardList: Card[] = [
             id: 1,
             name: "GS25",
             myCards: [],
-            position: { x: 0, y: 0, distance: 0 },
+            position: {
+              x: "127.0276368",
+              y: "37.4979425",
+              distance: 150, // 미터
+              road_address_name: "서울 강남구 강남대로 396", // 도로명 주소
+              place_url: "https://place.map.kakao.com/123456789", // 카카오맵 URL
+              place_name: "GS25 강남대로점", // 전체 가맹점 이름
+            },
           },
         ],
       },
@@ -72,7 +79,22 @@ const cardList: Card[] = [
         iconUrl: "https://example.com/starbucks.png",
 
         categories: [{ id: 2, name: "카페" }],
-        partners: [{ id: 2, name: "스타벅스", myCards: [], position: { x: 0, y: 0, distance: 0 } }],
+        partners: [
+          {
+            id: 2,
+            name: "스타벅스",
+            myCards: [],
+            position: {
+              x: "127.029288",
+              y: "37.499123",
+              distance: 100,
+              road_address_name: "서울특별시 강남구 테헤란로 152",
+              place_url: "https://place.map.kakao.com/987654321",
+              place_name: "스타벅스 테헤란로점",
+            },
+          },
+        ],
+
         benefitGrades: [],
       },
       {
@@ -83,7 +105,21 @@ const cardList: Card[] = [
         iconUrl: "https://example.com/oliveyoung.png",
 
         categories: [{ id: 3, name: "헬스/뷰티" }],
-        partners: [{ id: 3, name: "올리브영", myCards: [], position: { x: 0, y: 0, distance: 0 } }],
+        partners: [
+          {
+            id: 3,
+            name: "올리브영",
+            myCards: [],
+            position: {
+              x: "127.030111",
+              y: "37.500222",
+              distance: 120,
+              road_address_name: "서울특별시 강남구 역삼로 215",
+              place_url: "https://place.map.kakao.com/567890123",
+              place_name: "올리브영 강남역점",
+            },
+          },
+        ],
         benefitGrades: [],
       },
       {
@@ -94,7 +130,21 @@ const cardList: Card[] = [
         iconUrl: "https://example.com/cgv.png",
 
         categories: [{ id: 4, name: "문화" }],
-        partners: [{ id: 4, name: "CGV", myCards: [], position: { x: 0, y: 0, distance: 0 } }],
+        partners: [
+          {
+            id: 4,
+            name: "CGV",
+            myCards: [],
+            position: {
+              x: "127.025432",
+              y: "37.501678",
+              distance: 200,
+              road_address_name: "서울특별시 강남구 강남대로 438",
+              place_url: "https://place.map.kakao.com/345678901",
+              place_name: "CGV 강남점",
+            },
+          },
+        ],
         benefitGrades: [],
       },
       {
@@ -106,7 +156,19 @@ const cardList: Card[] = [
 
         categories: [{ id: 5, name: "생활" }],
         partners: [
-          { id: 5, name: "네이버페이", myCards: [], position: { x: 0, y: 0, distance: 0 } },
+          {
+            id: 5,
+            name: "네이버페이",
+            myCards: [],
+            position: {
+              x: "127.031234",
+              y: "37.502345",
+              distance: 300,
+              road_address_name: "경기도 성남시 분당구 불정로 6",
+              place_url: "https://place.map.kakao.com/1122334455",
+              place_name: "네이버 1784 빌딩",
+            },
+          },
         ],
         benefitGrades: [],
       },
@@ -118,7 +180,21 @@ const cardList: Card[] = [
         iconUrl: "https://example.com/book.png",
 
         categories: [{ id: 6, name: "도서" }],
-        partners: [{ id: 6, name: "YES24", myCards: [], position: { x: 0, y: 0, distance: 0 } }],
+        partners: [
+          {
+            id: 6,
+            name: "YES24",
+            myCards: [],
+            position: {
+              x: "127.033456",
+              y: "37.503456",
+              distance: 400,
+              road_address_name: "서울특별시 강서구 마곡중앙로 161-8",
+              place_url: "https://place.map.kakao.com/9988776655",
+              place_name: "YES24 본사",
+            },
+          },
+        ],
         benefitGrades: [],
       },
     ],

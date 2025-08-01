@@ -63,7 +63,10 @@ const handleSearch = async (keyword: string) => {
 
   for (const partner of res.partners) {
     if (partner?.position) {
-      const latLng = new kakao.maps.LatLng(partner.position.x, partner.position.y);
+      const latLng = new kakao.maps.LatLng(
+        parseFloat(partner.position.y),
+        parseFloat(partner.position.x)
+      );
       const marker = new kakao.maps.Marker({ position: latLng });
       marker.setMap(map.value);
       markers.value.push(marker);
@@ -84,7 +87,10 @@ const refreshLocation = async () => {
 
   for (const partner of res.partners) {
     if (partner?.position) {
-      const latLng = new kakao.maps.LatLng(partner.position.x, partner.position.y);
+      const latLng = new kakao.maps.LatLng(
+        parseFloat(partner.position.y),
+        parseFloat(partner.position.x)
+      );
       const marker = new kakao.maps.Marker({ position: latLng });
       marker.setMap(map.value);
       markers.value.push(marker);
@@ -119,29 +125,22 @@ onMounted(() => {
 
 <template>
   <div class="relative w-full h-screen overflow-hidden">
-    <!-- 지도 -->
     <div id="map" class="w-full h-full z-0" />
 
-   <!-- 검색창 + 새로고침 버튼 -->
-<!-- 검색창 + 새로고침 아이콘 버튼 -->
-<div class="absolute top-0 left-0 w-full z-10 p-4">
-  <PartnerSearchBar :onSubmit="handleSearch" />
+    <div class="absolute top-0 left-0 w-full z-10 p-4">
+      <PartnerSearchBar :onSubmit="handleSearch" />
 
-  <div class="mt-2 flex justify-end">
-    <button
-      class="w-9 h-9 flex items-center justify-center rounded-full bg-white text-gray-700 shadow hover:bg-gray-100"
-      @click="refreshLocation"
-      aria-label="위치 새로고침"
-    >
-      <RefreshCw class="w-5 h-5" />
-    </button>
-  </div>
-</div>
+      <div class="mt-2 flex justify-end">
+        <button
+          class="w-9 h-9 flex items-center justify-center rounded-full bg-white text-gray-700 shadow hover:bg-gray-100"
+          @click="refreshLocation"
+          aria-label="위치 새로고침"
+        >
+          <RefreshCw class="w-5 h-5" />
+        </button>
+      </div>
+    </div>
 
-
-
-
-    <!-- 하단 드로어 -->
     <div
       class="absolute bottom-0 left-0 w-full bg-white rounded-t-2xl shadow-lg z-20 transition-all duration-300"
       :style="{ height: `${drawerHeight}vh` }"
@@ -161,22 +160,15 @@ onMounted(() => {
         >
           <div class="text-sm text-gray-400">{{ partner.name }}</div>
           <div class="text-base font-semibold text-black">
-            {{ partner.myCards[0]?.name ?? '카드 없음' }}
+            {{ partner.myCards[0]?.name ?? "카드 없음" }}
           </div>
-          <div class="text-xs text-gray-500">
-            {{ partner.position?.distance ?? 0 }}m
-          </div>
+          <div class="text-xs text-gray-500">{{ partner.position?.distance ?? 0 }}m</div>
           <div class="text-sm text-gray-500 font-bold">
-            {{ partner.myCards[0]?.benefits[0].summary ?? '혜택 없음' }}
+            {{ partner.myCards[0]?.benefits[0].summary ?? "혜택 없음" }}
           </div>
         </div>
       </div>
     </div>
-
-    <!-- 하단 네비게이션 -->
     <BottomNavigation selected="home" />
   </div>
 </template>
-
-
-

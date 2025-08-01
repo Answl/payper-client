@@ -21,7 +21,6 @@ export const mockPartners: Partner[] = [
             summary: "1만원 이상 결제 시 10%",
             description: "<p>세탁소 업종 가맹점</p>",
             iconUrl: "https://example.com/laundry.png",
-
             categories: [{ id: 7, name: "생활" }],
             partners: [],
             benefitGrades: [],
@@ -32,7 +31,6 @@ export const mockPartners: Partner[] = [
             summary: "1만원 이상 결제 시 5%",
             description: "<p>제과·아이스크림 업종 가맹점</p>",
             iconUrl: "https://example.com/dessert.png",
-
             categories: [{ id: 8, name: "식비" }],
             partners: [],
             benefitGrades: [],
@@ -43,9 +41,12 @@ export const mockPartners: Partner[] = [
       },
     ],
     position: {
-      x: 37.55033295359956,
-      y: 127.07727277946327,
+      x: "127.07727277946327",
+      y: "37.55033295359956",
       distance: 200,
+      road_address_name: "서울특별시 광진구 능동로 120",
+      place_url: "https://place.map.kakao.com/123456789",
+      place_name: "GS25 어린이대공원역점",
     },
   },
   {
@@ -53,9 +54,12 @@ export const mockPartners: Partner[] = [
     name: "CU",
     myCards: [],
     position: {
-      x: 37.544832953599556,
-      y: 127.07527277946327,
+      x: "127.07527277946327",
+      y: "37.544832953599556",
       distance: 300,
+      road_address_name: "서울특별시 광진구 자양로 117",
+      place_url: "https://place.map.kakao.com/234567890",
+      place_name: "CU 자양점",
     },
   },
   {
@@ -63,9 +67,12 @@ export const mockPartners: Partner[] = [
     name: "세븐일레븐",
     myCards: [],
     position: {
-      x: 37.54933295359956,
-      y: 127.06827277946326,
+      x: "127.06827277946326",
+      y: "37.54933295359956",
       distance: 400,
+      road_address_name: "서울특별시 광진구 구의강변로 80",
+      place_url: "https://place.map.kakao.com/345678901",
+      place_name: "세븐일레븐 구의점",
     },
   },
 ];
