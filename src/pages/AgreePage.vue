@@ -1,6 +1,7 @@
 <script lang="ts" setup>
+import router from '@/router';
 function onAgree() {
-  alert("동의해주셔서 감사합니다.");
+  router.push("/");
 }
 </script>
 

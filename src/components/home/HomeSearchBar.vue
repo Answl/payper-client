@@ -34,6 +34,7 @@ const selectedCategory = ref<string | null>(null);
 
 const onCategoryClick = (pill: CategoryPill) => {
   keyword.value = pill.label;
+  console.log("PILL : " + pill)
   selectedCategory.value = pill.label;
   onSubmit(keyword.value);
 };

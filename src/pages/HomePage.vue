@@ -127,19 +127,19 @@ onMounted(() => {
   <div class="relative w-full h-screen overflow-hidden">
     <div id="map" class="w-full h-full z-0" />
 
-    <div class="absolute top-0 left-0 w-full z-10 p-4">
-      <PartnerSearchBar :onSubmit="handleSearch" />
+<div class="absolute top-0 left-0 w-full z-10 p-4">
+  <PartnerSearchBar :onSubmit="handleSearch" />
 
-      <div class="mt-2 flex justify-end">
-        <button
-          class="w-9 h-9 flex items-center justify-center rounded-full bg-white text-gray-700 shadow hover:bg-gray-100"
-          @click="refreshLocation"
-          aria-label="위치 새로고침"
-        >
-          <RefreshCw class="w-5 h-5" />
-        </button>
-      </div>
-    </div>
+  <div class="mt-2 flex justify-end">
+    <button
+      class="w-9 h-9 flex items-center justify-center rounded-full bg-white text-gray-700 shadow hover:bg-gray-100"
+      @click="refreshLocation"
+      aria-label="위치 새로고침"
+    >
+      <RefreshCw class="w-5 h-5" />
+    </button>
+  </div>
+</div>
 
     <div
       class="absolute bottom-0 left-0 w-full bg-white rounded-t-2xl shadow-lg z-20 transition-all duration-300"
