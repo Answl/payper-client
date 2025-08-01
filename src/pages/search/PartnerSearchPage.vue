@@ -2,7 +2,6 @@
 import { ref, computed, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import {
-  ArrowLeft,
   Search,
   ChevronDown,
   ChevronUp,
@@ -19,11 +18,11 @@ import { getMyCards } from "@/api/mycard.api";
 import type { Card } from "@/types/Card";
 import type { Component } from "vue";
 import BottomNavigation from "@/components/common/BottomNavigation.vue";
+import CommonHeader from "@/components/CommonHeader.vue";
+
 
 const router = useRouter();
 const route = useRoute();
-const goBack = () => router.back();
-
 const tabs = [
   { label: "신용카드", path: "/search/credit" },
   { label: "체크카드", path: "/search/check" },
@@ -113,14 +112,7 @@ onMounted(async () => {
 
 <template>
   <div class="flex flex-col size-full">
-    <header class="flex items-center justify-between py-2 px-4">
-      <button @click="goBack">
-        <ArrowLeft class="w-6 h-6" />
-      </button>
-      <h1 class="text-lg font-semibold">검색</h1>
-      <div class="w-6"></div>
-    </header>
-
+            <CommonHeader title="검색" />
 
     <main class="flex-1 overflow-y-auto">
       <div class="flex gap-6 pl-10 mb-4">

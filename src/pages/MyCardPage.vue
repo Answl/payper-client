@@ -2,7 +2,6 @@
 import { ref, onMounted, type Component } from "vue";
 import { useRouter } from "vue-router";
 import {
-  ArrowLeft,
   Plus,
   Coffee,
   Film,
@@ -17,6 +16,7 @@ import { Accordion, AccordionItem } from "@/components/ui/accordion";
 import { getMyCards } from "@/api/mycard.api";
 import type { Card } from "@/types/Card";
 import BottomNavigation from "@/components/common/BottomNavigation.vue";
+import CommonHeader from "@/components/CommonHeader.vue";
 
 const router = useRouter();
 const cards = ref<Card[]>([]);
@@ -53,9 +53,6 @@ onMounted(async () => {
   }
 });
 
-const goBack = () => {
-  router.push("/");
-};
 
 const goToAdd = () => router.push("/search");
 
@@ -70,13 +67,7 @@ const toggleBenefit = (cardId: number) => {
 
 <template>
     <div class="flex flex-col size-full">
-    <div class="flex items-center justify-between h-12 mt-6 mb-6 px-4">
-      <button @click="goBack" class="w-6 h-6 flex items-center justify-center">
-        <ArrowLeft class="w-6 h-6 text-black" />
-      </button>
-      <h1 class="text-xl font-bold text-center flex-1 -ml-6">내 카드</h1>
-      <div class="w-6 h-6"></div>
-    </div>
+      <CommonHeader title="내 카드" />
 
     <div v-if="cards.length === 0" class="text-center text-sm text-gray-500 mt-10">
       등록된 카드가 없습니다.
