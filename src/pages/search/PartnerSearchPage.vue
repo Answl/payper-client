@@ -202,7 +202,7 @@ onMounted(async () => {
                 alt="카드 이미지"
                 class="w-20 h-28 object-cover rounded-md"
               />
-              <div class="ml-4 flex-1 mt-2">
+              <div class="ml-4 flex-1">
                 <p class="text-xs text-gray-500">{{ card.company?.name }}</p>
                 <p class="text-sm text-gray-900 font-medium leading-snug line-clamp-2 mt-2">
                   {{ card.name }}
