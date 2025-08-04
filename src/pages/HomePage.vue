@@ -8,6 +8,7 @@ import { RotateCcw } from "lucide-vue-next";
 import type { Partners } from "@/types/Partners";
 import type { Partner } from "@/types/Partner";
 import type { Card } from "@/types/Card";
+import markerImg from '@/assets/MAP_MARKER.png';
 import { useRouter } from "vue-router";
 
 const router = useRouter();
@@ -17,6 +18,7 @@ const goToPartnerDetails = (id: number) => {
 
 const KAKAO_APP_KEY = import.meta.env.VITE_KAKAO_JAVASCRIPT_KEY;
 const { coords } = useGeolocation();
+const markerImage = new kakao.maps.MarkerImage(markerImg, new kakao.maps.Size(40, 50));
 
 const map = ref<kakao.maps.Map | null>(null);
 const markers = ref<kakao.maps.Marker[]>([]);
@@ -67,7 +69,7 @@ const initMap = () => {
   if (!container) return;
   const center = new kakao.maps.LatLng(coords.value.latitude, coords.value.longitude);
   map.value = new kakao.maps.Map(container, { center, level: 3 });
-  const myMarker = new kakao.maps.Marker({ position: center });
+  const myMarker = new kakao.maps.Marker({ position: center , image: markerImage});
   myMarker.setMap(map.value);
 };
 
@@ -80,7 +82,7 @@ const updateMarkers = (partners: Partner[]) => {
         parseFloat(partner.position.y),
         parseFloat(partner.position.x)
       );
-      const marker = new kakao.maps.Marker({ position: latLng });
+      const marker = new kakao.maps.Marker({ position: latLng});
       marker.setMap(map.value);
       markers.value.push(marker);
     }
