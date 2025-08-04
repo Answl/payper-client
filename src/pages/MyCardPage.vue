@@ -66,7 +66,7 @@ const toggleBenefit = (cardId: number) => {
     <div class="flex flex-col px-4 py-4 size-full">
       <button
         @click="goToAdd"
-        class="w-full mt-4 bg-[#F67154] text-white py-4 rounded-md text-base font-semibold flex items-center justify-center gap-2 shadow-md"
+        class="w-full mt-4 bg-[#F67154] text-white py-4 rounded-md text-base font-semibold flex items-center justify-center gap-2 shadow-md cursor-pointer"
       >
         <Plus class="w-5 h-5" />
         내 카드 추가하기

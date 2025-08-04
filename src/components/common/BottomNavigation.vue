@@ -67,7 +67,7 @@ const onClick = (name: string) => {
       :data-testid="`nav-item-${item.name}`"
     >
       <button
-        class="flex flex-col items-center justify-center space-y-1 focus-visible:outline-none"
+        class="flex flex-col items-center justify-center space-y-1 focus-visible:outline-none cursor-pointer"
       >
         <component
           :is="item.icon"
