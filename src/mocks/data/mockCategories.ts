@@ -4,9 +4,11 @@ export const mockCategories: Category[] = [
   {
     id: 1,
     name: "편의점",
+    imageUrl: "",
   },
   {
     id: 2,
     name: "커피",
+    imageUrl: "",
   },
 ];

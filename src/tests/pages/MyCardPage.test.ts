@@ -36,8 +36,22 @@ describe("MyCardPage", () => {
             iconUrl: "https://example.com/gs25.png",
 
             benefitGrades: [],
-            categories: [{ id: 1, name: "편의점" }],
-            partners: [{ id: 1, name: "GS25", myCards: [] }],
+            categories: [
+              {
+                id: 1,
+                name: "편의점",
+                imageUrl: "",
+              },
+            ],
+            partners: [
+              {
+                id: 1,
+                name: "GS25",
+                myCards: [],
+                imageUrl: "",
+                categoryName: "",
+              },
+            ],
           },
         ],
         annualcosts: "10,000원",

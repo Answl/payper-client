@@ -21,9 +21,9 @@ export const mockPartners: Partner[] = [
             summary: "1만원 이상 결제 시 10%",
             description: "<p>세탁소 업종 가맹점</p>",
             iconUrl: "https://example.com/laundry.png",
-            categories: [{ id: 7, name: "생활" }],
             partners: [],
             benefitGrades: [],
+            categories: [],
           },
           {
             id: 5,
@@ -31,9 +31,9 @@ export const mockPartners: Partner[] = [
             summary: "1만원 이상 결제 시 5%",
             description: "<p>제과·아이스크림 업종 가맹점</p>",
             iconUrl: "https://example.com/dessert.png",
-            categories: [{ id: 8, name: "식비" }],
             partners: [],
             benefitGrades: [],
+            categories: [],
           },
         ],
         annualcosts: "5000원",
@@ -48,6 +48,8 @@ export const mockPartners: Partner[] = [
       place_url: "https://place.map.kakao.com/123456789",
       place_name: "GS25 어린이대공원역점",
     },
+    imageUrl: "",
+    categoryName: "편의점",
   },
   {
     id: 2,
@@ -61,6 +63,8 @@ export const mockPartners: Partner[] = [
       place_url: "https://place.map.kakao.com/234567890",
       place_name: "CU 자양점",
     },
+    imageUrl: "",
+    categoryName: "편의점",
   },
   {
     id: 3,
@@ -74,5 +78,7 @@ export const mockPartners: Partner[] = [
       place_url: "https://place.map.kakao.com/345678901",
       place_name: "세븐일레븐 구의점",
     },
+    imageUrl: "",
+    categoryName: "편의점",
   },
 ];

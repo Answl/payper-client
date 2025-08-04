@@ -32,4 +32,6 @@ export const mockPartner: Partner = {
       ],
     },
   ],
+  imageUrl: "",
+  categoryName: "",
 };

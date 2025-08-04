@@ -1,9 +1,11 @@
 import type { Card } from "./Card";
-import type {Position} from "./Positions";
+import type { Position } from "./Positions";
 
 export interface Partner {
   id: number;
   name: string;
-  myCards : Card[];
-  position ?: Position,
+  imageUrl: string;
+  categoryName: string;
+  position?: Position;
+  myCards: Card[];
 }

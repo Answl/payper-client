@@ -40,7 +40,6 @@ const cardList: Card[] = [
             minPayment: 1000,
           },
         ],
-        categories: [{ id: 1, name: "편의점" }],
         partners: [
           {
             id: 1,
@@ -54,8 +53,11 @@ const cardList: Card[] = [
               place_url: "https://place.map.kakao.com/123456789", // 카카오맵 URL
               place_name: "GS25 강남대로점", // 전체 가맹점 이름
             },
+            imageUrl: "",
+            categoryName: "",
           },
         ],
+        categories: [],
       },
     ],
     annualcosts: "1000원",
@@ -78,7 +80,13 @@ const cardList: Card[] = [
         description: "<p>스타벅스, 스타벅스 APP 사이렌오더에서 1천원 청구할인</p>",
         iconUrl: "https://example.com/starbucks.png",
 
-        categories: [{ id: 2, name: "카페" }],
+        categories: [
+          {
+            id: 2,
+            name: "카페",
+            imageUrl: "",
+          },
+        ],
         partners: [
           {
             id: 2,
@@ -92,6 +100,8 @@ const cardList: Card[] = [
               place_url: "https://place.map.kakao.com/987654321",
               place_name: "스타벅스 테헤란로점",
             },
+            imageUrl: "",
+            categoryName: "",
           },
         ],
 
@@ -104,7 +114,13 @@ const cardList: Card[] = [
         description: "<p>올리브영, 안경점에서 1천원 청구할인</p>",
         iconUrl: "https://example.com/oliveyoung.png",
 
-        categories: [{ id: 3, name: "헬스/뷰티" }],
+        categories: [
+          {
+            id: 3,
+            name: "헬스/뷰티",
+            imageUrl: "",
+          },
+        ],
         partners: [
           {
             id: 3,
@@ -118,6 +134,8 @@ const cardList: Card[] = [
               place_url: "https://place.map.kakao.com/567890123",
               place_name: "올리브영 강남역점",
             },
+            imageUrl: "",
+            categoryName: "",
           },
         ],
         benefitGrades: [],
@@ -129,7 +147,13 @@ const cardList: Card[] = [
         description: "<p>CGV에서 1천원 청구할인</p>",
         iconUrl: "https://example.com/cgv.png",
 
-        categories: [{ id: 4, name: "문화" }],
+        categories: [
+          {
+            id: 4,
+            name: "문화",
+            imageUrl: "",
+          },
+        ],
         partners: [
           {
             id: 4,
@@ -143,6 +167,8 @@ const cardList: Card[] = [
               place_url: "https://place.map.kakao.com/345678901",
               place_name: "CGV 강남점",
             },
+            imageUrl: "",
+            categoryName: "",
           },
         ],
         benefitGrades: [],
@@ -154,7 +180,13 @@ const cardList: Card[] = [
         description: "<p>네이버페이, 카카오페이, SSGPAY(온라인)에서 1천원 청구할인</p>",
         iconUrl: "https://example.com/pay.png",
 
-        categories: [{ id: 5, name: "생활" }],
+        categories: [
+          {
+            id: 5,
+            name: "생활",
+            imageUrl: "",
+          },
+        ],
         partners: [
           {
             id: 5,
@@ -168,6 +200,8 @@ const cardList: Card[] = [
               place_url: "https://place.map.kakao.com/1122334455",
               place_name: "네이버 1784 빌딩",
             },
+            imageUrl: "",
+            categoryName: "",
           },
         ],
         benefitGrades: [],
@@ -179,7 +213,13 @@ const cardList: Card[] = [
         description: "<p>YES24, 교보문고(온라인)에서 1천원 청구할인</p>",
         iconUrl: "https://example.com/book.png",
 
-        categories: [{ id: 6, name: "도서" }],
+        categories: [
+          {
+            id: 6,
+            name: "도서",
+            imageUrl: "",
+          },
+        ],
         partners: [
           {
             id: 6,
@@ -193,6 +233,8 @@ const cardList: Card[] = [
               place_url: "https://place.map.kakao.com/9988776655",
               place_name: "YES24 본사",
             },
+            imageUrl: "",
+            categoryName: "",
           },
         ],
         benefitGrades: [],
@@ -218,7 +260,13 @@ const cardList: Card[] = [
         description: "<p>세탁소 업종 가맹점</p>",
         iconUrl: "https://example.com/laundry.png",
 
-        categories: [{ id: 7, name: "생활" }],
+        categories: [
+          {
+            id: 7,
+            name: "생활",
+            imageUrl: "",
+          },
+        ],
         partners: [],
         benefitGrades: [],
       },
@@ -229,7 +277,13 @@ const cardList: Card[] = [
         description: "<p>제과·아이스크림 업종 가맹점</p>",
         iconUrl: "https://example.com/dessert.png",
 
-        categories: [{ id: 8, name: "식비" }],
+        categories: [
+          {
+            id: 8,
+            name: "식비",
+            imageUrl: "",
+          },
+        ],
         partners: [],
         benefitGrades: [],
       },
