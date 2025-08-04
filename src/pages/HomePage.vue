@@ -8,6 +8,12 @@ import { RotateCcw } from "lucide-vue-next";
 import type { Partners } from "@/types/Partners";
 import type { Partner } from "@/types/Partner";
 import type { Card } from "@/types/Card";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+const goToPartnerDetails = (id: number) => {
+  router.push(`/partners/${id}`);
+};
 
 const KAKAO_APP_KEY = import.meta.env.VITE_KAKAO_JAVASCRIPT_KEY;
 const { coords } = useGeolocation();
@@ -98,7 +104,6 @@ const refreshLocation = async () => {
   updateMarkers(res.partners);
 };
 
-
 const loadMapScript = () => {
   //if (document.getElementById("kakao-map-sdk")) return;
   const script = document.createElement("script");
@@ -126,8 +131,6 @@ const loadMapScript = () => {
 onMounted(() => {
   loadMapScript();
 });
-;
-
 </script>
 
 <template>
@@ -177,6 +180,7 @@ onMounted(() => {
           v-for="partner in filteredPartners"
           :key="partner.id"
           class="bg-stone-100 rounded-2xl p-4 py-6 min-h-[100px] flex items-center justify-between"
+          @click="goToPartnerDetails(partner.id)"
         >
           <div class="flex items-center gap-4">
             <!-- 가맹점 이미지 (원형) -->
@@ -223,4 +227,3 @@ onMounted(() => {
     <BottomNavigation selected="home" />
   </div>
 </template>
-
