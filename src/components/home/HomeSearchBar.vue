@@ -43,17 +43,19 @@ const onCategoryClick = (pill: CategoryPill) => {
 <template>
   <div class="flex flex-col gap-2">
     <SearchBar v-model="keyword" placeholder="가맹점 ∙ 카테고리 검색" :onClick="handleSearch" />
-    <div class="flex overflow-auto gap-2">
+
+    <!-- 카테고리 버튼 영역 -->
+    <div class="flex overflow-auto gap-2 pb-1">
       <CommonButton
         v-for="(pill, index) in pills"
         :key="index"
         variant="outline"
         @click="() => onCategoryClick(pill)"
         :class="[
-          'rounded-full gap-1 shadow-xl',
+          'rounded-full gap-1 shadow-md transition-shadow duration-200',
           selectedCategory === pill.label
-            ? 'bg-red-500 text-white'
-            : 'bg-gray-100 hover:bg-gray-200',
+            ? 'bg-primary text-white'
+            : 'bg-white hover:bg-gray-200',
         ]"
       >
         <component :is="pill.icon" class="w-4 h-4" />
@@ -62,3 +64,4 @@ const onCategoryClick = (pill: CategoryPill) => {
     </div>
   </div>
 </template>
+
