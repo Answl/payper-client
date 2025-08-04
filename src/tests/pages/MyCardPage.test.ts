@@ -63,8 +63,11 @@ describe("MyCardPage", () => {
 
     render(MyCardPage);
 
-    const button = await screen.findByTestId("cardItem");
-    await user.click(button);
+    // const button = await screen.findByTestId("card");
+    // await user.click(button);
+
+    const cardElement = await screen.findByText("KB노리2");
+    await user.click(cardElement);
 
     expect(mockPush).toHaveBeenCalledWith({
       name: "cardDetails",
