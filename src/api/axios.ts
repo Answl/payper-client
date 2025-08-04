@@ -5,14 +5,13 @@ import { getNewTokens } from "./auth.api";
  * API 호출을 위한 BaseURL
  */
 
-export const baseURL =
-  import.meta.env.DEV ? "" : "http://localhost:8080/api";
+export const baseURL = import.meta.env.VITE_BASE_URL
+  ? import.meta.env.VITE_BASE_URL
+  : "http://localhost:8080/api";
 
 export const api = axios.create({
   baseURL,
 });
-
-
 
 /**
  * Axios 인터셉터 설정
