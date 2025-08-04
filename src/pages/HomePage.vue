@@ -99,8 +99,8 @@ const refreshLocation = async () => {
   }
 };
 
-onMounted(() => {
-  if (document.getElementById("kakao-map-sdk")) return;
+const loadMapScript = () => {
+  //if (document.getElementById("kakao-map-sdk")) return;
   const script = document.createElement("script");
   script.id = "kakao-map-sdk";
   script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_APP_KEY}&autoload=false`;
@@ -121,7 +121,13 @@ onMounted(() => {
     });
   };
   document.head.appendChild(script);
+};
+
+onMounted(() => {
+  loadMapScript();
 });
+;
+
 </script>
 
 <template>
@@ -173,3 +179,4 @@ onMounted(() => {
     <BottomNavigation selected="home" />
   </div>
 </template>
+
