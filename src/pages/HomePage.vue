@@ -82,9 +82,32 @@ const updateMarkers = (partners: Partner[]) => {
         parseFloat(partner.position.y),
         parseFloat(partner.position.x)
       );
+      const partnerName = partner.position.placeName
+      const partnerUrl = partner.position.placeUrl
+      const partnerRoadAdressName = partner.position.roadAddressName
+      console.log("수정해줘요" + partnerName)
+      const contentP= '<div class="overlaybox">' +
+       `<div class="boxtitle"> ${ partnerName }</div>` + `<div class="boxtitle"> ${partnerUrl} </div>` + `<div class="boxtitle"> ${partnerRoadAdressName} </div>`+ `</div>`
+       const infowindow = new kakao.maps.InfoWindow({
+        content: contentP
+       })
       const marker = new kakao.maps.Marker({ position: latLng });
-      marker.setMap(map.value);
-      markers.value.push(marker);
+    (function (
+      marker: kakao.maps.Marker,
+      infowindow: kakao.maps.InfoWindow,
+      map: kakao.maps.Map | null
+    ):
+      void {
+        if(map === null) return;
+        kakao.maps.event.addListener(marker, 'mouseover', () => {
+        infowindow.open(map, marker);
+    });
+        kakao.maps.event.addListener(marker, 'mouseout', () => {
+        infowindow.close();
+    });
+     })(marker, infowindow, map.value);
+        marker.setMap(map.value);
+        markers.value.push(marker);
     }
   }
 };
@@ -201,11 +224,11 @@ onMounted(() => {
                 {{ partner.categoryName || "카테고리 없음" }}
               </span>
               <span class="text-ml font-semibold text-[#F67154]">{{
-                partner.position?.place_name || partner.name
+                partner.position?.placeName || partner.name
               }}</span>
               <span class="text-xs text-stone-500">
                 {{ partner.position?.distance ?? 0 }}m ·
-                {{ partner.position?.road_address_name ?? "" }}
+                {{ partner.position?.roadAddressName ?? "" }}
               </span>
             </div>
           </div>
