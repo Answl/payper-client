@@ -5,8 +5,6 @@ import CommonButton from "./ui/button/CommonButton.vue";
 const REDIRECT_URI = import.meta.env.VITE_KAKAO_REDIRECT_URI;
 const CLIENT_ID  = import.meta.env.VITE_KAKAO_CLIENT_ID;
 
-// const REDIRECT_URI = "http://localhost:5173/auth/callback/kakao";
-// const CLIENT_ID = "aca0b6bad9587b8d156c8ee39bda1ce7";
 const KAKAO_AUTH_URL =
   "https://kauth.kakao.com/oauth/authorize?" +
   `client_id=${CLIENT_ID}` +
