@@ -11,7 +11,7 @@ import { useKakao } from "vue3-kakao-maps";
 // Browser에서 MSW 활성화
 async function enableMocking() {
   // 개발 환경에서만 동작
-  if (!import.meta.env.DEV) {
+  if (import.meta.env.VITE_MSW !== "true") {
     return;
   }
   const { worker } = await import("./mocks/browser");
