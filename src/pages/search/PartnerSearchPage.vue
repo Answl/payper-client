@@ -4,8 +4,8 @@ import { useRouter, useRoute } from "vue-router";
 import { Search } from "lucide-vue-next";
 import { Accordion, AccordionItem } from "@/components/ui/accordion";
 import FilterDrawer from "@/components/search/SelectDrawerButton.vue";
-import { getMyCards } from "@/api/mycard.api";
 import type { Card } from "@/types/Card";
+import { getAllCards } from "@/api/card.api";
 import BottomNavigation from "@/components/common/BottomNavigation.vue";
 import CommonHeader from "@/components/CommonHeader.vue";
 import CardItem from "@/components/cardlist/CardItem.vue";
@@ -47,18 +47,16 @@ const goToDetail = (id: number) => {
 const filteredCards = computed(() =>
   cards.value.filter((card) => {
     const query = searchQuery.value.trim().toLowerCase();
-
+    const benefits = card.benefits ?? [];
     const fields = [
       card.name,
       card.company?.name,
-      ...card.benefits.map((b) => b.summary),
-      ...card.benefits.flatMap((b) => b.partners?.map((p) => p.name) ?? []),
+      ...benefits.map((b) => b.summary),
+      ...benefits.flatMap((b) => b.partners?.map((p) => p.name) ?? []),
     ].filter(Boolean);
 
     const matchQuery = !query || fields.some((text) => text.toLowerCase().includes(query));
-
     const matchTags = selectedTags.value.every((tag) => fields.some((text) => text.includes(tag)));
-
     return matchQuery && matchTags;
   })
 );
@@ -66,7 +64,7 @@ const filteredCards = computed(() =>
 onMounted(async () => {
   loading.value = true;
   try {
-    const res = await getMyCards();
+    const res = await getAllCards();
     cards.value = res.cards ?? [];
   } catch (e) {
     console.error("카드 불러오기 실패:", e);

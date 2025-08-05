@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { Search } from "lucide-vue-next";
 import { Accordion, AccordionItem } from "@/components/ui/accordion";
 import FilterDrawer from "@/components/search/SelectDrawerButton.vue";
-import { getMyCards } from "@/api/mycard.api";
+import { searchCards } from "@/api/card.api";
 import type { Card } from "@/types/Card";
 import BottomNavigation from "@/components/common/BottomNavigation.vue";
 import CommonHeader from "@/components/CommonHeader.vue";
@@ -62,23 +62,13 @@ const goToDetail = (id: number) => {
   router.push({ name: "cardDetails", params: { id } });
 };
 
-const filteredCards = computed(() =>
-  cards.value.filter(
-    (card) =>
-      card.name.includes(searchQuery.value) &&
-      selectedTags.value.every(
-        (tag) =>
-          card.name.includes(tag) ||
-          card.company?.name?.includes(tag) ||
-          card.benefits?.some((b) => b.summary.includes(tag))
-      )
-  )
-);
-
-onMounted(async () => {
+const fetchCards = async () => {
   loading.value = true;
   try {
-    const res = await getMyCards();
+    const res = await searchCards({
+      name: searchQuery.value,
+      type: "CHECK",
+    });
     cards.value = res.cards ?? [];
   } catch (e) {
     console.error("카드 불러오기 실패:", e);
@@ -86,6 +76,14 @@ onMounted(async () => {
   } finally {
     loading.value = false;
   }
+};
+
+onMounted(() => {
+  fetchCards();
+});
+
+watch([searchQuery, sortOption], () => {
+  fetchCards();
 });
 </script>
 
@@ -177,7 +175,7 @@ onMounted(async () => {
 
       <Accordion type="single" collapsible class="space-y-4 px-10 pb-6">
         <AccordionItem
-          v-for="card in filteredCards"
+          v-for="card in cards"
           :key="card.id"
           :value="String(card.id)"
           class="overflow-hidden"

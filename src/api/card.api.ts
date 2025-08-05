@@ -13,5 +13,5 @@ export const getCardById = async (id: number): Promise<Card> => {
 };
 
 export const searchCards = async (options: CardSearchOptions) => {
-  return (await api.get<Cards>("/cards", { params: options })).data;
+  return (await api.get<Cards>("/cards/search", { params: options })).data;
 };

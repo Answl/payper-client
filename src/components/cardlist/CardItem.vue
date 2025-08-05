@@ -37,7 +37,7 @@ const resolveIcon = (benefit: Card["benefits"][number]): Component => {
 };
 
 const displayBenefits = computed(() =>
-  props.expanded ? props.card.benefits : props.card.benefits.slice(0, 3)
+  props.expanded ? props.card.benefits ?? [] : (props.card.benefits ?? []).slice(0, 3)
 );
 </script>
 
@@ -55,7 +55,7 @@ const displayBenefits = computed(() =>
         <span class="text-xs text-gray-600 leading-snug">{{ benefit.summary }}</span>
       </div>
 
-      <div v-if="card.benefits.length > 3" class="mt-2">
+      <div v-if="(card.benefits?.length ?? 0) > 3" class="mt-2">
         <button @click.stop="onToggle" class="text-xs text-gray-600 flex items-center gap-1">
           {{ expanded ? "접기" : "더보기" }}
           <component :is="expanded ? ChevronUp : ChevronDown" class="w-4 h-4 text-gray-400" />
