@@ -62,16 +62,17 @@ const toggleBenefit = (cardId: number) => {
       </AccordionItem>
     </Accordion>
 
-    <div class="border-b border-gray-200 mx-10 mb-4 py-4"></div>
-    <div class="flex flex-col px-4 py-4 size-full">
-      <button
+    <div class="w-full max-w-[calc(100%-60px)] h-[3px] bg-stone-200 mx-auto my-[40px]"></div>
+    <div class="flex flex-col items-center py-4">
+      <CommonButton
         @click="goToAdd"
-        class="w-full mt-4 bg-[#F67154] text-white py-4 rounded-md text-base font-semibold flex items-center justify-center gap-2 shadow-md cursor-pointer"
+        class="w-full max-w-[calc(100%-60px)] h-[44px] rounded-[10px] bg-[#F67154] text-white text-base font-semibold flex items-center justify-center gap-2"
       >
-        <Plus class="w-5 h-5" />
-        내 카드 추가하기
-      </button>
+        <Plus class="w-6 h-6" />
+        <span>내 카드 추가하기</span>
+      </CommonButton>
     </div>
+
     <BottomNavigation selected="myCards" />
   </div>
 </template>
