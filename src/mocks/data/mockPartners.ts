@@ -1,4 +1,5 @@
 import type { Partner } from "@/types/Partner";
+import { mockCategory } from "./mockCategory";
 
 export const mockPartners: Partner[] = [
   {
@@ -48,7 +49,7 @@ export const mockPartners: Partner[] = [
       placeName: "GS25 어린이대공원역점",
     },
     imageUrl: "",
-    categoryName: "편의점",
+    category: mockCategory,
   },
   {
     id: 2,
@@ -63,7 +64,7 @@ export const mockPartners: Partner[] = [
       placeName: "CU 자양점",
     },
     imageUrl: "",
-    categoryName: "편의점",
+    category: mockCategory,
   },
   {
     id: 3,
@@ -78,6 +79,6 @@ export const mockPartners: Partner[] = [
       placeName: "세븐일레븐 구의점",
     },
     imageUrl: "",
-    categoryName: "편의점",
+    category: mockCategory,
   },
 ];

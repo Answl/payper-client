@@ -38,7 +38,6 @@ const onCategoryClick = async (pill: CategoryPill) => {
   keyword.value = pill.label;
   selectedCategory.value = pill.label;
   await nextTick();
-  console.log("✅ 검색 실행:", keyword.value); // 로그 찍기
   handleSearch();
 };
 </script>

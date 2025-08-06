@@ -61,7 +61,6 @@ const onDrag = (e: MouseEvent | TouchEvent) => {
 };
 
 const handleSearch = async (keyword: string) => {
-  console.log(keyword);
   if (!currentLat.value || !currentLng.value) return;
   const res = await getMAPartner(keyword, currentLat.value, currentLng.value);
   PropsPartners.value = res;
@@ -142,7 +141,7 @@ const refreshLocation = async () => {
             <div class="flex flex-col">
               <!-- 가맹점명 -->
               <span class="text-xs text-stone-500">
-                {{ partner.categoryName || "카테고리 없음" }}
+                {{ partner.category?.name || "카테고리 없음" }}
               </span>
               <span class="text-ml font-semibold text-[#F67154]">{{
                 partner.position?.placeName || partner.name
