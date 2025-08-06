@@ -25,6 +25,6 @@ const emit = defineEmits<{
       </button>
     </span>
 
-    <button class="text-sm text-gray-500 underline ml-auto" @click="emit('clear')">초기화</button>
+    <button class="text-sm text-stone-500 underline ml-auto" @click="emit('clear')">초기화</button>
   </div>
 </template>

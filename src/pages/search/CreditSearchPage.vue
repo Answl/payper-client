@@ -24,7 +24,8 @@ const tabs = [
 ];
 
 const searchQuery = ref("");
-const selectedTags = ref<string[]>([]);
+const selectedBenefits = ref<string[]>([]);
+const selectedCompanies = ref<string[]>([]);
 const sortOption = ref("benefit");
 const cards = ref<Card[]>([]);
 const loading = ref(false);
@@ -45,16 +46,20 @@ const benefitOptions = [
   "디지털구독",
 ];
 
+const selectedTags = computed(() => [...selectedBenefits.value, ...selectedCompanies.value]);
+
 const handleSearch = () => {
   console.log("검색어:", searchQuery.value);
 };
 
 const clearFilters = () => {
-  selectedTags.value = [];
+  selectedBenefits.value = [];
+  selectedCompanies.value = [];
 };
 
 const removeTag = (tag: string) => {
-  selectedTags.value = selectedTags.value.filter((t) => t !== tag);
+  selectedBenefits.value = selectedBenefits.value.filter((t) => t !== tag);
+  selectedCompanies.value = selectedCompanies.value.filter((t) => t !== tag);
 };
 
 const toggleBenefit = (cardId: number) => {
@@ -104,7 +109,8 @@ watch([searchQuery, sortOption], () => {
       />
 
       <FilterSection
-        v-model:selected="selectedTags"
+        v-model:benefits="selectedBenefits"
+        v-model:companies="selectedCompanies"
         :benefitOptions="benefitOptions"
         @clear="clearFilters"
       />

@@ -24,7 +24,8 @@ const tabs = [
 ];
 
 const searchQuery = ref("");
-const selectedTags = ref<string[]>([]);
+const selectedBenefits = ref<string[]>([]);
+const selectedCompanies = ref<string[]>([]);
 const sortOption = ref("benefit");
 const cards = ref<Card[]>([]);
 const loading = ref(false);
@@ -45,16 +46,20 @@ const benefitOptions = [
   "디지털구독",
 ];
 
+const selectedTags = computed(() => [...selectedBenefits.value, ...selectedCompanies.value]);
+
 const handleSearch = () => {
   console.log("검색어:", searchQuery.value);
 };
 
 const clearFilters = () => {
-  selectedTags.value = [];
+  selectedBenefits.value = [];
+  selectedCompanies.value = [];
 };
 
 const removeTag = (tag: string) => {
-  selectedTags.value = selectedTags.value.filter((t) => t !== tag);
+  selectedBenefits.value = selectedBenefits.value.filter((t) => t !== tag);
+  selectedCompanies.value = selectedCompanies.value.filter((t) => t !== tag);
 };
 
 const toggleBenefit = (cardId: number) => {
@@ -88,8 +93,21 @@ onMounted(() => {
 watch([searchQuery, sortOption], () => {
   fetchCards();
 });
-</script>
 
+const filteredCards = computed(() => {
+  return cards.value.filter((card) => {
+    const companyMatch =
+      selectedCompanies.value.length === 0 ||
+      selectedCompanies.value.includes(card.company?.name ?? "");
+
+    const benefitMatch =
+      selectedBenefits.value.length === 0 ||
+      card.benefits.some((b) => selectedBenefits.value.includes(b.categories?.[0]?.name ?? ""));
+
+    return companyMatch && benefitMatch;
+  });
+});
+</script>
 <template>
   <div class="flex flex-col w-full h-full overflow-hidden">
     <CommonHeader title="검색" />
@@ -104,7 +122,8 @@ watch([searchQuery, sortOption], () => {
       />
 
       <FilterSection
-        v-model:selected="selectedTags"
+        v-model:benefits="selectedBenefits"
+        v-model:companies="selectedCompanies"
         :benefitOptions="benefitOptions"
         @clear="clearFilters"
       />
@@ -114,7 +133,7 @@ watch([searchQuery, sortOption], () => {
       <SortSelect v-model="sortOption" />
 
       <CardAccordionList
-        :cards="cards"
+        :cards="filteredCards"
         :expandedMap="expandedBenefits"
         @toggle="toggleBenefit"
         @detail="goToDetail"
