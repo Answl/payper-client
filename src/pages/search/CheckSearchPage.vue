@@ -88,10 +88,10 @@ watch([searchQuery, sortOption], () => {
 </script>
 
 <template>
-  <div class="flex flex-col size-full">
+  <div class="flex flex-col w-full h-full overflow-hidden">
     <CommonHeader title="검색" />
 
-    <main class="flex-1 overflow-y-auto">
+    <main class="flex-1 overflow-y-auto pb-[5.5rem] scrollbar-hide">
       <div class="flex gap-6 pl-10 mb-4">
         <button
           v-for="tab in tabs"
@@ -192,6 +192,8 @@ watch([searchQuery, sortOption], () => {
       </Accordion>
     </main>
 
-    <BottomNavigation selected="search" />
+    <div class="fixed bottom-0 left-0 right-0 z-10">
+      <BottomNavigation selected="search" />
+    </div>
   </div>
 </template>
