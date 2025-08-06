@@ -43,19 +43,11 @@ describe("MyCardPage", () => {
                 imageUrl: "",
               },
             ],
-            partners: [
-              {
-                id: 1,
-                name: "GS25",
-                myCards: [],
-                imageUrl: "",
-                categoryName: "",
-              },
-            ],
           },
         ],
-        annualcosts: "10,000원",
+        annualCost: "10,000원",
         grades: [],
+        cardIssueUrl: "",
       },
     ],
   };

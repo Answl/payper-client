@@ -30,7 +30,8 @@ const onClick = () => {
         <div class="flex gap-2 items-center">
           <p class="text-stone-500 text-sm">예상혜택</p>
           <p class="text-primary font-bold">
-            {{ card.grades[0].totalDiscount.toLocaleString() }}원 할인
+            {{ card.grades?.[0].totalDiscount?.toLocaleString?.() || "0" }}원 할인
+            <!-- {{ card.grades[0].totalDiscount.toLocaleString() }}원 할인 -->
           </p>
         </div>
       </div>

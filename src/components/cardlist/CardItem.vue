@@ -32,8 +32,10 @@ const iconMap: Record<string, Component> = {
 const resolveIcon = (benefit: Card["benefits"][number]): Component => {
   const normalize = (str?: string) => str?.trim().toLowerCase() || "";
   const category = normalize(benefit.categories?.[0]?.name);
-  const partner = normalize(benefit.partners?.[0]?.name);
-  return iconMap[category] || iconMap[partner] || ShoppingBag;
+  // partner가 어디에 사용되는지 정확하게 파악하기 어려워서 주석 처리했습니다.
+  // const partner = normalize(benefit.partners?.[0]?.name);
+  // return iconMap[category] || iconMap[partner] || ShoppingBag;
+  return iconMap[category] || ShoppingBag;
 };
 
 const displayBenefits = computed(() =>

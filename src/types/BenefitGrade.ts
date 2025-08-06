@@ -1,9 +1,11 @@
-import type { Discount } from "./Discount";
 import type { Grade } from "./Grade";
 
 export interface BenefitGrade {
   id: number;
   grade: Grade;
-  discount: Discount;
-  minPayment: number;
+  type: "RATE" | "FIXED_AMOUNT" | "UNKNOWN";
+  amount: number;
+  limitCount?: number | null;
+  limitAmount?: number | null;
+  minPayment?: number | null;
 }

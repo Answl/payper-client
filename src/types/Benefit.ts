@@ -1,5 +1,4 @@
 import type { Category } from "./Category";
-import type { Partner } from "./Partner";
 import type { BenefitGrade } from "./BenefitGrade";
 
 export interface Benefit {
@@ -10,5 +9,4 @@ export interface Benefit {
   iconUrl: string;
   benefitGrades: BenefitGrade[];
   categories: Category[];
-  partners: Partner[];
 }

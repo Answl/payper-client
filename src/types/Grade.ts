@@ -1,6 +1,5 @@
 export interface Grade {
-  id: number; 
+  id: number;
   start: number;
-  end: number;
-  totalDiscount: number;
+  totalDiscount?: number | null;
 }

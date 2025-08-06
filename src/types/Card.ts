@@ -7,8 +7,9 @@ export interface Card {
   name: string;
   type: "CREDIT" | "CHECK";
   imageUrl: string;
+  cardIssueUrl: string;
   company: CardCompany;
   benefits: Benefit[];
-  annualcosts: string;
+  annualCost: string;
   grades: Grade[];
 }

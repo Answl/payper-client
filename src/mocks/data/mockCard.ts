@@ -10,6 +10,7 @@ export const mockCard: Card = {
   imageUrl: "https://financialshopping-cdn.banksalad.com/shihan_b_big_5acbb579eb.png",
   company: mockCardCompany,
   benefits: mockBenefits,
-  annualcosts: "10000원",
+  annualCost: "10000원",
   grades: mockGrades,
+  cardIssueUrl: "",
 };

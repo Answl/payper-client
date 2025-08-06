@@ -15,71 +15,39 @@ export const mockBenefits: Benefit[] = [
       {
         id: 0,
         grade: mockGrades[0],
-        discount: {
-          type: "FIXED_AMOUNT",
-          amount: 5000,
-        },
+        type: "FIXED_AMOUNT",
+        amount: 5000,
         minPayment: 5000,
       },
       {
         id: 1,
         grade: mockGrades[1],
-        discount: {
-          type: "FIXED_AMOUNT",
-          amount: 12000,
-        },
+
+        type: "FIXED_AMOUNT",
+        amount: 12000,
+
         minPayment: 5000,
       },
       {
         id: 1,
         grade: mockGrades[2],
-        discount: {
-          type: "FIXED_AMOUNT",
-          amount: 15000,
-        },
+
+        type: "FIXED_AMOUNT",
+        amount: 15000,
+
         minPayment: 5000,
       },
       {
         id: 1,
         grade: mockGrades[3],
-        discount: {
-          type: "FIXED_AMOUNT",
-          amount: 20000,
-        },
+
+        type: "FIXED_AMOUNT",
+        amount: 20000,
+
         minPayment: 5000,
       },
     ],
     categories: mockCategories,
-    partners: [
-      {
-        id: 1,
-        name: "GS25",
-        myCards: [],
-        imageUrl: "",
-        categoryName: "편의점",
-      },
-      {
-        id: 2,
-        name: "CU",
-        myCards: [],
-        imageUrl: "",
-        categoryName: "편의점",
-      },
-      {
-        id: 3,
-        name: "세븐일레븐",
-        myCards: [],
-        imageUrl: "",
-        categoryName: "편의점",
-      },
-      {
-        id: 4,
-        name: "이마트24",
-        myCards: [],
-        imageUrl: "",
-        categoryName: "편의점",
-      },
-    ],
   },
   {
     id: 24873,
@@ -93,71 +61,41 @@ export const mockBenefits: Benefit[] = [
       {
         id: 0,
         grade: mockGrades[0],
-        discount: {
-          type: "FIXED_AMOUNT",
-          amount: 5000,
-        },
+
+        type: "FIXED_AMOUNT",
+        amount: 5000,
+
         minPayment: 5000,
       },
       {
         id: 1,
         grade: mockGrades[1],
-        discount: {
-          type: "FIXED_AMOUNT",
-          amount: 12000,
-        },
+
+        type: "FIXED_AMOUNT",
+        amount: 12000,
+
         minPayment: 5000,
       },
       {
         id: 1,
         grade: mockGrades[2],
-        discount: {
-          type: "FIXED_AMOUNT",
-          amount: 15000,
-        },
+
+        type: "FIXED_AMOUNT",
+        amount: 15000,
+
         minPayment: 5000,
       },
       {
         id: 1,
         grade: mockGrades[3],
-        discount: {
-          type: "FIXED_AMOUNT",
-          amount: 20000,
-        },
+
+        type: "FIXED_AMOUNT",
+        amount: 20000,
+
         minPayment: 5000,
       },
     ],
     categories: mockCategories,
-    partners: [
-      {
-        id: 1,
-        name: "스타벅스",
-        myCards: [],
-        imageUrl: "",
-        categoryName: "카페",
-      },
-      {
-        id: 2,
-        name: "커피빈",
-        myCards: [],
-        imageUrl: "",
-        categoryName: "카페",
-      },
-      {
-        id: 3,
-        name: "카페베네",
-        myCards: [],
-        imageUrl: "",
-        categoryName: "카페",
-      },
-      {
-        id: 4,
-        name: "엔제리너스",
-        myCards: [],
-        imageUrl: "",
-        categoryName: "카페",
-      },
-    ],
   },
   {
     id: 24874,
@@ -171,56 +109,40 @@ export const mockBenefits: Benefit[] = [
       {
         id: 0,
         grade: mockGrades[0],
-        discount: {
-          type: "FIXED_AMOUNT",
-          amount: 12000,
-        },
+
+        type: "FIXED_AMOUNT",
+        amount: 12000,
+
         minPayment: 5000,
       },
       {
         id: 1,
         grade: mockGrades[1],
-        discount: {
-          type: "FIXED_AMOUNT",
-          amount: 12000,
-        },
+
+        type: "FIXED_AMOUNT",
+        amount: 12000,
+
         minPayment: 5000,
       },
       {
         id: 1,
         grade: mockGrades[2],
-        discount: {
-          type: "FIXED_AMOUNT",
-          amount: 12000,
-        },
+
+        type: "FIXED_AMOUNT",
+        amount: 12000,
+
         minPayment: 5000,
       },
       {
         id: 1,
         grade: mockGrades[3],
-        discount: {
-          type: "FIXED_AMOUNT",
-          amount: 12000,
-        },
+
+        type: "FIXED_AMOUNT",
+        amount: 12000,
+
         minPayment: 5000,
       },
     ],
     categories: mockCategories,
-    partners: [
-      {
-        id: 1,
-        name: "CGV",
-        myCards: [],
-        imageUrl: "",
-        categoryName: "영화",
-      },
-      {
-        id: 2,
-        name: "메가박스",
-        myCards: [],
-        imageUrl: "",
-        categoryName: "영화",
-      },
-    ],
   },
 ];

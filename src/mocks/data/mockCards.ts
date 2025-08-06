@@ -28,39 +28,20 @@ const cardList: Card[] = [
             grade: {
               id: 1,
               start: 0,
-              end: 300000,
               totalDiscount: 2000,
             },
-            discount: {
-              type: "RATE",
-              amount: 10,
-              limitCount: null,
-              limitAmount: null,
-            },
+            type: "RATE",
+            amount: 10,
+            limitCount: null,
+            limitAmount: null,
             minPayment: 1000,
-          },
-        ],
-        partners: [
-          {
-            id: 1,
-            name: "GS25",
-            myCards: [],
-            position: {
-              x: "127.0276368",
-              y: "37.4979425",
-              distance: 150, // 미터
-              roadAddressName: "서울 강남구 강남대로 396", // 도로명 주소
-              placeUrl: "https://place.map.kakao.com/123456789", // 카카오맵 URL
-              placeName: "GS25 강남대로점", // 전체 가맹점 이름
-            },
-            imageUrl: "",
-            categoryName: "",
           },
         ],
         categories: [],
       },
     ],
-    annualcosts: "1000원",
+    annualCost: "1000원",
+    cardIssueUrl: "",
     grades: [],
   },
   {
@@ -87,23 +68,6 @@ const cardList: Card[] = [
             imageUrl: "",
           },
         ],
-        partners: [
-          {
-            id: 2,
-            name: "스타벅스",
-            myCards: [],
-            position: {
-              x: "127.029288",
-              y: "37.499123",
-              distance: 100,
-              roadAddressName: "서울특별시 강남구 테헤란로 152",
-              placeUrl: "https://place.map.kakao.com/987654321",
-              placeName: "스타벅스 테헤란로점",
-            },
-            imageUrl: "",
-            categoryName: "",
-          },
-        ],
 
         benefitGrades: [],
       },
@@ -121,23 +85,7 @@ const cardList: Card[] = [
             imageUrl: "",
           },
         ],
-        partners: [
-          {
-            id: 3,
-            name: "올리브영",
-            myCards: [],
-            position: {
-              x: "127.030111",
-              y: "37.500222",
-              distance: 120,
-              roadAddressName: "서울특별시 강남구 역삼로 215",
-              placeUrl: "https://place.map.kakao.com/567890123",
-              placeName: "올리브영 강남역점",
-            },
-            imageUrl: "",
-            categoryName: "",
-          },
-        ],
+
         benefitGrades: [],
       },
       {
@@ -154,23 +102,7 @@ const cardList: Card[] = [
             imageUrl: "",
           },
         ],
-        partners: [
-          {
-            id: 4,
-            name: "CGV",
-            myCards: [],
-            position: {
-              x: "127.025432",
-              y: "37.501678",
-              distance: 200,
-             roadAddressName: "서울특별시 강남구 강남대로 438",
-              placeUrl: "https://place.map.kakao.com/345678901",
-              placeName: "CGV 강남점",
-            },
-            imageUrl: "",
-            categoryName: "",
-          },
-        ],
+
         benefitGrades: [],
       },
       {
@@ -187,23 +119,7 @@ const cardList: Card[] = [
             imageUrl: "",
           },
         ],
-        partners: [
-          {
-            id: 5,
-            name: "네이버페이",
-            myCards: [],
-            position: {
-              x: "127.031234",
-              y: "37.502345",
-              distance: 300,
-              roadAddressName: "경기도 성남시 분당구 불정로 6",
-              placeUrl: "https://place.map.kakao.com/1122334455",
-              placeName: "네이버 1784 빌딩",
-            },
-            imageUrl: "",
-            categoryName: "",
-          },
-        ],
+
         benefitGrades: [],
       },
       {
@@ -220,27 +136,12 @@ const cardList: Card[] = [
             imageUrl: "",
           },
         ],
-        partners: [
-          {
-            id: 6,
-            name: "YES24",
-            myCards: [],
-            position: {
-              x: "127.033456",
-              y: "37.503456",
-              distance: 400,
-              roadAddressName: "서울특별시 강서구 마곡중앙로 161-8",
-              placeUrl: "https://place.map.kakao.com/9988776655",
-             placeName: "YES24 본사",
-            },
-            imageUrl: "",
-            categoryName: "",
-          },
-        ],
+
         benefitGrades: [],
       },
     ],
-    annualcosts: "2000원",
+    annualCost: "2000원",
+    cardIssueUrl: "",
     grades: [],
   },
   {
@@ -267,7 +168,6 @@ const cardList: Card[] = [
             imageUrl: "",
           },
         ],
-        partners: [],
         benefitGrades: [],
       },
       {
@@ -284,11 +184,11 @@ const cardList: Card[] = [
             imageUrl: "",
           },
         ],
-        partners: [],
         benefitGrades: [],
       },
     ],
-    annualcosts: "3000원",
+    annualCost: "3000원",
+    cardIssueUrl: "",
     grades: [],
   },
 ];

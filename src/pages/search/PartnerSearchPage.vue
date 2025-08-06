@@ -50,9 +50,9 @@ const filteredCards = computed(() =>
     const benefits = card.benefits ?? [];
     const fields = [
       card.name,
-      card.company?.name,
+      card.company.name,
       ...benefits.map((b) => b.summary),
-      ...benefits.flatMap((b) => b.partners?.map((p) => p.name) ?? []),
+      ...benefits.flatMap((b) => b.categories.map((p) => p.name) ?? []),
     ].filter(Boolean);
 
     const matchQuery = !query || fields.some((text) => text.toLowerCase().includes(query));

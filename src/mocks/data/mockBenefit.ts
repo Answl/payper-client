@@ -12,5 +12,4 @@ export const mockBenefit: Benefit = {
 
   benefitGrades: [],
   categories: mockCategories,
-  partners: mockPartners,
 };

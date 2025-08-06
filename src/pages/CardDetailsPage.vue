@@ -46,9 +46,8 @@ const onAddCardClick = () => {
       <div class="flex flex-col w-full gap-2">
         <p class="font-bold">연회비</p>
         <p class="text-stone-500">
-  {{ card.annualcosts }}
-</p>
-
+          {{ card.annualCost }}
+        </p>
       </div>
     </div>
     <div class="flex flex-col gap-2">
@@ -67,7 +66,7 @@ const onAddCardClick = () => {
     </div>
     <div class="flex flex-col items-center gap-2">
       <h1 class="text-3xl text-primary font-bold">
-        {{ card.grades[selectedGradeIndex ?? 0]?.totalDiscount.toLocaleString() }}원
+        {{ card.grades[selectedGradeIndex ?? 0]?.totalDiscount?.toLocaleString?.() || "0" }}원
       </h1>
       <p class="text-stone-500 text-sm">최대 할인 한도</p>
     </div>

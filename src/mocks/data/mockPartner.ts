@@ -15,21 +15,20 @@ export const mockPartner: Partner = {
         name: "KB국민카드",
       },
       benefits: [mockBenefit],
-      annualcosts: "4000원",
+      annualCost: "4000원",
       grades: [
         {
           id: 0,
           start: 300000,
-          end: 500000,
           totalDiscount: 1000,
         },
         {
           id: 1,
           start: 500000,
-          end: 7000000,
           totalDiscount: 2000,
         },
       ],
+      cardIssueUrl: "",
     },
   ],
   imageUrl: "",
