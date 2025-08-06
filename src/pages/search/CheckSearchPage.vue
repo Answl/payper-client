@@ -15,7 +15,7 @@ import CardAccordionList from "@/components/searchpage/CardAccordionList.vue";
 
 const router = useRouter();
 const route = useRoute();
-const isPartnerSearch = computed(() => route.path.includes("/search/check"));
+const isPartnerSearch = computed(() => route.path.includes("/search/partners"));
 
 const tabs = [
   { label: "신용카드", path: "/search/credit" },
