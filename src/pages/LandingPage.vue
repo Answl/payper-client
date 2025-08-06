@@ -23,7 +23,7 @@ watchEffect(() => {
     if (typeof redirect === "string") {
       router.push(redirect);
     } else {
-      router.push("/");
+      router.push("/agree");
     }
   }
 });
