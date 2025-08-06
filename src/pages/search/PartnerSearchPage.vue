@@ -1,19 +1,18 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from "vue";
-import { useRouter, useRoute } from "vue-router";
-import type { Card } from "@/types/Card";
-import { getAllCards } from "@/api/card.api";
+import { useRoute } from "vue-router";
+import type { Partner } from "@/types/Partner";
+import { getAllPartners } from "@/api/partner.api";
+
 import BottomNavigation from "@/components/common/BottomNavigation.vue";
 import CommonHeader from "@/components/CommonHeader.vue";
 import FilterDrawer from "@/components/search/SelectDrawerButton.vue";
-
 import SearchTabs from "@/components/searchpage/SearchTabs.vue";
 import SearchInput from "@/components/searchpage/SearchInput.vue";
 import SelectedTags from "@/components/searchpage/SelectedTags.vue";
-import SortSelect from "@/components/searchpage/SortSelect.vue";
-import CardAccordionList from "@/components/searchpage/CardAccordionList.vue";
+import PartnerList from "@/components/searchpage/PartnerList.vue";
+import type { PartnerResponse } from "@/types/PartnerSearchResponse";
 
-const router = useRouter();
 const route = useRoute();
 const isPartnerSearch = computed(() => route.path.includes("/search/partners"));
 
@@ -25,10 +24,8 @@ const tabs = [
 
 const searchQuery = ref("");
 const selectedTags = ref<string[]>([]);
-const sortOption = ref("benefit");
-const cards = ref<Card[]>([]);
+const partners = ref<Partner[]>([]);
 const loading = ref(false);
-const expandedBenefits = ref<Record<number, boolean>>({});
 
 const benefitOptions = ["편의점", "카페", "영화", "도서", "생활", "식비", "쇼핑", "뷰티"];
 
@@ -40,34 +37,20 @@ const removeTag = (tag: string) => {
   selectedTags.value = selectedTags.value.filter((t) => t !== tag);
 };
 
-const toggleBenefit = (cardId: number) => {
-  expandedBenefits.value[cardId] = !expandedBenefits.value[cardId];
-};
-
-const goToDetail = (id: number) => {
-  router.push({ name: "cardDetails", params: { id } });
-};
-
-const filteredCards = computed(() => {
+const filteredPartners = computed(() => {
   const query = searchQuery.value.trim().toLowerCase();
 
-  const filtered = cards.value.filter((card) => {
-    const benefits = card.benefits ?? [];
-    const fields = [
-      card.name,
-      card.company.name,
-      ...benefits.map((b) => b.summary),
-      ...benefits.flatMap((b) => b.categories.map((p) => p.name) ?? []),
-    ].filter(Boolean);
+  const filtered = partners.value.filter((partner) => {
+    const fields = [partner.name, partner.category?.name, partner.position?.placeName].filter(
+      (v): v is string => typeof v === "string"
+    );
 
     const matchQuery = !query || fields.some((text) => text.toLowerCase().includes(query));
+
     const matchTags = selectedTags.value.every((tag) => fields.some((text) => text.includes(tag)));
+
     return matchQuery && matchTags;
   });
-
-  if (sortOption.value === "benefit") {
-    return filtered.sort((a, b) => (b.benefits?.length || 0) - (a.benefits?.length || 0));
-  }
 
   return filtered;
 });
@@ -75,17 +58,30 @@ const filteredCards = computed(() => {
 onMounted(async () => {
   loading.value = true;
   try {
-    const res = await getAllCards();
-    cards.value = res.cards ?? [];
+    const res: PartnerResponse[] = await getAllPartners();
+
+    partners.value = res.map(
+      (item): Partner => ({
+        id: item.id,
+        name: item.name,
+        imageUrl: item.partnerImageUrl ?? "",
+        category: {
+          id: item.categoryId,
+          name: item.categoryName,
+          imageUrl: item.categoryImageUrl ?? "",
+        },
+        position: undefined,
+        myCards: [],
+      })
+    );
   } catch (e) {
-    console.error("카드 불러오기 실패:", e);
-    cards.value = [];
+    console.error("가맹점 불러오기 실패:", e);
+    partners.value = [];
   } finally {
     loading.value = false;
   }
 });
 </script>
-
 <template>
   <div class="flex flex-col size-full">
     <CommonHeader title="검색" />
@@ -97,26 +93,31 @@ onMounted(async () => {
         v-model="searchQuery"
         :placeholder="isPartnerSearch ? '가맹점명으로 검색' : '카드명으로 검색'"
       />
+
       <div class="flex flex-wrap gap-2 items-center mb-2 px-10">
         <FilterDrawer label="카테고리" :options="benefitOptions" v-model:selected="selectedTags" />
         <button
           v-if="!selectedTags.length"
-          class="text-sm text-gray-500 underline ml-auto hover:text-black"
+          class="text-sm text-stone-500 underline ml-auto hover:text-black"
           @click="clearFilters"
         >
           초기화
         </button>
       </div>
-      <SelectedTags :tags="selectedTags" @remove="removeTag" @clear="clearFilters" />
-      <SortSelect v-model="sortOption" />
 
-      <CardAccordionList
-        :cards="filteredCards"
-        :expandedMap="expandedBenefits"
-        @toggle="toggleBenefit"
-        @detail="goToDetail"
+      <SelectedTags
+        v-if="selectedTags.length"
+        :tags="selectedTags"
+        @remove="removeTag"
+        @clear="clearFilters"
       />
+
+      <div class="px-10 my-4">
+        <hr class="border-t-2 border-stone-300" />
+      </div>
+      <PartnerList :partners="filteredPartners" />
     </main>
+
     <div class="fixed bottom-0 left-0 right-0 z-10">
       <BottomNavigation selected="search" />
     </div>
