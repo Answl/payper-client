@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { nextTick, ref } from "vue";
 import SearchBar from "../common/SearchBar.vue";
 import CommonButton from "../ui/button/CommonButton.vue";
 import type { CategoryPill } from "@/types/CategoryPill";
@@ -9,7 +9,9 @@ const { onSubmit } = defineProps<{
   onSubmit: (value: string) => void;
 }>();
 
-const keyword = ref<string>("");
+const keyword = defineModel<string>("keyword", {
+  default: "",
+});
 
 const pills: CategoryPill[] = [
   {
@@ -32,11 +34,12 @@ const handleSearch = () => {
 
 const selectedCategory = ref<string | null>(null);
 
-const onCategoryClick = (pill: CategoryPill) => {
+const onCategoryClick = async (pill: CategoryPill) => {
   keyword.value = pill.label;
-  console.log("PILL : " + pill)
   selectedCategory.value = pill.label;
-  onSubmit(keyword.value);
+  await nextTick();
+  console.log("✅ 검색 실행:", keyword.value); // 로그 찍기
+  handleSearch();
 };
 </script>
 
@@ -45,17 +48,14 @@ const onCategoryClick = (pill: CategoryPill) => {
     <SearchBar v-model="keyword" placeholder="가맹점 ∙ 카테고리 검색" :onClick="handleSearch" />
 
     <!-- 카테고리 버튼 영역 -->
-    <div class="flex overflow-auto gap-2 pb-1">
+    <div class="flex overflow-y-visible gap-2 pb-1">
       <CommonButton
         v-for="(pill, index) in pills"
         :key="index"
-        variant="outline"
-        @click="() => onCategoryClick(pill)"
+        @click="onCategoryClick(pill)"
         :class="[
-          'rounded-full gap-1 shadow-md transition-shadow duration-200',
-          selectedCategory === pill.label
-            ? 'bg-primary text-white'
-            : 'bg-white hover:bg-gray-200',
+          'rounded-full bg-white text-stone-900 gap-1 z-10 shadow-lg transition-shadow duration-200 hover:text-white',
+          selectedCategory === pill.label ? 'bg-primary text-white' : '',
         ]"
       >
         <component :is="pill.icon" class="w-4 h-4" />
@@ -64,4 +64,3 @@ const onCategoryClick = (pill: CategoryPill) => {
     </div>
   </div>
 </template>
-

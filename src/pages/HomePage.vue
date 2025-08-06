@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, watch, computed } from "vue";
-import { useGeolocation } from "@vueuse/core";
+import { ref, computed } from "vue";
 import { getMAPartner } from "@/api/mapartner.api";
 import PartnerSearchBar from "@/components/home/HomeSearchBar.vue";
 import BottomNavigation from "@/components/common/BottomNavigation.vue";
@@ -8,22 +7,21 @@ import { RotateCcw } from "lucide-vue-next";
 import type { Partners } from "@/types/Partners";
 import type { Partner } from "@/types/Partner";
 import type { Card } from "@/types/Card";
-import markerImg from "@/assets/MAP_MARKER.png";
 import { useRouter } from "vue-router";
+import KakaoMap from "@/components/home/KakaoMap.vue";
+import CommonButton from "@/components/ui/button/CommonButton.vue";
 
 const router = useRouter();
 const goToPartnerDetails = (id: number) => {
   router.push(`/partners/${id}`);
 };
 
-const KAKAO_APP_KEY = import.meta.env.VITE_KAKAO_JAVASCRIPT_KEY;
-const { coords } = useGeolocation();
-
-const map = ref<kakao.maps.Map | null>(null);
-const markers = ref<kakao.maps.Marker[]>([]);
 const PropsPartners = ref<Partners>();
 const drawerHeight = ref(0);
 const isDragging = ref(false);
+const keyword = ref("");
+const currentLat = ref<number>(0);
+const currentLng = ref<number>(0);
 
 const tabs = ["credit", "check"] as const;
 type CardType = (typeof tabs)[number];
@@ -62,117 +60,40 @@ const onDrag = (e: MouseEvent | TouchEvent) => {
   drawerHeight.value = Math.min(Math.max(vh, 20), 80);
 };
 
-const initMap = () => {
-  if (!coords.value.latitude || !coords.value.longitude) return;
-  const container = document.getElementById("map");
-  if (!container) return;
-  const center = new kakao.maps.LatLng(coords.value.latitude, coords.value.longitude);
-  map.value = new kakao.maps.Map(container, { center, level: 3 });
-  const markerImage = new kakao.maps.MarkerImage(markerImg, new kakao.maps.Size(40, 50));
-  const myMarker = new kakao.maps.Marker({ position: center, image: markerImage });
-  myMarker.setMap(map.value);
-};
-
-const updateMarkers = (partners: Partner[]) => {
-  markers.value.forEach((m) => m.setMap(null));
-  markers.value = [];
-  for (const partner of partners) {
-    if (partner?.position) {
-      const latLng = new kakao.maps.LatLng(
-        parseFloat(partner.position.y),
-        parseFloat(partner.position.x)
-      );
-      const partnerName = partner.position.placeName
-      const partnerUrl = partner.position.placeUrl
-      const partnerRoadAdressName = partner.position.roadAddressName
-      console.log("수정해줘요" + partnerName)
-      const contentP= '<div class="overlaybox">' +
-       `<div class="boxtitle"> ${ partnerName }</div>` + `<div class="boxtitle"> ${partnerUrl} </div>` + `<div class="boxtitle"> ${partnerRoadAdressName} </div>`+ `</div>`
-       const infowindow = new kakao.maps.InfoWindow({
-        content: contentP
-       })
-      const marker = new kakao.maps.Marker({ position: latLng });
-    (function (
-      marker: kakao.maps.Marker,
-      infowindow: kakao.maps.InfoWindow,
-      map: kakao.maps.Map | null
-    ):
-      void {
-        if(map === null) return;
-        kakao.maps.event.addListener(marker, 'mouseover', () => {
-        infowindow.open(map, marker);
-    });
-        kakao.maps.event.addListener(marker, 'mouseout', () => {
-        infowindow.close();
-    });
-     })(marker, infowindow, map.value);
-        marker.setMap(map.value);
-        markers.value.push(marker);
-    }
-  }
-};
-
 const handleSearch = async (keyword: string) => {
-  if (!coords.value.latitude || !coords.value.longitude) return;
-  const res = await getMAPartner(keyword, coords.value.latitude, coords.value.longitude);
+  console.log(keyword);
+  if (!currentLat.value || !currentLng.value) return;
+  const res = await getMAPartner(keyword, currentLat.value, currentLng.value);
   PropsPartners.value = res;
   drawerHeight.value = 30;
-  updateMarkers(res.partners);
 };
 
 const refreshLocation = async () => {
-  if (!coords.value.latitude || !coords.value.longitude) return;
-  const res = await getMAPartner("", coords.value.latitude, coords.value.longitude);
-  PropsPartners.value = res;
-  const newCenter = new kakao.maps.LatLng(coords.value.latitude, coords.value.longitude);
-  map.value?.setCenter(newCenter);
-  updateMarkers(res.partners);
+  handleSearch(keyword.value);
 };
-
-const loadMapScript = () => {
-  //if (document.getElementById("kakao-map-sdk")) return;
-  const script = document.createElement("script");
-  script.id = "kakao-map-sdk";
-  script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_APP_KEY}&autoload=false`;
-  script.async = true;
-  script.onload = () => {
-    window.kakao.maps.load(() => {
-      if (coords.value.latitude && coords.value.longitude) {
-        initMap();
-      } else {
-        watch(
-          () => coords.value,
-          (val) => {
-            if (val.latitude && val.longitude) initMap();
-          },
-          { immediate: true }
-        );
-      }
-    });
-  };
-  document.head.appendChild(script);
-};
-
-onMounted(() => {
-  loadMapScript();
-});
 </script>
 
 <template>
   <div class="relative w-full h-screen overflow-hidden">
-    <div id="map" class="w-full h-full z-0" />
+    <!-- <div id="map" class="w-full h-full z-0" /> -->
+    <KakaoMap
+      :partners="PropsPartners?.partners"
+      v-model:currentLat="currentLat"
+      v-model:currentLng="currentLng"
+    />
 
-    <div class="absolute top-0 left-0 w-full z-10 p-4">
-      <PartnerSearchBar :onSubmit="handleSearch" />
-      <div class="mt-2 flex justify-end">
-        <button
-          class="w-9 h-9 flex items-center justify-center rounded-full bg-white text-stone-700 shadow hover:bg-stone-100"
-          @click="refreshLocation"
-        >
-          <RotateCcw class="w-5 h-5" />
-        </button>
-      </div>
-    </div>
+    <PartnerSearchBar
+      class="absolute top-0 left-0 w-full z-10 p-4"
+      :onSubmit="handleSearch"
+      v-model:keyword="keyword"
+    />
+
+    <CommonButton
+      class="absolute right-3 top-32 z-10 p-4 size-10 flex items-center justify-center rounded-full bg-white text-stone-700 shadow-primary-light hover:bg-stone-100"
+      @click="refreshLocation"
+    >
+      <RotateCcw />
+    </CommonButton>
 
     <div
       class="absolute bottom-0 left-0 w-full bg-white rounded-t-2xl shadow-lg z-20 transition-all duration-300"
