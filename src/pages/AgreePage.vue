@@ -126,4 +126,3 @@ function onAgree() {
 
 <style scoped>
 </style>
-

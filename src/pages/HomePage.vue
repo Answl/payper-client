@@ -88,7 +88,7 @@ const refreshLocation = async () => {
     />
 
     <CommonButton
-      class="absolute right-3 top-32 z-10 p-4 size-10 flex items-center justify-center rounded-full bg-white text-stone-700 shadow-primary-light hover:bg-stone-100"
+      class="absolute right-3 top-32 z-10 p-4 size-10 flex items-center justify-center rounded-full bg-white text-stone-700 shadow-lg hover:bg-stone-100"
       @click="refreshLocation"
     >
       <RotateCcw />
