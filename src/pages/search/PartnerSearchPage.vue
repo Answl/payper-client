@@ -1,23 +1,27 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { Search } from "lucide-vue-next";
-import { Accordion, AccordionItem } from "@/components/ui/accordion";
-import FilterDrawer from "@/components/search/SelectDrawerButton.vue";
 import type { Card } from "@/types/Card";
 import { getAllCards } from "@/api/card.api";
 import BottomNavigation from "@/components/common/BottomNavigation.vue";
 import CommonHeader from "@/components/CommonHeader.vue";
-import CardItem from "@/components/cardlist/CardItem.vue";
+import FilterDrawer from "@/components/search/SelectDrawerButton.vue";
+
+import SearchTabs from "@/components/searchpage/SearchTabs.vue";
+import SearchInput from "@/components/searchpage/SearchInput.vue";
+import SelectedTags from "@/components/searchpage/SelectedTags.vue";
+import SortSelect from "@/components/searchpage/SortSelect.vue";
+import CardAccordionList from "@/components/searchpage/CardAccordionList.vue";
 
 const router = useRouter();
 const route = useRoute();
+const isPartnerSearch = computed(() => route.path.includes("/search/partners"));
+
 const tabs = [
   { label: "신용카드", path: "/search/credit" },
   { label: "체크카드", path: "/search/check" },
   { label: "가맹점", path: "/search/partners" },
 ];
-const isActive = (path: string) => route.path === path;
 
 const searchQuery = ref("");
 const selectedTags = ref<string[]>([]);
@@ -44,9 +48,10 @@ const goToDetail = (id: number) => {
   router.push({ name: "cardDetails", params: { id } });
 };
 
-const filteredCards = computed(() =>
-  cards.value.filter((card) => {
-    const query = searchQuery.value.trim().toLowerCase();
+const filteredCards = computed(() => {
+  const query = searchQuery.value.trim().toLowerCase();
+
+  const filtered = cards.value.filter((card) => {
     const benefits = card.benefits ?? [];
     const fields = [
       card.name,
@@ -58,8 +63,14 @@ const filteredCards = computed(() =>
     const matchQuery = !query || fields.some((text) => text.toLowerCase().includes(query));
     const matchTags = selectedTags.value.every((tag) => fields.some((text) => text.includes(tag)));
     return matchQuery && matchTags;
-  })
-);
+  });
+
+  if (sortOption.value === "benefit") {
+    return filtered.sort((a, b) => (b.benefits?.length || 0) - (a.benefits?.length || 0));
+  }
+
+  return filtered;
+});
 
 onMounted(async () => {
   loading.value = true;
@@ -79,40 +90,15 @@ onMounted(async () => {
   <div class="flex flex-col size-full">
     <CommonHeader title="검색" />
 
-    <main class="flex-1 overflow-y-auto">
-      <div class="flex gap-6 pl-10 mb-4">
-        <button
-          v-for="tab in tabs"
-          :key="tab.path"
-          @click="router.push(tab.path)"
-          :class="[
-            'bg-transparent outline-none text-xl px-0 pb-1 font-normal transition-all duration-150 ease-in-out',
-            isActive(tab.path)
-              ? 'text-black font-bold border-b-2 border-black'
-              : 'text-gray-300 hover:text-black hover:border-b-2 hover:border-black',
-          ]"
-        >
-          {{ tab.label }}
-        </button>
-      </div>
+    <main class="flex-1 overflow-y-auto pb-[5.5rem] scrollbar-hide">
+      <SearchTabs :tabs="tabs" />
 
-      <div class="mb-4 px-10">
-        <div class="flex items-center w-full border rounded overflow-hidden">
-          <input
-            v-model="searchQuery"
-            type="text"
-            placeholder="가맹점명으로 검색"
-            class="flex-1 px-4 py-2 text-sm focus:outline-none"
-          />
-          <div class="px-3 h-full text-gray-400">
-            <Search class="w-5 h-5" />
-          </div>
-        </div>
-      </div>
-
+      <SearchInput
+        v-model="searchQuery"
+        :placeholder="isPartnerSearch ? '가맹점명으로 검색' : '카드명으로 검색'"
+      />
       <div class="flex flex-wrap gap-2 items-center mb-2 px-10">
         <FilterDrawer label="카테고리" :options="benefitOptions" v-model:selected="selectedTags" />
-
         <button
           v-if="!selectedTags.length"
           class="text-sm text-gray-500 underline ml-auto hover:text-black"
@@ -121,56 +107,18 @@ onMounted(async () => {
           초기화
         </button>
       </div>
+      <SelectedTags :tags="selectedTags" @remove="removeTag" @clear="clearFilters" />
+      <SortSelect v-model="sortOption" />
 
-      <div v-if="selectedTags.length" class="flex flex-wrap gap-2 mb-4 px-10 items-center">
-        <span
-          v-for="tag in selectedTags"
-          :key="tag"
-          class="bg-red-400 text-white px-3 py-2 rounded-full text-xs flex items-center gap-1"
-        >
-          {{ tag }}
-          <button
-            class="ml-1 text-white hover:text-red-700 text-base leading-none"
-            @click="removeTag(tag)"
-          >
-            &times;
-          </button>
-        </span>
-
-        <button
-          class="text-sm text-gray-500 underline ml-auto hover:text-black"
-          @click="clearFilters"
-        >
-          초기화
-        </button>
-      </div>
-
-      <div class="border-b border-gray-200 mx-10 mb-4 mt-2"></div>
-      <div class="flex justify-end mb-4 px-10">
-        <select v-model="sortOption" class="border rounded px-2 py-1 text-sm">
-          <option value="benefit">혜택 높은순</option>
-          <option value="fee">연회비 낮은순</option>
-        </select>
-      </div>
-
-      <Accordion type="single" collapsible class="space-y-4 px-10 pb-4">
-        <AccordionItem
-          v-for="card in filteredCards"
-          :key="card.id"
-          :value="String(card.id)"
-          class="overflow-hidden"
-        >
-          <div class="w-[95%] mx-auto">
-            <cardItem
-              :card="card"
-              :expanded="!!expandedBenefits[card.id]"
-              :onToggle="() => toggleBenefit(card.id)"
-              :onClick="() => goToDetail(card.id)"
-            />
-          </div>
-        </AccordionItem>
-      </Accordion>
+      <CardAccordionList
+        :cards="filteredCards"
+        :expandedMap="expandedBenefits"
+        @toggle="toggleBenefit"
+        @detail="goToDetail"
+      />
     </main>
-    <BottomNavigation selected="search" />
+    <div class="fixed bottom-0 left-0 right-0 z-10">
+      <BottomNavigation selected="search" />
+    </div>
   </div>
 </template>

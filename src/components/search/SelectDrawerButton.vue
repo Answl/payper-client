@@ -47,23 +47,23 @@ const hasSelection = computed(() => options.some((option) => selected.value.incl
           <DrawerTitle>{{ label }}</DrawerTitle>
         </DrawerHeader>
         <div class="p-4">
-  <div class="grid grid-cols-2 gap-x-4 gap-y-2">
-    <label
-      v-for="option in options"
-      :key="option"
-      class="flex items-center gap-2 text-sm cursor-pointer"
-    >
-      <input
-        type="checkbox"
-        :id="option"
-        :checked="isSelected(option)"
-        @change="toggleSelection(option)"
-        class="accent-primary"
-      />
-      {{ option }}
-    </label>
-  </div>
-</div>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <label
+              v-for="option in options"
+              :key="option"
+              class="flex items-center gap-2 text-sm cursor-pointer"
+            >
+              <input
+                type="checkbox"
+                :id="option"
+                :checked="isSelected(option)"
+                @change="toggleSelection(option)"
+                class="accent-primary"
+              />
+              {{ option }}
+            </label>
+          </div>
+        </div>
       </div>
     </DrawerContent>
   </Drawer>
