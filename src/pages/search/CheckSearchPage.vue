@@ -102,7 +102,8 @@ const filteredCards = computed(() => {
 
     const benefitMatch =
       selectedBenefits.value.length === 0 ||
-      card.benefits.some((b) => selectedBenefits.value.includes(b.categories?.[0]?.name ?? ""));
+      (card.benefits?.some((b) => selectedBenefits.value.includes(b.categories?.[0]?.name ?? "")) ??
+        false);
 
     return companyMatch && benefitMatch;
   });

@@ -22,27 +22,12 @@ const cardList: Card[] = [
         description: "<p>월 2회, 최대 1천원</p>",
         iconUrl: "https://example.com/benefit.png",
 
-        benefitGrades: [
-          {
-            id: 1,
-            grade: {
-              id: 1,
-              start: 0,
-              totalDiscount: 2000,
-            },
-            type: "RATE",
-            amount: 10,
-            limitCount: null,
-            limitAmount: null,
-            minPayment: 1000,
-          },
-        ],
         categories: [],
       },
     ],
     annualCost: "1000원",
     cardIssueUrl: "",
-    grades: [],
+    preMonthSpending: "",
   },
   {
     id: 2,
@@ -68,8 +53,6 @@ const cardList: Card[] = [
             imageUrl: "",
           },
         ],
-
-        benefitGrades: [],
       },
       {
         id: 3,
@@ -85,8 +68,6 @@ const cardList: Card[] = [
             imageUrl: "",
           },
         ],
-
-        benefitGrades: [],
       },
       {
         id: 4,
@@ -102,8 +83,6 @@ const cardList: Card[] = [
             imageUrl: "",
           },
         ],
-
-        benefitGrades: [],
       },
       {
         id: 5,
@@ -119,8 +98,6 @@ const cardList: Card[] = [
             imageUrl: "",
           },
         ],
-
-        benefitGrades: [],
       },
       {
         id: 6,
@@ -136,13 +113,11 @@ const cardList: Card[] = [
             imageUrl: "",
           },
         ],
-
-        benefitGrades: [],
       },
     ],
     annualCost: "2000원",
     cardIssueUrl: "",
-    grades: [],
+    preMonthSpending: "",
   },
   {
     id: 3,
@@ -168,7 +143,6 @@ const cardList: Card[] = [
             imageUrl: "",
           },
         ],
-        benefitGrades: [],
       },
       {
         id: 5,
@@ -184,12 +158,11 @@ const cardList: Card[] = [
             imageUrl: "",
           },
         ],
-        benefitGrades: [],
       },
     ],
     annualCost: "3000원",
     cardIssueUrl: "",
-    grades: [],
+    preMonthSpending: "",
   },
 ];
 

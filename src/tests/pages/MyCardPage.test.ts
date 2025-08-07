@@ -35,7 +35,6 @@ describe("MyCardPage", () => {
             description: "<p>월 최대 1,000원 할인</p>",
             iconUrl: "https://example.com/gs25.png",
 
-            benefitGrades: [],
             categories: [
               {
                 id: 1,
@@ -46,8 +45,8 @@ describe("MyCardPage", () => {
           },
         ],
         annualCost: "10,000원",
-        grades: [],
         cardIssueUrl: "",
+        preMonthSpending: "",
       },
     ],
   };

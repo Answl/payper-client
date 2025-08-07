@@ -1,7 +1,6 @@
 import type { Card } from "@/types/Card";
 import { mockCardCompany } from "./mockCardCompany";
 import { mockBenefits } from "./mockBenefits";
-import { mockGrades } from "./mockGrades";
 
 export const mockCard: Card = {
   id: 1,
@@ -11,6 +10,6 @@ export const mockCard: Card = {
   company: mockCardCompany,
   benefits: mockBenefits,
   annualCost: "10000원",
-  grades: mockGrades,
   cardIssueUrl: "",
+  preMonthSpending: "",
 };

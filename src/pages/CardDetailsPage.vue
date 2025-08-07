@@ -41,7 +41,7 @@ const onAddCardClick = () => {
     <div class="flex w-full text-sm">
       <div class="flex flex-col w-full gap-2">
         <p class="font-bold">전월실적</p>
-        <p class="text-stone-500">최소 {{ card.grades[0].start / 10000 }}만원</p>
+        <p class="text-stone-500">최소 00만원</p>
       </div>
       <div class="flex flex-col w-full gap-2">
         <p class="font-bold">연회비</p>
@@ -49,26 +49,6 @@ const onAddCardClick = () => {
           {{ card.annualCost }}
         </p>
       </div>
-    </div>
-    <div class="flex flex-col gap-2">
-      <p class="text-sm text-stone-500">전월실적</p>
-      <div class="flex w-full">
-        <CommonButton
-          v-for="(grade, index) in card.grades"
-          :key="index"
-          :variant="index === selectedGradeIndex ? 'default' : 'outline'"
-          class="flex-1"
-          @click="selectedGradeIndex = index"
-        >
-          {{ grade.start / 10000 }}만원
-        </CommonButton>
-      </div>
-    </div>
-    <div class="flex flex-col items-center gap-2">
-      <h1 class="text-3xl text-primary font-bold">
-        {{ card.grades[selectedGradeIndex ?? 0]?.totalDiscount?.toLocaleString?.() || "0" }}원
-      </h1>
-      <p class="text-stone-500 text-sm">최대 할인 한도</p>
     </div>
     <div class="flex flex-col gap-5">
       <BenefitItem

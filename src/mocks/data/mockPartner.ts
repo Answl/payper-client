@@ -16,19 +16,8 @@ export const mockPartner: Partner = {
       },
       benefits: [mockBenefit],
       annualCost: "4000원",
-      grades: [
-        {
-          id: 0,
-          start: 300000,
-          totalDiscount: 1000,
-        },
-        {
-          id: 1,
-          start: 500000,
-          totalDiscount: 2000,
-        },
-      ],
       cardIssueUrl: "",
+      preMonthSpending: "",
     },
   ],
   imageUrl: "",

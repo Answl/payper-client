@@ -26,11 +26,11 @@ const onClick = () => {
         ※ 상품권, 선불카드 구입(충전) 제외
       </p>
       <div class="flex flex-col gap-2 items-end">
-        <p class="text-stone-900 text-sm">전월실적 {{ card.grades[0].start / 10000 }}만원 이상</p>
+        <!-- <p class="text-stone-900 text-sm">전월실적 {{ card.grades[0].start / 10000 }}만원 이상</p> -->
         <div class="flex gap-2 items-center">
           <p class="text-stone-500 text-sm">예상혜택</p>
           <p class="text-primary font-bold">
-            {{ card.grades?.[0].totalDiscount?.toLocaleString?.() || "0" }}원 할인
+            <!-- {{ card.grades?.[0].totalDiscount?.toLocaleString?.() || "0" }}원 할인 -->
             <!-- {{ card.grades[0].totalDiscount.toLocaleString() }}원 할인 -->
           </p>
         </div>

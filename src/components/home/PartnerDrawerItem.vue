@@ -55,9 +55,9 @@ const goToPartnerDetails = () => {
       <div v-if="partner.myCards.length > 0" class="flex flex-col gap-1 items-end">
         <span>{{ partner.myCards[0].name }}</span>
         <span class="text-sm">예상 혜택</span>
-        <span class="text-primary font-bold">{{
+        <!-- <span class="text-primary font-bold">{{
           partner.myCards[0].benefits[0].benefitGrades[0].amount
-        }}</span>
+        }}</span> -->
       </div>
 
       <!-- 카드가 없는 경우 - 그림과 같은 스타일 -->

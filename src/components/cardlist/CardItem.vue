@@ -11,6 +11,7 @@ import {
   Candy,
 } from "lucide-vue-next";
 import type { Card } from "@/types/Card";
+import type { Benefit } from "@/types/Benefit";
 
 const props = defineProps<{
   card: Card;
@@ -29,7 +30,7 @@ const iconMap: Record<string, Component> = {
   식비: Candy,
 };
 
-const resolveIcon = (benefit: Card["benefits"][number]): Component => {
+const resolveIcon = (benefit: Benefit): Component => {
   const normalize = (str?: string) => str?.trim().toLowerCase() || "";
   const category = normalize(benefit.categories?.[0]?.name);
   // partner가 어디에 사용되는지 정확하게 파악하기 어려워서 주석 처리했습니다.

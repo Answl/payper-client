@@ -41,9 +41,14 @@ describe("CardDetailsPage.vue", () => {
     await waitFor(() => {
       expect(screen.getByText(mockCard.name)).toBeInTheDocument();
       expect(screen.getByText(mockCard.company.name)).toBeInTheDocument();
-      mockCard.benefits.forEach((benefit) => {
-        expect(screen.getAllByText(benefit.title).length).toBeGreaterThan(0);
-      });
+      // mockCard.benefits.forEach((benefit) => {
+      //   expect(screen.getAllByText(benefit.title).length).toBeGreaterThan(0);
+      // });
+      if (mockCard.benefits) {
+        mockCard.benefits.forEach((benefit) => {
+          expect(screen.getAllByText(benefit.title).length).toBeGreaterThan(0);
+        });
+      }
     });
   });
 });

@@ -22,7 +22,6 @@ export const mockPartners: Partner[] = [
             summary: "1만원 이상 결제 시 10%",
             description: "<p>세탁소 업종 가맹점</p>",
             iconUrl: "https://example.com/laundry.png",
-            benefitGrades: [],
             categories: [],
           },
           {
@@ -31,13 +30,12 @@ export const mockPartners: Partner[] = [
             summary: "1만원 이상 결제 시 5%",
             description: "<p>제과·아이스크림 업종 가맹점</p>",
             iconUrl: "https://example.com/dessert.png",
-            benefitGrades: [],
             categories: [],
           },
         ],
         annualCost: "5000원",
         cardIssueUrl: "",
-        grades: [],
+        preMonthSpending: "",
       },
     ],
     position: {

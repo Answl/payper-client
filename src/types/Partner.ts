@@ -5,7 +5,7 @@ import type { Position } from "./Positions";
 export interface Partner {
   id: number;
   name: string;
-  imageUrl: string;
+  imageUrl?: string;
   category: Category;
   position?: Position;
   myCards: Card[];
