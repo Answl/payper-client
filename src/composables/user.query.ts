@@ -10,7 +10,13 @@ export const useMeQuery = (options?: { enabled?: boolean }) => {
   });
 };
 
-export const useDeleteMeMutation = (onSuccess?: () => void, onError?: (error: unknown) => void) => {
+export const useDeleteMeMutation = ({
+  onSuccess,
+  onError,
+}: {
+  onSuccess?: () => void;
+  onError?: (error: unknown) => void;
+}) => {
   return useMutation({
     mutationFn: deleteMe,
     onSuccess: () => {
