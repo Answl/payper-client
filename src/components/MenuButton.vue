@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { ChevronRight } from "lucide-vue-next";
-import CommonButton from "./ui/button/CommonButton.vue";
-
 import { defineProps, type Component } from "vue";
+import CommonButton from "./ui/button/CommonButton.vue";
 
 const props = defineProps<{
   label: string;
@@ -14,9 +13,9 @@ const props = defineProps<{
 <template>
   <CommonButton
     @click="onClick"
-    class="flex w-full py-6 text-neutral-800 bg-neutral-100 items-center justify-between"
+    class="flex p-6 text-stone-900 bg-stone-100 items-center justify-between hover:bg-stone-200"
   >
-    <div class="flex items-center space-x-2">
+    <div class="flex items-center gap-2">
       <component :is="props.icon" />
       <span>{{ props.label }}</span>
     </div>

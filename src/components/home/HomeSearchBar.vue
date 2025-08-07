@@ -1,9 +1,18 @@
 <script setup lang="ts">
 import { nextTick, ref } from "vue";
 import SearchBar from "../common/SearchBar.vue";
-import CommonButton from "../ui/button/CommonButton.vue";
 import type { CategoryPill } from "@/types/CategoryPill";
-import { BookOpen, Coffee, Store } from "lucide-vue-next";
+import {
+  BookOpen,
+  Coffee,
+  Fuel,
+  Popcorn,
+  ShoppingBag,
+  ShoppingCart,
+  Store,
+  Utensils,
+} from "lucide-vue-next";
+import CategoryPillButton from "./CategoryPillButton.vue";
 
 const { onSubmit } = defineProps<{
   onSubmit: (value: string) => void;
@@ -13,18 +22,48 @@ const keyword = defineModel<string>("keyword", {
   default: "",
 });
 
+const scrollContainerRef = ref<HTMLElement | null>(null);
+
 const pills: CategoryPill[] = [
+  {
+    icon: Utensils,
+    label: "음식점",
+    color: "text-orange-400",
+  },
   {
     icon: Store,
     label: "편의점",
+    color: "text-yellow-400",
   },
   {
     icon: Coffee,
     label: "카페",
+    color: "text-amber-500",
   },
   {
     icon: BookOpen,
     label: "서점",
+    color: "text-sky-400",
+  },
+  {
+    icon: Popcorn,
+    label: "영화관",
+    color: "text-indigo-400",
+  },
+  {
+    icon: ShoppingCart,
+    label: "마트",
+    color: "text-lime-500",
+  },
+  {
+    icon: ShoppingBag,
+    label: "백화점",
+    color: "text-rose-400",
+  },
+  {
+    icon: Fuel,
+    label: "주유소",
+    color: "text-slate-400",
   },
 ];
 
@@ -40,6 +79,13 @@ const onCategoryClick = async (pill: CategoryPill) => {
   await nextTick();
   handleSearch();
 };
+
+const handleWheel = (event: WheelEvent) => {
+  if (scrollContainerRef.value && Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
+    scrollContainerRef.value.scrollLeft += event.deltaY;
+    event.preventDefault(); // 수직 스크롤 방지
+  }
+};
 </script>
 
 <template>
@@ -47,19 +93,19 @@ const onCategoryClick = async (pill: CategoryPill) => {
     <SearchBar v-model="keyword" placeholder="가맹점 ∙ 카테고리 검색" :onClick="handleSearch" />
 
     <!-- 카테고리 버튼 영역 -->
-    <div class="flex overflow-y-visible gap-2 pb-1">
-      <CommonButton
+    <div
+      ref="scrollContainerRef"
+      style="-webkit-overflow-scrolling: touch"
+      class="flex relative mb-10 scrollbar-hide overflow-y-visible overflow-x-auto scroll-smooth gap-2 pb-1 pr-24"
+      @wheel="handleWheel"
+    >
+      <CategoryPillButton
         v-for="(pill, index) in pills"
         :key="index"
-        @click="onCategoryClick(pill)"
-        :class="[
-          'rounded-full bg-white text-stone-900 gap-1 z-10 shadow-lg transition-shadow duration-200 hover:text-white',
-          selectedCategory === pill.label ? 'bg-primary text-white' : '',
-        ]"
-      >
-        <component :is="pill.icon" class="w-4 h-4" />
-        {{ pill.label }}
-      </CommonButton>
+        :pill="pill"
+        :selected="selectedCategory === pill.label"
+        @click="onCategoryClick"
+      />
     </div>
   </div>
 </template>

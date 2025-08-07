@@ -17,10 +17,11 @@ const keyword = defineModel<string>();
       v-model="keyword"
       type="text"
       :placeholder="props.placeholder ?? '검색어를 입력하세요'"
-      class="w-full px-[20px] py-7 border-0 rounded-2xl bg-white shadow-lg z-0"
+      class="w-full px-[20px] placeholder:text-stone-500 py-7 border-0 rounded-2xl bg-white shadow-lg z-0"
+      @keydown.enter="onClick"
     />
     <span @click="onClick" class="absolute end-3 inset-y-0 flex items-center justify-center px-2">
-      <Search class="size-6 text-muted-foreground" />
+      <Search class="size-6 text-stone-500" />
     </span>
   </div>
 </template>
