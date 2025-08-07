@@ -21,42 +21,51 @@ const { mutate } = useAddToMyCardsMutation({
   },
 });
 
-const onAddCardClick = () => {
+const   onAddCardClick = () => {
   mutate(cardId);
 };
 </script>
 
 <template>
   <PageHolder v-if="card" title="카드 상세">
-    <div class="flex flex-col items-center gap-5">
-      <img :src="card.imageUrl" class="object-contain max-w-48 h-48" />
-      <div class="flex flex-col items-center gap-2">
-        <p class="text-sm text-stone-500">{{ card.company.name }}</p>
-        <h1 class="text-2xl font-bold">{{ card.name }}</h1>
+    <div class="flex flex-col gap-5 min-h-full pb-20 relative">
+      <div class="flex flex-col items-center gap-5">
+        <img :src="card.imageUrl" class="object-contain max-w-48 h-48" />
+        <div class="flex flex-col items-center gap-2">
+          <p class="text-sm text-stone-500">{{ card.company.name }}</p>
+          <h1 class="text-2xl font-bold">{{ card.name }}</h1>
+        </div>
       </div>
-      <CommonButton variant="outline" class="w-full" @click="onAddCardClick"
-        ><Plus /><span>내 카드에 추가하기</span>
-      </CommonButton>
-    </div>
-    <div class="flex w-full text-sm">
-      <div class="flex flex-col w-full gap-2">
-        <p class="font-bold">전월실적</p>
-        <p class="text-stone-500">최소 00만원</p>
+      <div class="flex w-full text-sm">
+        <div class="flex flex-col w-full gap-2">
+          <p class="font-bold">전월실적</p>
+          <p class="text-stone-500">{{ card.prevMonthSpending }}</p>
+        </div>
+        <div class="flex flex-col w-full gap-2">
+          <p class="font-bold">연회비</p>
+          <p class="text-stone-500">{{ card.annualCost }}</p>
+        </div>
       </div>
-      <div class="flex flex-col w-full gap-2">
-        <p class="font-bold">연회비</p>
-        <p class="text-stone-500">
-          {{ card.annualCost }}
-        </p>
+      <div class="flex flex-col gap-5">
+        <BenefitItem
+          v-for="benefit in card.benefits"
+          :key="benefit.id"
+          :benefit="benefit"
+          :gradeIndex="selectedGradeIndex"
+        />
       </div>
-    </div>
-    <div class="flex flex-col gap-5">
-      <BenefitItem
-        v-for="benefit in card.benefits"
-        :key="benefit.id"
-        :benefit="benefit"
-        :gradeIndex="selectedGradeIndex"
-      />
+      <div
+        class="w-full sticky bottom-0 pt-4 pb-4"
+      >
+        <CommonButton
+          variant="outline"
+          class="w-full bg-primary text-white "
+          @click="onAddCardClick"
+        >
+        <Plus />
+        <span>내 카드에 추가하기</span>
+        </CommonButton>
+      </div>
     </div>
   </PageHolder>
 </template>
