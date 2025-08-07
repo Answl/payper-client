@@ -11,5 +11,5 @@ export const mockCard: Card = {
   benefits: mockBenefits,
   annualCost: "10000원",
   cardIssueUrl: "",
-  preMonthSpending: "",
+  prevMonthSpending: 100,
 };

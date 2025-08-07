@@ -46,7 +46,7 @@ describe("MyCardPage", () => {
         ],
         annualCost: "10,000원",
         cardIssueUrl: "",
-        preMonthSpending: "",
+        prevMonthSpending: 10000,
       },
     ],
   };

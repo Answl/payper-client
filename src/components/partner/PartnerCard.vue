@@ -23,8 +23,10 @@ const onClick = () => {
       </div>
       <div class="flex flex-col gap-2 items-end">
         <div v-if="card.benefits && card.benefits.length > 0" class="flex flex-col gap-1 items-end">
-          <p class="text-stone-500 text-sm">{{ card.preMonthSpending ? card.preMonthSpending : "전월 실적 정보 없음" }}</p>
-          <p  class="text-primary font-bold">
+          <p class="text-stone-500 text-sm">
+            {{ card.prevMonthSpending ? card.prevMonthSpending : "전월 실적 정보 없음" }}
+          </p>
+          <p class="text-primary font-bold">
             {{ card.benefits[0].summary }}
           </p>
         </div>

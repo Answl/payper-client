@@ -17,7 +17,7 @@ export const mockPartner: Partner = {
       benefits: [mockBenefit],
       annualCost: "4000원",
       cardIssueUrl: "",
-      preMonthSpending: "",
+      prevMonthSpending: 1000,
     },
   ],
   imageUrl: "",

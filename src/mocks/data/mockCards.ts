@@ -27,7 +27,7 @@ const cardList: Card[] = [
     ],
     annualCost: "1000원",
     cardIssueUrl: "",
-    preMonthSpending: "",
+    prevMonthSpending: 10,
   },
   {
     id: 2,
@@ -117,7 +117,7 @@ const cardList: Card[] = [
     ],
     annualCost: "2000원",
     cardIssueUrl: "",
-    preMonthSpending: "",
+    prevMonthSpending: 10,
   },
   {
     id: 3,
@@ -162,7 +162,7 @@ const cardList: Card[] = [
     ],
     annualCost: "3000원",
     cardIssueUrl: "",
-    preMonthSpending: "",
+    prevMonthSpending: 10,
   },
 ];
 

@@ -10,5 +10,5 @@ export interface Card {
   company: CardCompany;
   benefits: Benefit[] | null;
   annualCost: string | null;
-  preMonthSpending: string;
+  prevMonthSpending: number;
 }

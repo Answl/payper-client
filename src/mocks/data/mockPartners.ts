@@ -35,7 +35,7 @@ export const mockPartners: Partner[] = [
         ],
         annualCost: "5000원",
         cardIssueUrl: "",
-        preMonthSpending: "",
+        prevMonthSpending: 1000,
       },
     ],
     position: {
