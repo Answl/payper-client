@@ -108,8 +108,8 @@ const updatePartnerMarkers = (partners: Partner[]) => {
         parseFloat(partner.position.y),
         parseFloat(partner.position.x)
       );
-      const markerImage = partner.category?.imageUrl
-        ? partner.category.imageUrl
+      const markerImage = partner?.imageUrl
+        ? partner.imageUrl
         : defaultPartnerMarkerImage;
       const marker = createMarker(position, markerImage, { width: 34, height: 34 });
 
