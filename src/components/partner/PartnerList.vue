@@ -48,12 +48,8 @@ const goBack = () => {
     >
       <div class="flex items-center gap-4">
         <div class="w-12 h-12 rounded-full bg-stone-300 overflow-hidden border border-stone-400">
-  <img
-    :src="partner.imageUrl"
-    :alt="partner.name"
-    class="w-full h-full object-cover"
-  />
-</div>
+          <img :src="partner.imageUrl" :alt="partner.name" class="w-full h-full object-cover" />
+        </div>
 
         <div class="flex flex-col">
           <span class="text-xs text-stone-500">

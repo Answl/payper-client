@@ -23,7 +23,7 @@ const mapKey = import.meta.env.VITE_KAKAO_JAVASCRIPT_KEY;
 
 const map = ref<kakao.maps.Map | null>(null);
 const userMarker = ref<kakao.maps.Marker | null>(null);
-const partnerMarkers = ref<kakao.maps.Marker[]>([]);
+const partnerOverray = ref<kakao.maps.CustomOverlay[]>([]);
 let centerInitialized = false; // 중앙 위치 초기화 여부
 
 // useGeolocation이 비동기적으로 처리되면 사용자 위치 마커 갱신
@@ -97,10 +97,21 @@ const createMarker = (
   return new kakao.maps.Marker({ position, image, map: map.value! });
 };
 
+const createOverray = (
+  positions: kakao.maps.LatLng,
+  contents: string,
+): kakao.maps.CustomOverlay =>{
+  return new kakao.maps.CustomOverlay({
+    position: positions,
+    content: contents,
+  })
+
+}
+
 const updatePartnerMarkers = (partners: Partner[]) => {
   // 기존 마커 제거
-  partnerMarkers.value.forEach((marker) => marker.setMap(null));
-  partnerMarkers.value = [];
+  partnerOverray.value.forEach((overlay) => overlay.setMap(null));
+  partnerOverray.value = [];
 
   partners.forEach((partner) => {
     if (partner?.position) {
@@ -111,10 +122,36 @@ const updatePartnerMarkers = (partners: Partner[]) => {
       const markerImage = partner?.imageUrl
         ? partner.imageUrl
         : defaultPartnerMarkerImage;
-      const marker = createMarker(position, markerImage, { width: 34, height: 34 });
+      const imagehtml = '<div class="round-image">' +
+          `<img src=${markerImage} />` +
+          '</div>' +
+          '<style>' +
+          '.round-image {' +
+          'display: flex;' +
+          'justify-content: center;' +
+          'align-items: center;' +
+          'width: 40px;' +
+          'height: 40px;' +
+          'border-radius: 50%;' +
+          'overflow: hidden;' +
+          'border: 2px solid #ccc;' +
+          'box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);' +
+          'transition: border-color 0.3s ease;' +
+          '}' +
+          '.round-image:hover {' +
+          'border-color: #F67154;' +
+          '}' +
+          '.round-image img {' +
+          'width: 100%;' +
+          'height: 100%;' +
+          'object-fit: cover;' +
+          '}' +
+          '</style>'
 
-      marker.setMap(map.value);
-      partnerMarkers.value.push(marker);
+      const overlay = createOverray(position, imagehtml);
+
+      overlay.setMap(map.value);
+      partnerOverray.value.push(overlay);
     }
   });
 };
