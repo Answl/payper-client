@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { Partner } from "@/types/Partner";
-import { Bird } from "lucide-vue-next";
 import { useRouter } from "vue-router";
 
 const { partner } = defineProps<{
@@ -54,18 +53,10 @@ const goToPartnerDetails = () => {
       <!-- 카드가 있는 경우 -->
       <div v-if="partner.myCards.length > 0" class="flex flex-col gap-1 items-end">
         <span>{{ partner.myCards[0].name }}</span>
-        <span class="text-sm">예상 혜택</span>
-        <!-- <span class="text-primary font-bold">{{
-          partner.myCards[0].benefits[0].benefitGrades[0].amount
-        }}</span> -->
       </div>
 
       <!-- 카드가 없는 경우 - 그림과 같은 스타일 -->
-      <div v-else class="flex flex-col gap-1 items-center justify-center text-stone-300">
-        <!-- 회색 박스 아이콘 -->
-        <Bird />
-        <span class="text-xs">혜택이 없어요...</span>
-      </div>
+      <div v-else class="flex flex-col gap-1 items-center justify-center text-stone-300"></div>
     </div>
   </div>
 </template>
