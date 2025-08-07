@@ -2,6 +2,7 @@
 import type { Partner } from "@/types/Partner";
 import { ref, watch } from "vue";
 import PartnerDrawerItem from "./PartnerDrawerItem.vue";
+import PartnerCardList from "@/components/partner/PartnerList.vue";
 
 const { partners, height } = defineProps<{
   partners: Partner[] | undefined;
@@ -12,7 +13,22 @@ const emit = defineEmits<{
   "height-change": [height: number];
 }>();
 
-// props의 height가 변경되면 drawerHeight 동기화
+const drawerHeight = ref(height);
+const selectedPartner = ref<Partner | null>(null);
+
+const handleSelectPartner = (partner: Partner) => {
+  selectedPartner.value = partner;
+  drawerHeight.value = 60;
+  emit("height-change", 60);
+};
+
+const handleBack = () => {
+  selectedPartner.value = null;
+  drawerHeight.value = 50;
+  emit("height-change", 50);
+};
+
+// 드로우 높이 동기화
 watch(
   () => height,
   (newHeight) => {
@@ -20,11 +36,10 @@ watch(
   }
 );
 
-// partners 데이터가 변경될 때 drawer를 중앙으로 올림
+// partners 바뀌면 드로우 올리기
 watch(
   () => partners,
   (newPartners, oldPartners) => {
-    // 초기 로딩이 아닌 경우에만 실행 (oldPartners가 존재하는 경우)
     if (oldPartners !== undefined && newPartners && newPartners.length > 0) {
       drawerHeight.value = 50;
       emit("height-change", 50);
@@ -32,13 +47,11 @@ watch(
   }
 );
 
-const drawerHeight = ref(height);
+// 드래그 동작
 const isDragging = ref(false);
 
 const startDrag = (e: MouseEvent | TouchEvent) => {
   e.preventDefault();
-  e.stopPropagation();
-
   isDragging.value = true;
   window.addEventListener("mousemove", onDrag);
   window.addEventListener("touchmove", onDrag);
@@ -56,10 +69,6 @@ const stopDrag = () => {
 
 const onDrag = (e: MouseEvent | TouchEvent) => {
   if (!isDragging.value) return;
-
-  e.preventDefault();
-  e.stopPropagation();
-
   const clientY = "touches" in e ? e.touches[0].clientY : e.clientY;
   const windowHeight = window.innerHeight;
   const vh = ((windowHeight - clientY) / windowHeight) * 100;
@@ -67,18 +76,11 @@ const onDrag = (e: MouseEvent | TouchEvent) => {
   drawerHeight.value = newHeight;
   emit("height-change", newHeight);
 };
-
-watch(
-  () => partners,
-  (newPartners) => {
-    console.log("Partners changed:", newPartners);
-  }
-);
 </script>
 
 <template>
   <div
-    class="absolute flex flex-col gap-3 bottom-0 left-0 w-full bg-white rounded-t-2xl shadow-lg z-20 transition-all duration-300 px-5"
+    class="absolute bottom-0 left-0 w-full bg-white rounded-t-2xl shadow-lg z-20 transition-all duration-300 px-5"
     :style="{ height: `${drawerHeight}vh` }"
   >
     <div
@@ -88,11 +90,27 @@ watch(
     >
       <div class="w-12 h-1.5 bg-stone-200 rounded-full" />
     </div>
-    <div v-if="!partners || partners.length == 0" class="text-center text-stone-400 py-10 text-sm">
-      검색 결과가 없습니다.
-    </div>
-    <div v-else class="flex flex-col gap-3 overflow-y-auto h-[calc(100%-4rem)] pb-24">
-      <PartnerDrawerItem v-for="(partner, index) in partners" :key="index" :partner="partner" />
+
+    <div class="flex flex-col gap-3 overflow-y-auto h-[calc(100%-4rem)] pb-24">
+      <div
+        v-if="!partners || partners.length === 0"
+        class="text-center text-stone-400 py-10 text-sm"
+      >
+        검색 결과가 없습니다.
+      </div>
+
+      <template v-else-if="!selectedPartner">
+        <PartnerDrawerItem
+          v-for="partner in partners"
+          :key="partner.id"
+          :partner="partner"
+          @select-partner="handleSelectPartner"
+        />
+      </template>
+
+      <template v-else>
+        <PartnerCardList :partner="selectedPartner" @back="handleBack" />
+      </template>
     </div>
   </div>
 </template>

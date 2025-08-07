@@ -14,7 +14,11 @@ const onClick = () => {
 </script>
 
 <template>
-  <div @click="onClick" class="flex gap-5 w-full hover:cursor-pointer">
+  <!-- <div @click="onClick" class="flex gap-5 w-full hover:cursor-pointer"> -->
+  <div
+    @click="onClick"
+    class="flex gap-5 w-full p-4 rounded-xl bg-white hover:bg-stone-200 transition-colors cursor-pointer"
+  >
     <img :src="card.imageUrl" class="w-24 h-full object-cover" />
     <div class="flex flex-col gap-2 w-full h-full justify-between">
       <div class="flex flex-col">
