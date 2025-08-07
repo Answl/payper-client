@@ -2,6 +2,8 @@
 import type { Partner } from "@/types/Partner";
 import PartnerCard from "@/components/partner/PartnerCard.vue";
 import { useRouter } from "vue-router";
+import CommonButton from "../ui/button/CommonButton.vue";
+import { ChevronLeft } from "lucide-vue-next";
 
 const { partner } = defineProps<{
   partner: Partner;
@@ -29,10 +31,15 @@ const goBack = () => {
 
 <template>
   <div class="space-y-6">
-    <!-- 뒤로 가기 버튼 -->
-    <button class="text-sm text-primary font-semibold flex items-center gap-1" @click="goBack">
-      돌아가기
-    </button>
+     <CommonButton
+  @click="goBack"
+  class="bg-white text-stone-900 shadow-none border-none"
+>
+  <ChevronLeft class="w-5 h-5" />
+</CommonButton>
+
+
+
 
     <!-- 가맹점 정보 -->
     <div
@@ -40,9 +47,14 @@ const goBack = () => {
       @click="goToPartnerDetails"
     >
       <div class="flex items-center gap-4">
-        <div class="w-12 h-12 rounded-full bg-stone-300 overflow-hidden">
-          <img :src="partner.imageUrl" :alt="partner.name" class="w-full h-full object-cover" />
-        </div>
+        <div class="w-12 h-12 rounded-full bg-stone-300 overflow-hidden border border-stone-400">
+  <img
+    :src="partner.imageUrl"
+    :alt="partner.name"
+    class="w-full h-full object-cover"
+  />
+</div>
+
         <div class="flex flex-col">
           <span class="text-xs text-stone-500">
             {{ partner.category?.name }}
