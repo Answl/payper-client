@@ -7,7 +7,14 @@ const { partner } = defineProps<{
 </script>
 
 <template>
-  <div>
-    <h1 class="text-xl font-bold">{{ partner.name }}</h1>
+  <div class="flex items-center gap-4">
+    <img
+      :src="partner.imageUrl"
+      class="object-contain h-20 aspect-square rounded-full border border-gray-300"
+    />
+    <p class="text-xl font-bold">{{ partner.name }}</p>
+    <p class="text-xl text-black font-bold">{{ partner.category?.name }}</p>
   </div>
 </template>
+
+
