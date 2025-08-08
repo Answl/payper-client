@@ -21,7 +21,7 @@ const { mutate } = useAddToMyCardsMutation({
   },
 });
 
-const   onAddCardClick = () => {
+const onAddCardClick = () => {
   mutate(cardId);
 };
 </script>
@@ -54,16 +54,14 @@ const   onAddCardClick = () => {
           :gradeIndex="selectedGradeIndex"
         />
       </div>
-      <div
-        class="w-full sticky bottom-0 pt-4 pb-4"
-      >
+      <div class="w-full sticky bottom-0 pt-4 pb-4">
         <CommonButton
           variant="outline"
-          class="w-full bg-primary text-white "
+          class="w-full bg-primary text-white"
           @click="onAddCardClick"
         >
-        <Plus />
-        <span>내 카드에 추가하기</span>
+          <Plus />
+          <span>내 카드에 추가하기</span>
         </CommonButton>
       </div>
     </div>
