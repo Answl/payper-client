@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Partner } from "@/types/Partner";
+import defaultPartnerImage from "@/assets/DEFAULT_PARTNER_IMAGE.png";
 
 const { partner } = defineProps<{
   partner: Partner;
@@ -30,7 +31,11 @@ const handleClick = () => {
   >
     <div class="flex items-center gap-4">
       <div class="w-12 h-12 rounded-full bg-stone-300 overflow-hidden">
-        <img :src="partner.imageUrl" :alt="partner.name" class="w-full h-full object-cover" />
+        <img
+          :src="partner.imageUrl ? partner.imageUrl : defaultPartnerImage"
+          :alt="partner.name"
+          class="w-full h-full object-cover"
+        />
       </div>
       <div class="flex flex-col">
         <span class="text-xs text-stone-500">
@@ -44,16 +49,6 @@ const handleClick = () => {
           {{ partner.position.roadAddressName }}
         </span>
       </div>
-    </div>
-
-    <div class="flex flex-col items-end text-sm">
-      <!-- 카드가 있는 경우 -->
-      <div v-if="partner.myCards.length > 0" class="flex flex-col gap-1 items-end">
-        <span>{{ partner.myCards[0].name }}</span>
-      </div>
-
-      <!-- 카드가 없는 경우 - 회색 텍스트 처리 -->
-      <div v-else class="text-stone-400 text-xs">카드 혜택 없음</div>
     </div>
   </div>
 </template>

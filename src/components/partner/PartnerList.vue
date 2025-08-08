@@ -4,6 +4,7 @@ import PartnerCard from "@/components/partner/PartnerCard.vue";
 import { useRouter } from "vue-router";
 import CommonButton from "../ui/button/CommonButton.vue";
 import { ChevronLeft } from "lucide-vue-next";
+import defaultPartnerImage from "@/assets/DEFAULT_PARTNER_IMAGE.png";
 
 const { partner } = defineProps<{
   partner: Partner;
@@ -31,15 +32,9 @@ const goBack = () => {
 
 <template>
   <div class="space-y-6">
-     <CommonButton
-  @click="goBack"
-  class="bg-white text-stone-900 shadow-none border-none"
->
-  <ChevronLeft class="w-5 h-5" />
-</CommonButton>
-
-
-
+    <CommonButton @click="goBack" class="bg-white text-stone-900 shadow-none border-none">
+      <ChevronLeft class="w-5 h-5" />
+    </CommonButton>
 
     <!-- 가맹점 정보 -->
     <div
@@ -48,7 +43,11 @@ const goBack = () => {
     >
       <div class="flex items-center gap-4">
         <div class="w-12 h-12 rounded-full bg-stone-300 overflow-hidden border border-stone-400">
-          <img :src="partner.imageUrl" :alt="partner.name" class="w-full h-full object-cover" />
+          <img
+            :src="partner.imageUrl ? partner.imageUrl : defaultPartnerImage"
+            :alt="partner.name"
+            class="w-full h-full object-cover"
+          />
         </div>
 
         <div class="flex flex-col">

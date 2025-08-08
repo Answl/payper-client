@@ -2,7 +2,7 @@
 import { ref, watch } from "vue";
 import { onMounted } from "vue";
 import userMarkerImage from "@/assets/USER_MARKER.png";
-import defaultPartnerMarkerImage from "@/assets/DEFAULT_PARTNER_MARKER_IMAGE.png";
+import defaultPartnerMarkerImage from "@/assets/DEFAULT_PARTNER_IMAGE.png";
 import { useGeolocation } from "@vueuse/core";
 import type { Partner } from "@/types/Partner";
 import MoveToUserLocationButton from "./MoveToUserLocationButton.vue";
@@ -99,14 +99,13 @@ const createMarker = (
 
 const createOverray = (
   positions: kakao.maps.LatLng,
-  contents: string,
-): kakao.maps.CustomOverlay =>{
+  contents: string
+): kakao.maps.CustomOverlay => {
   return new kakao.maps.CustomOverlay({
     position: positions,
     content: contents,
-  })
-
-}
+  });
+};
 
 const updatePartnerMarkers = (partners: Partner[]) => {
   // 기존 마커 제거
@@ -119,34 +118,33 @@ const updatePartnerMarkers = (partners: Partner[]) => {
         parseFloat(partner.position.y),
         parseFloat(partner.position.x)
       );
-      const markerImage = partner?.imageUrl
-        ? partner.imageUrl
-        : defaultPartnerMarkerImage;
-      const imagehtml = '<div class="round-image">' +
-          `<img src=${markerImage} />` +
-          '</div>' +
-          '<style>' +
-          '.round-image {' +
-          'display: flex;' +
-          'justify-content: center;' +
-          'align-items: center;' +
-          'width: 40px;' +
-          'height: 40px;' +
-          'border-radius: 50%;' +
-          'overflow: hidden;' +
-          'border: 2px solid #ccc;' +
-          'box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);' +
-          'transition: border-color 0.3s ease;' +
-          '}' +
-          '.round-image:hover {' +
-          'border-color: #F67154;' +
-          '}' +
-          '.round-image img {' +
-          'width: 100%;' +
-          'height: 100%;' +
-          'object-fit: cover;' +
-          '}' +
-          '</style>'
+      const markerImage = partner?.imageUrl ? partner.imageUrl : defaultPartnerMarkerImage;
+      const imagehtml =
+        '<div class="round-image">' +
+        `<img src=${markerImage} />` +
+        "</div>" +
+        "<style>" +
+        ".round-image {" +
+        "display: flex;" +
+        "justify-content: center;" +
+        "align-items: center;" +
+        "width: 40px;" +
+        "height: 40px;" +
+        "border-radius: 50%;" +
+        "overflow: hidden;" +
+        "border: 2px solid #ccc;" +
+        "box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);" +
+        "transition: border-color 0.3s ease;" +
+        "}" +
+        ".round-image:hover {" +
+        "border-color: #F67154;" +
+        "}" +
+        ".round-image img {" +
+        "width: 100%;" +
+        "height: 100%;" +
+        "object-fit: cover;" +
+        "}" +
+        "</style>";
 
       const overlay = createOverray(position, imagehtml);
 
