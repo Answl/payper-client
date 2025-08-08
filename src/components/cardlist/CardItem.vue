@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, defineProps, type Component } from "vue";
+import { computed, defineProps, onMounted, ref, watch, type Component } from "vue";
 import {
   ChevronDown,
   ChevronUp,
@@ -19,6 +19,27 @@ const props = defineProps<{
   onToggle: () => void;
   onClick: () => void;
 }>();
+
+const cardImageRef = ref<HTMLImageElement | null>(null);
+const shouldRotate = ref(false);
+
+onMounted(() => {
+  if (cardImageRef.value?.complete) {
+    handleImageLoad();
+  }
+});
+
+watch(cardImageRef, (img) => {
+  if (!img) return;
+  img.addEventListener("load", handleImageLoad);
+});
+
+const handleImageLoad = () => {
+  const img = cardImageRef.value;
+  if (img && img.naturalWidth > img.naturalHeight) {
+    shouldRotate.value = true;
+  }
+};
 
 const iconMap: Record<string, Component> = {
   편의점: ShoppingBag,
@@ -46,7 +67,13 @@ const displayBenefits = computed(() =>
 
 <template>
   <div class="px-4 py-4 flex cursor-pointer" @click="onClick">
-    <img :src="card.imageUrl" alt="카드 이미지" class="w-20 h-32 object-cover rounded-md" />
+    <img
+      ref="cardImageRef"
+      :src="card.imageUrl"
+      alt="카드 이미지"
+      class="size-32 object-contain rounded-md transition-transform"
+      :class="{ 'rotate-90': shouldRotate }"
+    />
     <div class="ml-4 flex-1">
       <p class="text-xs text-gray-500">{{ card.company?.name }}</p>
       <p class="text-sm text-gray-900 font-medium leading-snug line-clamp-2 mt-2">

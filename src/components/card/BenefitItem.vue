@@ -20,24 +20,5 @@ const { benefit } = defineProps<{
         <BenefitDescriptionAccordion :description="benefit.description" />
       </div>
     </div>
-    <div class="flex flex-col w-full items-end">
-      <!-- <p class="text-stone-500">
-        {{ benefit.benefitGrades[gradeIndex].grade.start / 10000 }}만원 이상
-      </p> -->
-      <!-- <p class="text-primary font-bold text-xl">
-        {{ benefit.benefitGrades[gradeIndex].amount.toLocaleString() }} -->
-
-      <!-- 혹시 "UNKNOWN"가 안될 경우를 대비하여 남겨둡니다. 서버에서 반영되면 삭제 가능 -->
-      <!-- {{ benefit.benefitGrades[gradeIndex].type === "FIXED_AMOUNT" ? "원" : "%" }} -->
-
-      <!-- {{
-          benefit.benefitGrades[gradeIndex].type === "FIXED_AMOUNT"
-            ? "원"
-            : benefit.benefitGrades[gradeIndex].type === "RATE"
-            ? "%"
-            : ""
-        }}
-      </p> -->
-    </div>
   </div>
 </template>
