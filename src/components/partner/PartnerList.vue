@@ -5,6 +5,7 @@ import { useRouter } from "vue-router";
 import CommonButton from "../ui/button/CommonButton.vue";
 import { ChevronLeft } from "lucide-vue-next";
 import defaultPartnerImage from "@/assets/DEFAULT_PARTNER_IMAGE.png";
+import { toast } from "vue-sonner";
 
 const { partner } = defineProps<{
   partner: Partner;
@@ -22,6 +23,10 @@ const formatDistance = (distance: number): string => {
 };
 
 const goToPartnerDetails = () => {
+  if (!partner.id) {
+    toast("아직 등록되지 않은 가맹점입니다.");
+    return;
+  }
   router.push(`/partners/${partner.id}`);
 };
 
@@ -31,7 +36,7 @@ const goBack = () => {
 </script>
 
 <template>
-  <div class="space-y-6">
+  <div>
     <CommonButton @click="goBack" class="bg-white text-stone-900 shadow-none border-none">
       <ChevronLeft class="w-5 h-5" />
     </CommonButton>
